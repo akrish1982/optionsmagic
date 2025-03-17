@@ -1,0 +1,23 @@
+2025-03-16 15:45:31,178 - __main__ - INFO - Market is closed. Exiting.
+2025-03-16 15:46:52,476 - __main__ - INFO - Table stock_quotes created or already exists
+2025-03-16 15:46:53,109 - __main__ - WARNING - Error checking options for MMM: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:53,697 - __main__ - WARNING - Error checking options for AOS: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:54,330 - __main__ - WARNING - Error checking options for ABT: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:54,960 - __main__ - WARNING - Error checking options for ABBV: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:55,569 - __main__ - WARNING - Error checking options for ACN: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:56,185 - __main__ - WARNING - Error checking options for ADBE: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:56,789 - __main__ - WARNING - Error checking options for AMD: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:57,402 - __main__ - WARNING - Error checking options for AES: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:58,001 - __main__ - WARNING - Error checking options for AFL: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:58,599 - __main__ - WARNING - Error checking options for A: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:59,192 - __main__ - WARNING - Error checking options for APD: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:46:59,782 - __main__ - WARNING - Error checking options for ABNB: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:47:00,391 - __main__ - WARNING - Error checking options for AKAM: Expecting value: line 1 column 1 (char 0)
+2025-03-16 15:49:06,945 - __main__ - INFO - Table stock_quotes created or already exists
+2025-03-16 15:49:08,104 - __main__ - INFO - Fetched data for 0 stocks
+2025-03-16 15:49:08,104 - __main__ - WARNING - No stock data to upsert
+2025-03-16 15:49:08,104 - __main__ - INFO - Stock data collection completed successfully
+2025-03-16 16:17:32,554 - __main__ - INFO - Table stock_quotes created or already exists
+2025-03-16 16:17:33,730 - __main__ - INFO - Fetched data for 0 stocks
+2025-03-16 16:17:33,731 - __main__ - WARNING - No stock data to upsert
+2025-03-16 16:17:33,731 - __main__ - INFO - Stock data collection completed successfully
