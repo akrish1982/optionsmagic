@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Options Magic - Options Screener</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+
+  <!-- ✅ Use only one Alpine.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
+
+  <!-- ✅ Supporting libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+  <script>
+    function optionsApp() {
+      return {
+        options: [],
+        filteredOptions: [],
+        displayedOptions: [],
+        loading: true,
+        lastUpdated: '',
+        expirationDates: [],
+
+        currentPage: 1,
+        pageSize: 10,
+
+        sortColumn: 'return_pct',
+        sortDirection: 'desc',
+
+        filters: {
+          symbol: '',
+          expiration: '',
+          minReturn: '',
+          maxDelta: ''
+        },
+
+        // ✅ Automatically run on page load
+        init() {
+          this.fetchData();
+        },
+
+        fetchData() {
+          this.loading = true;
+          fetch('https://royal-grass-05ca.akrish1982.workers.dev/api/options')
+            .then(response => response.json())
+            .then(data => {
+              console.log('API returned data:', data); // ✅ Debug log
+              this.options = data.data;
+              this.lastUpdated = data.lastUpdated || new Date().toLocaleString();
+              this.expirationDates = [...new Set(this.options.map(opt => opt.expiration))].sort();
+              this.applyFilters();
+              this.loading = false;
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+              this.loading = false;
+            });
+        },
+
+        refreshData() {
+          this.fetchData();
+        },
+
+        applyFilters() {
+          this.filteredOptions = this.options.filter(option => {
+            if (this.filters.symbol && !option.symbol.includes(this.filters.symbol.toUpperCase())) return false;
+            if (this.filters.expiration && option.expiration !== this.filters.expiration) return false;
+            if (this.filters.minReturn && option.return_pct < parseFloat(this.filters.minReturn)) return false;
+            if (this.filters.maxDelta && option.delta < parseFloat(this.filters.maxDelta)) return false;
+            return true;
+          });
+
+          this.sortData();
+          this.goToPage(1);
+        },
+
+        sortBy(column) {
+          if (this.sortColumn === column) {
+            this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+          } else {
+            this.sortColumn = column;
+            this.sortDirection = 'desc';
+          }
+
+          this.sortData();
+        },
+
+        sortData() {
+          const direction = this.sortDirection === 'asc' ? 1 : -1;
+          this.filteredOptions = [...this.filteredOptions].sort((a, b) => {
+            if (a[this.sortColumn] < b[this.sortColumn]) return -1 * direction;
+            if (a[this.sortColumn] > b[this.sortColumn]) return 1 * direction;
+            return 0;
+          });
+
+          this.updateDisplayedOptions();
+        },
+
+        updateDisplayedOptions() {
+          const start = (this.currentPage - 1) * this.pageSize;
+          const end = start + this.pageSize;
+          this.displayedOptions = this.filteredOptions.slice(start, end);
+        },
+
+        get pageCount() {
+          return Math.max(1, Math.ceil(this.filteredOptions.length / this.pageSize));
+        },
+
+        nextPage() {
+          if (this.currentPage < this.pageCount) {
+            this.currentPage++;
+            this.updateDisplayedOptions();
+          }
+        },
+
+        prevPage() {
+          if (this.currentPage > 1) {
+            this.currentPage--;
+            this.updateDisplayedOptions();
+          }
+        },
+
+        goToPage(page) {
+          this.currentPage = page;
+          this.updateDisplayedOptions();
+        },
+
+        formatDate(dateStr) {
+          return moment(dateStr).format('MMM D, YYYY');
+        },
+
+        formatPrice(price) {
+          return price ? price.toFixed(2) : '0.00';
+        },
+
+        formatCurrency(amount) {
+          return amount ? `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '$0.00';
+        },
+
+        formatPercent(value) {
+          return value ? `${value.toFixed(2)}%` : '0.00%';
+        },
+
+        formatDelta(delta) {
+          return delta ? delta.toFixed(3) : '0.000';
+        },
+
+        formatNumber(num) {
+          return num ? num.toLocaleString() : '0';
+        }
+      };
+    }
+  </script>
+</head>
+
+<body class="bg-gray-100" x-data="optionsApp()" x-init="init()">
+    <div x-data="optionsApp()" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-blue-800 text-white shadow-lg">
+            <div class="container mx-auto py-4 px-4 md:px-6">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl md:text-3xl font-bold">Options Magic</h1>
+                    <div class="flex items-center space-x-4">
+                        <span x-text="lastUpdated" class="text-sm hidden md:block"></span>
+                        <button @click="refreshData" class="bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-md text-sm">
+                            Refresh Data
+                        </button>
+                    </div>
+                </div>
+                <p class="mt-1 text-blue-200 text-sm">Premium Options Screener for Cash-Secured Puts</p>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <div class="container mx-auto mt-6 px-4 md:px-6">
+            <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Symbol</label>
+                        <input x-model="filters.symbol" type="text" class="border border-gray-300 rounded-md px-3 py-2 w-full md:w-32" placeholder="All">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Expiration</label>
+                        <select x-model="filters.expiration" class="border border-gray-300 rounded-md px-3 py-2 w-full md:w-40">
+                            <option value="">All Dates</option>
+                            <template x-for="date in expirationDates" :key="date">
+                                <option x-text="date" :value="date"></option>
+                            </template>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Min Return %</label>
+                        <input x-model="filters.minReturn" type="number" step="0.1" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full md:w-32">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Max Delta</label>
+                        <input x-model="filters.maxDelta" type="number" step="0.05" min="-1" max="0" class="border border-gray-300 rounded-md px-3 py-2 w-full md:w-32">
+                    </div>
+                    <div class="md:self-end">
+                        <button @click="applyFilters" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <main class="container mx-auto mt-6 px-4 md:px-6 pb-12">
+            <!-- Loading state -->
+            <div x-show="loading" class="flex justify-center items-center py-12">
+                <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="ml-3 text-lg text-gray-700">Loading data...</span>
+            </div>
+
+            <!-- Data table -->
+            <div x-show="!loading" class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th @click="sortBy('symbol')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Symbol
+                                        <span x-show="sortColumn === 'symbol'" class="ml-1">
+                                            <span x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                        </span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('expiration')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Expiration
+                                        <span x-show="sortColumn === 'expiration'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('strike')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Strike
+                                        <span x-show="sortColumn === 'strike'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('collateral')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Collateral
+                                        <span x-show="sortColumn === 'collateral'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('income')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Income
+                                        <span x-show="sortColumn === 'income'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('return_pct')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Return %
+                                        <span x-show="sortColumn === 'return_pct'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('delta')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Delta
+                                        <span x-show="sortColumn === 'delta'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('bid')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Bid
+                                        <span x-show="sortColumn === 'bid'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('ask')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Ask
+                                        <span x-show="sortColumn === 'ask'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                                <th @click="sortBy('volume')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center">
+                                        Volume
+                                        <span x-show="sortColumn === 'volume'" class="ml-1" x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <template x-for="(option, index) in displayedOptions" :key="option.contractid">
+                                <tr :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-blue-600" x-text="option.symbol"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatDate(option.expiration)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatPrice(option.strike)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatCurrency(option.collateral)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatCurrency(option.income)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-green-600" x-text="formatPercent(option.return_pct)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatDelta(option.delta)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatPrice(option.bid)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatPrice(option.ask)"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900" x-text="formatNumber(option.volume)"></td>
+                                </tr>
+                            </template>
+                            <tr x-show="displayedOptions.length === 0">
+                                <td colspan="10" class="px-4 py-8 text-center text-gray-500">
+                                    No options found matching your criteria.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                Showing <span class="font-medium" x-text="(currentPage - 1) * pageSize + 1"></span> to 
+                                <span class="font-medium" x-text="Math.min(currentPage * pageSize, filteredOptions.length)"></span> of 
+                                <span class="font-medium" x-text="filteredOptions.length"></span> results
+                            </p>
+                        </div>
+                        <div>
+                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                <button @click="prevPage" :disabled="currentPage === 1" 
+                                        class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                                        :class="{'opacity-50 cursor-not-allowed': currentPage === 1}">
+                                    Previous
+                                </button>
+                                <template x-for="pageNumber in pageCount" :key="pageNumber">
+                                    <button @click="goToPage(pageNumber)" 
+                                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50"
+                                            :class="pageNumber === currentPage ? 'z-10 bg-blue-50 border-blue-500 text-blue-600' : 'text-gray-500'">
+                                        <span x-text="pageNumber"></span>
+                                    </button>
+                                </template>
+                                <button @click="nextPage" :disabled="currentPage === pageCount" 
+                                        class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                                        :class="{'opacity-50 cursor-not-allowed': currentPage === pageCount}">
+                                    Next
+                                </button>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div>
+                        <p class="text-sm">&copy; 2025 Options Magic. All rights reserved.</p>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <p class="text-sm text-gray-400">Data refreshed: <span x-text="lastUpdated"></span></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+</body>
+</html>

@@ -12,6 +12,10 @@ from psycopg2 import sql
 from psycopg2.extras import execute_values
 import re
 from urllib.parse import urlencode
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -25,9 +29,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Database configuration - set these as environment variables in your production environment
-DB_NAME = os.environ.get("DB_NAME", "stock_data")
-DB_USER = os.environ.get("DB_USER", "postgres")
-DB_PASSWORD = os.environ.get("DB_PASSWORD", "password")
+DB_NAME = os.environ.get("DB_NAME", "postgres")
+DB_USER = os.environ.get("DB_USER", "ananth")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
 DB_HOST = os.environ.get("DB_HOST", "localhost")
 DB_PORT = os.environ.get("DB_PORT", "5432")
 

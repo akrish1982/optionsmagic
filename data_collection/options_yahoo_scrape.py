@@ -5,12 +5,17 @@ import psycopg2
 from datetime import datetime
 import time
 from collections import defaultdict
-
 import json
 import re
 import ast
-from datetime import datetime
-import psycopg2
+from bs4 import BeautifulSoup
+# Database configuration - set these as environment variables in your production environment
+DB_NAME = os.environ.get("DB_NAME", "postgres")
+DB_USER = os.environ.get("DB_USER", "ananth")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
+DB_HOST = os.environ.get("DB_HOST", "localhost")
+DB_PORT = os.environ.get("DB_PORT", "5432")
+API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
 
 def parse_options_data(file_path):
     """
@@ -245,7 +250,6 @@ def main():
     except Exception as e:
         print(f"Error processing options data: {e}")
 
-
 def generate_jsonschema(json_data):
     """Generate a jsonschema from a JSON object."""
     def _infer_type(value):
@@ -294,18 +298,6 @@ def generate_jsonschema(json_data):
 # schema = generate_jsonschema(data) - THIS IS NEEDED ONLY ONCE TO GENERATE THE SCHEMA
 # print(json.dumps(schema, indent=2))
 
-DB_NAME = os.getenv("DB_NAME")
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
-
-import psycopg2
-import os
-
-from bs4 import BeautifulSoup
-
 def extract_option_tables(soup):
     """
     Extracts call and put option tables from an HTML string.
@@ -351,7 +343,6 @@ def extract_option_tables(soup):
 
     return call_table_data, put_table_data
 
-
 def get_latest_tickers():
     """
     Retrieves a list of distinct ticker symbols from the latest quote date.
@@ -376,10 +367,6 @@ def get_latest_tickers():
             WHERE quote_date = (SELECT MAX(quote_date) FROM public.stock_quotes)
             ORDER BY ticker ASC
         """
-        query = """
-            select distinct stcks.ticker from public.stock_quotes stcks
-            where stcks.ticker not in (select distinct opt.symbol from public.alpha_vantage_options opt where date = '2025-03-14')
-        """
 
         cur.execute(query)
         tickers = [row[0] for row in cur.fetchall()]
@@ -392,8 +379,6 @@ def get_latest_tickers():
     except (psycopg2.Error, Exception) as e:
         print(f"Error retrieving tickers: {e}")
         return None
-
-
 
 def insert_option_data(data_list):
     """
@@ -537,9 +522,12 @@ def upsert_into_database(response):
     insert_option_data(data)
     print("Upsert completed.")
 
-if __name__ == "__main__":
-    # my_tickers = [ "NVDA", "MSFT", "AMZN", "GOOGL", "GOOG", "META", "TSLA", "AVGO", "TSM", "LLY"]
-    my_tickers = get_latest_tickers()
+
+# if __name__ == "__main__":
+#     # my_tickers = [ "NVDA", "MSFT", "AMZN", "GOOGL", "GOOG", "META", "TSLA", "AVGO", "TSM", "LLY"]
+#     my_tickers = get_latest_tickers()
+#     print(f"Found {len(my_tickers)} tickers.")
+#     print(my_tickers)
     # for ticker in my_tickers:
     #     print(f"Fetching options data for {ticker}")
     #     url = f"https://www.alphavantage.co/query?function=HISTORICAL_OPTIONS&symbol={ticker}&apikey={API_KEY}"
@@ -555,32 +543,32 @@ if __name__ == "__main__":
     #         print("Response text:", r.text)
     #     time.sleep(10)  # Sleep for 10s  before next API call
 
-    for index, ticker in enumerate(my_tickers):
-        print(f"Fetching options data for {ticker}")
-        url = f"https://www.alphavantage.co/query?function=HISTORICAL_OPTIONS&symbol={ticker}&apikey={API_KEY}"
-        try:
-            r = requests.get(url)
-            r.raise_for_status() # Raise HTTPError for bad responses (4xx or 5xx)
-            data = r.json()
-            print("Success! Data received")
-            upsert_into_database(data)
-            print(f"Response text: {r.text}")
+    # for index, ticker in enumerate(my_tickers):
+    #     print(f"Fetching options data for {ticker}")
+    #     url = f"https://www.alphavantage.co/query?function=HISTORICAL_OPTIONS&symbol={ticker}&apikey={API_KEY}"
+    #     try:
+    #         r = requests.get(url)
+    #         r.raise_for_status() # Raise HTTPError for bad responses (4xx or 5xx)
+    #         data = r.json()
+    #         print("Success! Data received")
+    #         upsert_into_database(data)
+    #         print(f"Response text: {r.text}")
 
-        except requests.exceptions.RequestException as e:
-            print(f"API call failed: {e}")
-            if r is not None:
-                print(f"Status Code: {r.status_code}")
-                print(f"Response text: {r.text}")
-            else:
-                print("No response object available.")
+    #     except requests.exceptions.RequestException as e:
+    #         print(f"API call failed: {e}")
+    #         if r is not None:
+    #             print(f"Status Code: {r.status_code}")
+    #             print(f"Response text: {r.text}")
+    #         else:
+    #             print("No response object available.")
 
-        # Delay logic:
-        random_delay = random.randint(10, 120)
-        print(f"Sleeping for {random_delay} seconds...")
-        time.sleep(random_delay)
+    #     # Delay logic:
+    #     random_delay = random.randint(10, 120)
+    #     print(f"Sleeping for {random_delay} seconds...")
+    #     time.sleep(random_delay)
 
-        if (index + 1) % 10 == 0:  # Check if 10 stocks have been processed
-            print("Processing 10 stocks, sleeping for 300 seconds...")
-            time.sleep(300)
-        print("Continuing with next ticker.")
+    #     if (index + 1) % 10 == 0:  # Check if 10 stocks have been processed
+    #         print("Processing 10 stocks, sleeping for 300 seconds...")
+    #         time.sleep(300)
+    #     print("Continuing with next ticker.")
         

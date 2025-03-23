@@ -1943,3 +1943,118 @@ TE -->
 2025-03-16 18:34:36,961 - __main__ - INFO - Added 10 stocks from page 3 (total: 50)
 2025-03-16 18:34:36,961 - __main__ - INFO - Scraping completed. Total stocks: 50
 2025-03-16 18:34:36,961 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 50
+2025-03-22 18:05:01,877 - __main__ - ERROR - Database connection error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "postgres" does not exist
+
+2025-03-22 18:05:01,878 - __main__ - ERROR - Error in scrape_finviz_stocks_with_options: connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "postgres" does not exist
+
+2025-03-22 18:05:01,878 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 0
+2025-03-22 18:10:37,493 - __main__ - ERROR - Database connection error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "ananth" does not exist
+
+2025-03-22 18:10:37,493 - __main__ - ERROR - Error in scrape_finviz_stocks_with_options: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "ananth" does not exist
+
+2025-03-22 18:10:37,493 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 0
+2025-03-22 18:11:47,083 - __main__ - INFO - Table stock_quotes created or already exists
+2025-03-22 18:11:47,083 - __main__ - INFO - Scraping page 1: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1
+2025-03-22 18:11:47,083 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1
+2025-03-22 18:11:49,805 - __main__ - INFO - Successfully fetched page, length: 167436
+2025-03-22 18:11:49,876 - __main__ - INFO - Found 23 tables in the document
+2025-03-22 18:11:49,876 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-22 18:11:49,876 - __main__ - INFO - Found 20 data rows
+2025-03-22 18:11:49,878 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-22 18:11:49,878 - __main__ - INFO - Extracted data for 20 stocks
+2025-03-22 18:11:49,884 - __main__ - INFO - Successfully upserted data for 20 stocks
+2025-03-22 18:11:49,884 - __main__ - INFO - Added 20 stocks from page 1 (total: 20)
+2025-03-22 18:11:49,884 - __main__ - INFO - Waiting 3.62 seconds before next page...
+2025-03-22 18:11:53,507 - __main__ - INFO - Scraping page 2: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-22 18:11:53,507 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-22 18:11:56,516 - __main__ - INFO - Successfully fetched page, length: 167735
+2025-03-22 18:11:56,565 - __main__ - INFO - Found 23 tables in the document
+2025-03-22 18:11:56,566 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-22 18:11:56,566 - __main__ - INFO - Found 20 data rows
+2025-03-22 18:11:56,568 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-22 18:11:56,568 - __main__ - INFO - Extracted data for 20 stocks
+2025-03-22 18:11:56,571 - __main__ - INFO - Successfully upserted data for 20 stocks
+2025-03-22 18:11:56,571 - __main__ - INFO - Added 20 stocks from page 2 (total: 40)
+2025-03-22 18:11:56,571 - __main__ - INFO - Waiting 3.71 seconds before next page...
+2025-03-22 18:12:00,287 - __main__ - INFO - Scraping page 3: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-22 18:12:00,287 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-22 18:12:03,194 - __main__ - INFO - Successfully fetched page, length: 143114
+2025-03-22 18:12:03,238 - __main__ - INFO - Found 23 tables in the document
+2025-03-22 18:12:03,238 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-22 18:12:03,238 - __main__ - INFO - Found 10 data rows
+2025-03-22 18:12:03,240 - __main__ - INFO - No 'next' link found.
+2025-03-22 18:12:03,240 - __main__ - INFO - Extracted data for 10 stocks
+2025-03-22 18:12:03,243 - __main__ - INFO - Successfully upserted data for 10 stocks
+2025-03-22 18:12:03,243 - __main__ - INFO - Added 10 stocks from page 3 (total: 50)
+2025-03-22 18:12:03,243 - __main__ - INFO - Scraping completed. Total stocks: 50
+2025-03-22 18:12:03,243 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 50
+2025-03-23 11:13:24,628 - __main__ - INFO - Table stock_quotes created or already exists
+2025-03-23 11:13:24,628 - __main__ - INFO - Scraping page 1: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1
+2025-03-23 11:13:24,628 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1
+2025-03-23 11:13:25,940 - __main__ - INFO - Successfully fetched page, length: 167436
+2025-03-23 11:13:26,012 - __main__ - INFO - Found 23 tables in the document
+2025-03-23 11:13:26,012 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-23 11:13:26,012 - __main__ - INFO - Found 20 data rows
+2025-03-23 11:13:26,014 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-23 11:13:26,014 - __main__ - INFO - Extracted data for 20 stocks
+2025-03-23 11:13:26,022 - __main__ - INFO - Successfully upserted data for 20 stocks
+2025-03-23 11:13:26,022 - __main__ - INFO - Added 20 stocks from page 1 (total: 20)
+2025-03-23 11:13:26,022 - __main__ - INFO - Waiting 2.43 seconds before next page...
+2025-03-23 11:13:28,457 - __main__ - INFO - Scraping page 2: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-23 11:13:28,457 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-23 11:13:31,583 - __main__ - INFO - Successfully fetched page, length: 167735
+2025-03-23 11:13:31,637 - __main__ - INFO - Found 23 tables in the document
+2025-03-23 11:13:31,637 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-23 11:13:31,638 - __main__ - INFO - Found 20 data rows
+2025-03-23 11:13:31,640 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-23 11:13:31,640 - __main__ - INFO - Extracted data for 20 stocks
+2025-03-23 11:13:31,642 - __main__ - INFO - Successfully upserted data for 20 stocks
+2025-03-23 11:13:31,643 - __main__ - INFO - Added 20 stocks from page 2 (total: 40)
+2025-03-23 11:13:31,643 - __main__ - INFO - Waiting 3.22 seconds before next page...
+2025-03-23 11:13:34,869 - __main__ - INFO - Scraping page 3: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-23 11:13:34,870 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-23 11:13:37,466 - __main__ - INFO - Successfully fetched page, length: 143114
+2025-03-23 11:13:37,516 - __main__ - INFO - Found 23 tables in the document
+2025-03-23 11:13:37,517 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-23 11:13:37,517 - __main__ - INFO - Found 10 data rows
+2025-03-23 11:13:37,518 - __main__ - INFO - No 'next' link found.
+2025-03-23 11:13:37,519 - __main__ - INFO - Extracted data for 10 stocks
+2025-03-23 11:13:37,521 - __main__ - INFO - Successfully upserted data for 10 stocks
+2025-03-23 11:13:37,522 - __main__ - INFO - Added 10 stocks from page 3 (total: 50)
+2025-03-23 11:13:37,522 - __main__ - INFO - Scraping completed. Total stocks: 50
+2025-03-23 11:13:37,522 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 50
+2025-03-23 11:20:52,150 - __main__ - INFO - Table stock_quotes created or already exists
+2025-03-23 11:20:52,151 - __main__ - INFO - Scraping page 1: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1
+2025-03-23 11:20:52,152 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1
+2025-03-23 11:20:55,032 - __main__ - INFO - Successfully fetched page, length: 167436
+2025-03-23 11:20:55,098 - __main__ - INFO - Found 23 tables in the document
+2025-03-23 11:20:55,098 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-23 11:20:55,098 - __main__ - INFO - Found 20 data rows
+2025-03-23 11:20:55,100 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-23 11:20:55,100 - __main__ - INFO - Extracted data for 20 stocks
+2025-03-23 11:20:55,229 - __main__ - INFO - Successfully upserted data for 20 stocks
+2025-03-23 11:20:55,229 - __main__ - INFO - Added 20 stocks from page 1 (total: 20)
+2025-03-23 11:20:55,229 - __main__ - INFO - Waiting 2.89 seconds before next page...
+2025-03-23 11:20:58,129 - __main__ - INFO - Scraping page 2: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-23 11:20:58,129 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=21
+2025-03-23 11:20:59,805 - __main__ - INFO - Successfully fetched page, length: 167735
+2025-03-23 11:20:59,859 - __main__ - INFO - Found 23 tables in the document
+2025-03-23 11:20:59,859 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-23 11:20:59,859 - __main__ - INFO - Found 20 data rows
+2025-03-23 11:20:59,861 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-23 11:20:59,861 - __main__ - INFO - Extracted data for 20 stocks
+2025-03-23 11:20:59,978 - __main__ - INFO - Successfully upserted data for 20 stocks
+2025-03-23 11:20:59,978 - __main__ - INFO - Added 20 stocks from page 2 (total: 40)
+2025-03-23 11:20:59,978 - __main__ - INFO - Waiting 3.71 seconds before next page...
+2025-03-23 11:21:03,694 - __main__ - INFO - Scraping page 3: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-23 11:21:03,694 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=41
+2025-03-23 11:21:05,205 - __main__ - INFO - Successfully fetched page, length: 143124
+2025-03-23 11:21:05,251 - __main__ - INFO - Found 23 tables in the document
+2025-03-23 11:21:05,252 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2025-03-23 11:21:05,252 - __main__ - INFO - Found 10 data rows
+2025-03-23 11:21:05,253 - __main__ - INFO - No 'next' link found.
+2025-03-23 11:21:05,253 - __main__ - INFO - Extracted data for 10 stocks
+2025-03-23 11:21:05,380 - __main__ - INFO - Successfully upserted data for 10 stocks
+2025-03-23 11:21:05,380 - __main__ - INFO - Added 10 stocks from page 3 (total: 50)
+2025-03-23 11:21:05,380 - __main__ - INFO - Scraping completed. Total stocks: 50
+2025-03-23 11:21:05,381 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 50
