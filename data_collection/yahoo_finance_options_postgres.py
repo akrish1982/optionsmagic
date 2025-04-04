@@ -1,6 +1,7 @@
 import os
 import re
 import datetime
+import json
 from bs4 import BeautifulSoup
 import psycopg2
 from psycopg2.extras import execute_values
@@ -9,6 +10,7 @@ from dateutil import parser as date_parser
 import pytz
 import requests
 from dotenv import load_dotenv
+from calculate_option_greeks import calculate_option_delta
 
 # Load environment variables from .env
 load_dotenv()
@@ -26,46 +28,140 @@ db_params = {
     'password': DB_PASSWORD
 }
 
+# def generate_yahoo_options_urls(ticker):
+#     """
+#     Generates a list of Yahoo Finance options URLs for the next 8 Fridays.
 
-def generate_yahoo_options_urls(ticker):
+#     Args:
+#         ticker (str): The stock ticker symbol (e.g., "NVDA").
+
+#     Returns:
+#         tuple: A tuple containing (list of URLs, list of expiration dates).
+#     """
+#     urls, expiration_dates = [], []
+#     today = datetime.date.today()
+#     friday_count = 0
+    
+#     # Yahoo uses timestamps for 8:00 PM ET the day BEFORE expiration
+#     eastern = pytz.timezone('US/Eastern')
+
+#     for i in range(365):  # Check for Fridays within a year
+#         current_date = today + datetime.timedelta(days=i)
+#         if current_date.weekday() == 4:  # Friday is weekday 4
+#             # Get the day before expiration
+#             day_before = current_date - datetime.timedelta(days=1)
+            
+#             # Create datetime at 20:00 (8:00 PM) Eastern Time for day before expiration
+#             market_timestamp = eastern.localize(
+#                 datetime.datetime.combine(day_before, datetime.time(20, 0, 0))
+#             )
+            
+#             # Convert to Unix timestamp (seconds since epoch)
+#             unix_timestamp = int(market_timestamp.timestamp())
+            
+#             urls.append(f"https://finance.yahoo.com/quote/{ticker}/options/?date={unix_timestamp}")
+#             expiration_dates.append(current_date.strftime("%Y-%m-%d"))
+#             friday_count += 1
+#             if friday_count == 8:
+#                 break
+                
+#     return urls, expiration_dates
+
+
+def extract_options_dates(ticker):
     """
-    Generates a list of Yahoo Finance options URLs for the next 8 Fridays.
+    Extracts all available options expiration dates from Yahoo Finance's options page.
+    
+    Args:
+        ticker (str): The stock ticker symbol (e.g., "AAPL").
+        
+    Returns:
+        list: A list of dictionaries with date information (date string and timestamp).
+    """
+    url = f"https://finance.yahoo.com/quote/{ticker}/options"
+    
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    
+    try:
+        response = requests.get(url, headers=headers)
+        
+        if response.status_code != 200:
+            print(f"Error: Received status code {response.status_code}")
+            return []
+        
+        # First try the escaped JSON pattern (\\\"expirationDates\\\":)
+        pattern = r'\\\"expirationDates\\\":\[([0-9,]+)\]'
+        match = re.search(pattern, response.text)
+        
+        # Extract and parse the timestamps array
+        timestamps_str = "[" + match.group(1) + "]"
+        print(f"Extracted timestamps string: {timestamps_str}")
+        try:
+            timestamps = json.loads(timestamps_str)
+        except json.JSONDecodeError as e:
+            print(f"Failed to parse timestamps JSON: {e}")
+            print(f"Timestamps string: {timestamps_str}")
+            return []
+        
+        # Convert timestamps to readable dates
+        date_info = []
+        for ts in timestamps:
+            
+            date_obj = datetime.datetime.fromtimestamp(ts)
+            day_after = date_obj + datetime.timedelta(days=1)
+            date_str = day_after.strftime("%b %d, %Y")  # Format like "Apr 11, 2025"
+            date_info.append({
+                "date_string": date_str,
+                "timestamp": ts,
+                "iso_date": day_after.strftime("%Y-%m-%d")
+            })
+        
+        return date_info
+    
+    except Exception as e:
+        print(f"Error extracting expiration dates: {e}")
+        return []
+
+def generate_yahoo_options_urls(ticker, num_dates):
+    """
+    Generates options page URLs for each expiration date.
+    
+    Args:
+        ticker (str): The stock ticker symbol.
+        dates_info (list): List of dictionaries with date information.
+        
+    Returns:
+        list: List of URLs for each expiration date.
+    """
+    dates_info = extract_options_dates(ticker)
+    urls = []
+    dates = [date_info['iso_date'] for date_info in dates_info]
+    for date_info in dates_info:
+        urls.append(f"https://finance.yahoo.com/quote/{ticker}/options?date={date_info['timestamp']}")
+    
+    return urls[:num_dates], dates[:num_dates]
+
+def get_price(soup):
+    """
+    Extracts the current stock price from the Yahoo Finance page.
 
     Args:
-        ticker (str): The stock ticker symbol (e.g., "NVDA").
+        soup (BeautifulSoup): BeautifulSoup object containing the parsed HTML of the page.
 
     Returns:
-        tuple: A tuple containing (list of URLs, list of expiration dates).
+        float: The current stock price, or None if not found.
     """
-    urls, expiration_dates = [], []
-    today = datetime.date.today()
-    friday_count = 0
+    try:
+        price_tag = soup.find('span', {'data-testid': 'qsp-price'})
+        if price_tag:
+            price_text = price_tag.get_text(strip=True)
+            return float(price_text.replace(',', ''))  # Handle prices like 1,234.56
+    except Exception as e:
+        print(f"Error extracting price: {e}")
     
-    # Yahoo uses timestamps for 8:00 PM ET the day BEFORE expiration
-    eastern = pytz.timezone('US/Eastern')
-
-    for i in range(365):  # Check for Fridays within a year
-        current_date = today + datetime.timedelta(days=i)
-        if current_date.weekday() == 4:  # Friday is weekday 4
-            # Get the day before expiration
-            day_before = current_date - datetime.timedelta(days=1)
-            
-            # Create datetime at 20:00 (8:00 PM) Eastern Time for day before expiration
-            market_timestamp = eastern.localize(
-                datetime.datetime.combine(day_before, datetime.time(20, 0, 0))
-            )
-            
-            # Convert to Unix timestamp (seconds since epoch)
-            unix_timestamp = int(market_timestamp.timestamp())
-            
-            urls.append(f"https://finance.yahoo.com/quote/{ticker}/options/?date={unix_timestamp}")
-            expiration_dates.append(current_date.strftime("%Y-%m-%d"))
-            friday_count += 1
-            if friday_count == 8:
-                break
-                
-    return urls, expiration_dates
-
+    return None  # Return None if not found or error
 
 def get_options_table_from_url(url):
     """
@@ -85,21 +181,22 @@ def get_options_table_from_url(url):
         response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
 
         soup = BeautifulSoup(response.content, 'html.parser')
+        price = get_price(soup)
         options_table_section = soup.find('section', {'data-testid': 'options-list-table'})
 
         if options_table_section:
-            return str(options_table_section)  # Return the table's HTML
+            return str(options_table_section), price  # Return the table's HTML
         else:
-            return None  # Table not found
+            return None, None  # Table not found
 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching URL: {e}")
-        return None  # Handle request errors
+        return None, None  # Handle request errors
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-        return None
+        return None, None
 
-def parse_options_table_html(table, ticker, expiration_date, option_type):
+def parse_options_table_html(table, ticker, expiration_date, option_type, price):
     """
     Parse the Yahoo Finance options HTML table and extract call and put options data.
     
@@ -181,6 +278,7 @@ def parse_options_table_html(table, ticker, expiration_date, option_type):
                 'symbol': symbol,
                 'expiration': expiration_date,
                 'strike': strike,
+                'price': price,
                 'type': option_type,
                 'last': last_price,
                 'mark': mark,
@@ -198,7 +296,7 @@ def parse_options_table_html(table, ticker, expiration_date, option_type):
                 'vega': None,   # Not available in Yahoo Finance HTML
                 'rho': None     # Not available in Yahoo Finance HTML
             }
-            
+            option_data['delta'] = calculate_option_delta(option_data, risk_free_rate=0.05) # IN FUTURE: Use a more accurate risk-free rate
             all_options.append(option_data)
             
         except (ValueError, TypeError, IndexError) as e:
@@ -298,7 +396,7 @@ def insert_options_into_db(db_params, options_data):
             cursor.close()
             conn.close()
 
-def process_options_from_html(html_content, ticker, expiration_date, option_type):
+def process_options_from_html(html_content, ticker, expiration_date, option_type, price):
     """
     Process options data from HTML content and insert into database.
     
@@ -311,7 +409,7 @@ def process_options_from_html(html_content, ticker, expiration_date, option_type
         Number of records processed
     """
     # Parse options data from HTML
-    options_data = parse_options_table_html(html_content, ticker, expiration_date, option_type)
+    options_data = parse_options_table_html(html_content, ticker, expiration_date, option_type, price)
     
     # Insert data into database
     inserted_count = insert_options_into_db(db_params, options_data)
@@ -325,12 +423,13 @@ def update_all_options_data(ticker):
     Args:
         ticker (str): The stock ticker symbol"
     """
-    urls, expiration_dates = generate_yahoo_options_urls(ticker)
+    urls, expiration_dates = generate_yahoo_options_urls(ticker, 8) # Get URLs for the next 8 Weeks
 
     if urls:
         for url, expiration_date in zip(urls, expiration_dates): 
             print(f"Fetching data from: {url} for date: {expiration_date}")
-            table_html = get_options_table_from_url(url)
+            
+            table_html, price = get_options_table_from_url(url)
             if table_html:
                 soup_table = BeautifulSoup(table_html, 'html.parser')
                 tables = soup_table.find_all('table')
@@ -339,7 +438,7 @@ def update_all_options_data(ticker):
                     if 'yf-wurt5d' in table.get('class', []):
                         try:
                             option_type = 'call' if idx == 0 else 'put'
-                            inserted_count = process_options_from_html(table, ticker, expiration_date, option_type)
+                            inserted_count = process_options_from_html(table, ticker, expiration_date, option_type, price)
                             print(f"Successfully processed {inserted_count} options records")
                             
                         except Exception as e:

@@ -45,6 +45,7 @@ def create_tradeable_options_table(cursor):
             symbol VARCHAR(255),
             expiration DATE,
             strike DECIMAL,
+            price DECIMAL,
             type VARCHAR(10),
             last DECIMAL,
             mark DECIMAL,
@@ -65,20 +66,29 @@ def create_tradeable_options_table(cursor):
     """)
     print("Created tradeable_options table")
 
-def upsert_tradeable_options(db_params):
+def delete_tradeable_options_rows(cursor):
+    """Delete all rows from the tradeable_options table."""
+    cursor.execute("DELETE FROM public.tradeable_options;")
+    print("Deleted all rows from tradeable_options table")
+    
+def connect_to_db(db_params):
+    """Connect to the PostgreSQL database and return the connection and cursor."""
+    conn = psycopg2.connect(**db_params)
+    cursor = conn.cursor()
+    return conn, cursor
+def close_db_connection(conn, cursor):
+    """Close the database connection and cursor."""
+    if cursor:
+        cursor.close()
+    if conn:
+        conn.close()
+
+def upsert_tradeable_options(cursor, conn):
     """
     Upsert data into tradeable_options table based on a SELECT query from yahoo_finance_options.
     Creates the table if it doesn't exist.
     """
-    conn = None
     try:
-        # Connect to the database
-        conn = psycopg2.connect(**db_params)
-        cursor = conn.cursor()
-        
-        # Check if table exists, create if not
-        if not check_table_exists(cursor, "tradeable_options"):
-            create_tradeable_options_table(cursor)
         
         # The SELECT query to fetch data
         select_query = """
@@ -90,6 +100,7 @@ def upsert_tradeable_options(db_params):
                 symbol, 
                 expiration, 
                 strike, 
+                stcks.price as price,
                 type, 
                 last, 
                 mark, 
@@ -116,6 +127,8 @@ def upsert_tradeable_options(db_params):
             )
             AND type = 'put'
             AND strike <= stcks.price
+            and strike/price < 0.9
+            and (bid/strike * 100) > 2
             ORDER BY return_pct DESC
         """
         
@@ -130,7 +143,7 @@ def upsert_tradeable_options(db_params):
         # Column names for the INSERT statement
         columns = [
             "collateral", "income", "return_pct", "contractid", "symbol", 
-            "expiration", "strike", "type", "last", "mark", "bid", "bid_size", 
+            "expiration", "strike", "price", "type", "last", "mark", "bid", "bid_size", 
             "ask", "ask_size", "volume", "open_interest", "date", 
             "implied_volatility", "delta", "gamma", "theta", "vega", "rho"
         ]
@@ -147,6 +160,7 @@ def upsert_tradeable_options(db_params):
                 symbol = EXCLUDED.symbol,
                 expiration = EXCLUDED.expiration,
                 strike = EXCLUDED.strike,
+                price = EXCLUDED.price,
                 type = EXCLUDED.type,
                 last = EXCLUDED.last,
                 mark = EXCLUDED.mark,
@@ -189,4 +203,13 @@ def upsert_tradeable_options(db_params):
 if __name__ == "__main__":
     
     # Run the upsert operation
-    upsert_tradeable_options(db_params)
+    conn, cursor = connect_to_db(db_params)
+    if not conn:
+        print("Failed to connect to the database")
+        exit(1)
+    # Check if table exists, create if not
+    if not check_table_exists(cursor, "tradeable_options"):
+        create_tradeable_options_table(cursor)
+    delete_tradeable_options_rows(cursor)
+    upsert_tradeable_options(cursor, conn)
+    close_db_connection(conn, cursor)
