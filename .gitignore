@@ -1,3 +1,5 @@
 *.env
 .env.local
 *_readme.md
+logs/*.log
+heartbeat/*
