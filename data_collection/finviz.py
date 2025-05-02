@@ -537,11 +537,12 @@ def scrape_finviz_stocks_with_options():
         create_table_if_not_exists(conn)
         
         # Use the exact URL specified by the user
-        url = "https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1"
+        url = "https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_roe_o10%2Cfa_sales5years_o10%2Csh_opt_option&ft=2&o=-marketcap"
+        
         
         page_count = 1
         total_stocks = 0
-        max_pages = 10
+        max_pages = 30
         
         while url and page_count <= max_pages:
             logger.info(f"Scraping page {page_count}: {url}")

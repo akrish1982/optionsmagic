@@ -2,6 +2,18 @@ import requests
 import re
 import json
 import datetime
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("finviz_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 def extract_options_dates(ticker):
     """
@@ -23,7 +35,7 @@ def extract_options_dates(ticker):
         response = requests.get(url, headers=headers)
         
         if response.status_code != 200:
-            print(f"Error: Received status code {response.status_code}")
+            logger.info(f"Error: Received status code {response.status_code}")
             return []
         
         # First try the escaped JSON pattern (\\\"expirationDates\\\":)
@@ -32,12 +44,12 @@ def extract_options_dates(ticker):
         
         # Extract and parse the timestamps array
         timestamps_str = "[" + match.group(1) + "]"
-        print(f"Extracted timestamps string: {timestamps_str}")
+        logger.info(f"Extracted timestamps string: {timestamps_str}")
         try:
             timestamps = json.loads(timestamps_str)
         except json.JSONDecodeError as e:
-            print(f"Failed to parse timestamps JSON: {e}")
-            print(f"Timestamps string: {timestamps_str}")
+            logger.info(f"Failed to parse timestamps JSON: {e}")
+            logger.info(f"Timestamps string: {timestamps_str}")
             return []
         
         # Convert timestamps to readable dates
@@ -56,7 +68,7 @@ def extract_options_dates(ticker):
         return date_info
     
     except Exception as e:
-        print(f"Error extracting expiration dates: {e}")
+        logger.info(f"Error extracting expiration dates: {e}")
         return []
 
 def generate_options_urls(ticker, dates_info, num_dates):
@@ -83,15 +95,15 @@ if __name__ == "__main__":
     dates_info = extract_options_dates(ticker)
     
     if dates_info:
-        print(f"Found {len(dates_info)} expiration dates for {ticker}:")
+        logger.info(f"Found {len(dates_info)} expiration dates for {ticker}:")
         for i, date_info in enumerate(dates_info):
-            print(f"{i+1}. {date_info['date_string']} (Timestamp: {date_info['timestamp']})")
+            logger.info(f"{i+1}. {date_info['date_string']} (Timestamp: {date_info['timestamp']})")
         
         # Generate URLs for the first 8 dates or all dates if fewer than 8
         num_dates = min(8, len(dates_info))
         urls, dates = generate_options_urls(ticker, dates_info[:num_dates], num_dates)
-        print(f"\nURLs for the next {num_dates} expiration dates:")
+        logger.info(f"\nURLs for the next {num_dates} expiration dates:")
         for i, url in enumerate(urls):
-            print(f"{i+1}. {dates_info[i]['date_string']}: {url}")
+            logger.info(f"{i+1}. {dates_info[i]['date_string']}: {url}")
     else:
-        print(f"No expiration dates found for {ticker}")
+        logger.info(f"No expiration dates found for {ticker}")

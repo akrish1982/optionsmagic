@@ -11,6 +11,18 @@ import pytz
 import requests
 from dotenv import load_dotenv
 from calculate_option_greeks import calculate_option_delta
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("finviz_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Load environment variables from .env
 load_dotenv()
@@ -88,7 +100,7 @@ def extract_options_dates(ticker):
         response = requests.get(url, headers=headers)
         
         if response.status_code != 200:
-            print(f"Error: Received status code {response.status_code}")
+            logger.info(f"Error: Received status code {response.status_code}")
             return []
         
         # First try the escaped JSON pattern (\\\"expirationDates\\\":)
@@ -97,12 +109,12 @@ def extract_options_dates(ticker):
         
         # Extract and parse the timestamps array
         timestamps_str = "[" + match.group(1) + "]"
-        print(f"Extracted timestamps string: {timestamps_str}")
+        logger.info(f"Extracted timestamps string: {timestamps_str}")
         try:
             timestamps = json.loads(timestamps_str)
         except json.JSONDecodeError as e:
-            print(f"Failed to parse timestamps JSON: {e}")
-            print(f"Timestamps string: {timestamps_str}")
+            logger.info(f"Failed to parse timestamps JSON: {e}")
+            logger.info(f"Timestamps string: {timestamps_str}")
             return []
         
         # Convert timestamps to readable dates
@@ -121,7 +133,7 @@ def extract_options_dates(ticker):
         return date_info
     
     except Exception as e:
-        print(f"Error extracting expiration dates: {e}")
+        logger.info(f"Error extracting expiration dates: {e}")
         return []
 
 def generate_yahoo_options_urls(ticker, num_dates):
@@ -159,7 +171,7 @@ def get_price(soup):
             price_text = price_tag.get_text(strip=True)
             return float(price_text.replace(',', ''))  # Handle prices like 1,234.56
     except Exception as e:
-        print(f"Error extracting price: {e}")
+        logger.info(f"Error extracting price: {e}")
     
     return None  # Return None if not found or error
 
@@ -190,10 +202,10 @@ def get_options_table_from_url(url):
             return None, None  # Table not found
 
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching URL: {e}")
+        logger.info(f"Error fetching URL: {e}")
         return None, None  # Handle request errors
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        logger.info(f"An unexpected error occurred: {e}")
         return None, None
 
 def parse_options_table_html(table, ticker, expiration_date, option_type, price):
@@ -251,7 +263,7 @@ def parse_options_table_html(table, ticker, expiration_date, option_type, price)
         
         # If option_type_from_code doesn't match our expected option_type, log a warning
         if option_type_from_code and option_type_from_code != option_type:
-            print(f"Warning: Option type mismatch for {contract_name}. Expected {option_type}, found {option_type_from_code}")
+            logger.info(f"Warning: Option type mismatch for {contract_name}. Expected {option_type}, found {option_type_from_code}")
         
         # Extract strike price
         strike_part = contract_name[len(symbol)+7:] if symbol else None
@@ -300,7 +312,7 @@ def parse_options_table_html(table, ticker, expiration_date, option_type, price)
             all_options.append(option_data)
             
         except (ValueError, TypeError, IndexError) as e:
-            print(f"Warning: Error parsing numeric values for {contract_name}: {e}")
+            logger.info(f"Warning: Error parsing numeric values for {contract_name}: {e}")
     
     return all_options
 
@@ -427,7 +439,7 @@ def update_all_options_data(ticker):
 
     if urls:
         for url, expiration_date in zip(urls, expiration_dates): 
-            print(f"Fetching data from: {url} for date: {expiration_date}")
+            logger.info(f"Fetching data from: {url} for date: {expiration_date}")
             
             table_html, price = get_options_table_from_url(url)
             if table_html:
@@ -439,14 +451,14 @@ def update_all_options_data(ticker):
                         try:
                             option_type = 'call' if idx == 0 else 'put'
                             inserted_count = process_options_from_html(table, ticker, expiration_date, option_type, price)
-                            print(f"Successfully processed {inserted_count} options records")
+                            logger.info(f"Successfully processed {inserted_count} options records")
                             
                         except Exception as e:
-                            print(f"Error processing options data: {e}")
+                            logger.info(f"Error processing options data: {e}")
             else:
-                print("Failed to retrieve options table.")
+                logger.info("Failed to retrieve options table.")
     else:
-        print('Failed to generate urls.')
+        logger.info('Failed to generate urls.')
 
 
 def get_latest_tickers():
@@ -483,7 +495,7 @@ def get_latest_tickers():
         return tickers
 
     except (psycopg2.Error, Exception) as e:
-        print(f"Error retrieving tickers: {e}")
+        logger.info(f"Error retrieving tickers: {e}")
         return None
 
 if __name__ == "__main__":

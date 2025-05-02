@@ -199,3 +199,11 @@ date, implied_volatility, delta, gamma, theta, vega, rho
 12 9-16 * * 1-5 cd /Users/ananth/code/optionsmagic && /Users/ananth/.local/bin/poetry run python data_collection/update_tradeable_options.py >> /Users/ananth/code/optionsmagic/logs/tradeable.log 2>&1 && touch /Users/ananth/code/optionsmagic/heartbeat/tradeable_heartbeat || echo "update_tradeable_options.py failed" | mail -s "Tradeable Options Job Failed" akrish1982@gmail.com
 ```
 
+#### Running the program from command line
+
+```
+cd /Users/ananth/code/optionsmagic 
+poetry run python data_collection/finviz.py >> /Users/ananth/code/optionsmagic/logs/finviz.log
+poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/ananth/code/optionsmagic/logs/yahoo_finance.log
+poetry run python data_collection/update_tradeable_options.py >> /Users/ananth/code/optionsmagic/logs/tradeable.log
+```

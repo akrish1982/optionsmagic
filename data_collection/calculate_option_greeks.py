@@ -1,6 +1,18 @@
 import math
 import datetime
 from scipy.stats import norm
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("finviz_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 def calculate_option_delta(row, risk_free_rate=0.05):
     try:
@@ -16,11 +28,10 @@ def calculate_option_delta(row, risk_free_rate=0.05):
         T = (expiration - today).days / 365.0
 
         if T <= 0 or sigma <= 0:
-            print(f"Invalid parameters for delta calculation: T={T}, sigma={sigma}")
+            logger.info(f"Invalid parameters for delta calculation: T={T}, sigma={sigma}")
             return None  # Option is expired or invalid volatility
 
         d1 = (math.log(S / K) + (r + 0.5 * sigma ** 2) * T) / (sigma * math.sqrt(T))
-        print(f"Calculated d1: {d1}")
         if row['type'].lower() == 'call':
             delta = norm.cdf(d1)
         else:  # put
@@ -28,5 +39,6 @@ def calculate_option_delta(row, risk_free_rate=0.05):
         
         return round(delta, 4)
     except Exception as e:
-        print(f"Error in delta calculation module for {row['symbol']}: {e}")
+        logger.error(f"Error in delta calculation module for {row['symbol']}: {e}")
+        logger.error(f"Values: S={row['price']}, K={row['strike']}, r={risk_free_rate}, sigma={row['implied_volatility']}, T={T}")
         return None

@@ -2,6 +2,18 @@ import os
 import psycopg2
 from psycopg2 import sql
 from psycopg2.extras import execute_values
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("finviz_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 from dotenv import load_dotenv
 
@@ -64,12 +76,12 @@ def create_tradeable_options_table(cursor):
             rho DECIMAL
         );
     """)
-    print("Created tradeable_options table")
+    logger.info("Created tradeable_options table")
 
 def delete_tradeable_options_rows(cursor):
     """Delete all rows from the tradeable_options table."""
     cursor.execute("DELETE FROM public.tradeable_options;")
-    print("Deleted all rows from tradeable_options table")
+    logger.info("Deleted all rows from tradeable_options table")
     
 def connect_to_db(db_params):
     """Connect to the PostgreSQL database and return the connection and cursor."""
@@ -137,7 +149,7 @@ def upsert_tradeable_options(cursor, conn):
         results = cursor.fetchall()
         
         if not results:
-            print("No matching options found to upsert")
+            logger.info("No matching options found to upsert")
             return 0
         
         # Column names for the INSERT statement
@@ -186,13 +198,13 @@ def upsert_tradeable_options(cursor, conn):
         conn.commit()
         
         row_count = len(results)
-        print(f"Successfully upserted {row_count} rows into tradeable_options")
+        logger.info(f"Successfully upserted {row_count} rows into tradeable_options")
         return row_count
         
     except Exception as e:
         if conn:
             conn.rollback()
-        print(f"Error upserting data: {e}")
+        logger.info(f"Error upserting data: {e}")
         raise
         
     finally:
@@ -205,7 +217,7 @@ if __name__ == "__main__":
     # Run the upsert operation
     conn, cursor = connect_to_db(db_params)
     if not conn:
-        print("Failed to connect to the database")
+        logger.info("Failed to connect to the database")
         exit(1)
     # Check if table exists, create if not
     if not check_table_exists(cursor, "tradeable_options"):
