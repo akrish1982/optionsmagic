@@ -1,9 +1,21 @@
 from yahoo_fin import stock_info as si
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("finviz_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 def get_eod_options_yahoo_fin(ticker):
     # Get current price
     current_price = si.get_live_price(ticker)
-    print(current_price)
+    logger.info(current_price)
 
     # Retrieve all options chains for the ticker
     # yahoo_fin provides a list of expiration dates:
@@ -33,10 +45,10 @@ if __name__ == "__main__":
     for t in my_tickers:
         try:
             calls, puts = get_eod_options_yahoo_fin(t)
-            print(f"---- {t} ----")
-            print("Calls:")
-            print(calls.head())
-            print("\nPuts:")
-            print(puts.head())
+            logger.info(f"---- {t} ----")
+            logger.info("Calls:")
+            logger.info(calls.head())
+            logger.info("\nPuts:")
+            logger.info(puts.head())
         except Exception as e:
-            print(f"Error fetching data for {t}: {e}")
+            logger.info(f"Error fetching data for {t}: {e}")

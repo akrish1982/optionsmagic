@@ -9,6 +9,18 @@ import json
 import re
 import ast
 from bs4 import BeautifulSoup
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("finviz_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 # Database configuration - set these as environment variables in your production environment
 DB_NAME = os.environ.get("DB_NAME", "postgres")
 DB_USER = os.environ.get("DB_USER", "ananth")
@@ -74,7 +86,7 @@ def map_option_to_db_schema(option_data, option_type):
     # Verify option type from contract name
     type_from_contract = contract_name[date_start+6]
     if (type_from_contract == 'C' and option_type != 'call') or (type_from_contract == 'P' and option_type != 'put'):
-        print(f"Warning: Option type mismatch for {contract_name}. Expected {option_type}, found {type_from_contract}")
+        logger.info(f"Warning: Option type mismatch for {contract_name}. Expected {option_type}, found {type_from_contract}")
     
     # Extract strike price (divide by 1000 to get actual value)
     strike_str = contract_name[date_start+7:]
@@ -205,12 +217,12 @@ def insert_options_into_db(db_config, options_data):
         
         # Commit the transaction
         conn.commit()
-        print(f"Successfully inserted {len(options_data)} options into the database")
+        logger.info(f"Successfully inserted {len(options_data)} options into the database")
         
     except Exception as e:
         if conn:
             conn.rollback()
-        print(f"Database error: {e}")
+        logger.info(f"Database error: {e}")
         
     finally:
         if conn:
@@ -239,16 +251,16 @@ def main():
         all_options = call_options + put_options
         
         # Print sample for verification
-        print(f"Processed {len(all_options)} options")
-        print("Sample mapped option:")
-        print(json.dumps(all_options[0], indent=2))
+        logger.info(f"Processed {len(all_options)} options")
+        logger.info("Sample mapped option:")
+        logger.info(json.dumps(all_options[0], indent=2))
         
         # Insert into database
         # Uncomment when ready to insert
         # insert_options_into_db(db_config, all_options)
         
     except Exception as e:
-        print(f"Error processing options data: {e}")
+        logger.info(f"Error processing options data: {e}")
 
 def generate_jsonschema(json_data):
     """Generate a jsonschema from a JSON object."""
@@ -296,7 +308,7 @@ def generate_jsonschema(json_data):
     return schema
 
 # schema = generate_jsonschema(data) - THIS IS NEEDED ONLY ONCE TO GENERATE THE SCHEMA
-# print(json.dumps(schema, indent=2))
+# logger.info(json.dumps(schema, indent=2))
 
 def extract_option_tables(soup):
     """
@@ -377,7 +389,7 @@ def get_latest_tickers():
         return tickers
 
     except (psycopg2.Error, Exception) as e:
-        print(f"Error retrieving tickers: {e}")
+        logger.info(f"Error retrieving tickers: {e}")
         return None
 
 def insert_option_data(data_list):
@@ -499,11 +511,11 @@ def insert_option_data(data_list):
 
         # After commit, print out how many records processed for each symbol
         for sym, count in processed_counts.items():
-            print(f"Processed {count} record(s) for ticker: {sym}")
+            logger.info(f"Processed {count} record(s) for ticker: {sym}")
 
     except Exception as e:
         conn.rollback()
-        print("Error during upsert:", e)
+        logger.info("Error during upsert:", e)
     finally:
         cursor.close()
         conn.close()
@@ -517,58 +529,58 @@ def upsert_into_database(response):
     # json_obj = json.loads(response)
     # Extract the "data" array
     data = response.get("data", [])
-    print(f"Found {len(data)} records in the data array.")
+    logger.info(f"Found {len(data)} records in the data array.")
     # Insert/Upsert into Postgres
     insert_option_data(data)
-    print("Upsert completed.")
+    logger.info("Upsert completed.")
 
 
 # if __name__ == "__main__":
 #     # my_tickers = [ "NVDA", "MSFT", "AMZN", "GOOGL", "GOOG", "META", "TSLA", "AVGO", "TSM", "LLY"]
 #     my_tickers = get_latest_tickers()
-#     print(f"Found {len(my_tickers)} tickers.")
-#     print(my_tickers)
+#     logger.info(f"Found {len(my_tickers)} tickers.")
+#     logger.info(my_tickers)
     # for ticker in my_tickers:
-    #     print(f"Fetching options data for {ticker}")
+    #     logger.info(f"Fetching options data for {ticker}")
     #     url = f"https://www.alphavantage.co/query?function=HISTORICAL_OPTIONS&symbol={ticker}&apikey={API_KEY}"
     #     r = requests.get(url)
     #     if r.status_code == 200:
     #         # Parse response JSON or text as needed
     #         data = r.json()
-    #         print("Success! Data received")
+    #         logger.info("Success! Data received")
     #         upsert_into_database(data)
     #     else:
     #         # Handle specific status codes or general errors
-    #         print(f"API call failed. Status Code: {r.status_code}")
-    #         print("Response text:", r.text)
+    #         logger.info(f"API call failed. Status Code: {r.status_code}")
+    #         logger.info("Response text:", r.text)
     #     time.sleep(10)  # Sleep for 10s  before next API call
 
     # for index, ticker in enumerate(my_tickers):
-    #     print(f"Fetching options data for {ticker}")
+    #     logger.info(f"Fetching options data for {ticker}")
     #     url = f"https://www.alphavantage.co/query?function=HISTORICAL_OPTIONS&symbol={ticker}&apikey={API_KEY}"
     #     try:
     #         r = requests.get(url)
     #         r.raise_for_status() # Raise HTTPError for bad responses (4xx or 5xx)
     #         data = r.json()
-    #         print("Success! Data received")
+    #         logger.info("Success! Data received")
     #         upsert_into_database(data)
-    #         print(f"Response text: {r.text}")
+    #         logger.info(f"Response text: {r.text}")
 
     #     except requests.exceptions.RequestException as e:
-    #         print(f"API call failed: {e}")
+    #         logger.info(f"API call failed: {e}")
     #         if r is not None:
-    #             print(f"Status Code: {r.status_code}")
-    #             print(f"Response text: {r.text}")
+    #             logger.info(f"Status Code: {r.status_code}")
+    #             logger.info(f"Response text: {r.text}")
     #         else:
-    #             print("No response object available.")
+    #             logger.info("No response object available.")
 
     #     # Delay logic:
     #     random_delay = random.randint(10, 120)
-    #     print(f"Sleeping for {random_delay} seconds...")
+    #     logger.info(f"Sleeping for {random_delay} seconds...")
     #     time.sleep(random_delay)
 
     #     if (index + 1) % 10 == 0:  # Check if 10 stocks have been processed
-    #         print("Processing 10 stocks, sleeping for 300 seconds...")
+    #         logger.info("Processing 10 stocks, sleeping for 300 seconds...")
     #         time.sleep(300)
-    #     print("Continuing with next ticker.")
+    #     logger.info("Continuing with next ticker.")
         

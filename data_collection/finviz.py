@@ -495,7 +495,8 @@ def upsert_stock_data(conn, stock_data):
             insert_stmt = sql.SQL("""
                 INSERT INTO stock_quotes ({})
                 VALUES %s
-                ON CONFLICT (ticker, quote_date, quote_time) DO UPDATE SET
+                ON CONFLICT (ticker, quote_date) DO UPDATE SET
+                    quote_time = EXCLUDED.quote_time,
                     price = EXCLUDED.price,
                     change_percent = EXCLUDED.change_percent,
                     volume = EXCLUDED.volume,
@@ -540,7 +541,7 @@ def scrape_finviz_stocks_with_options():
         
         page_count = 1
         total_stocks = 0
-        max_pages = 10
+        max_pages = 30
         
         while url and page_count <= max_pages:
             logger.info(f"Scraping page {page_count}: {url}")
