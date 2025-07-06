@@ -536,7 +536,7 @@ def scrape_finviz_stocks_with_options():
         create_table_if_not_exists(conn)
         
         # Use the exact URL specified by the user
-        url = "https://finviz.com/screener.ashx?v=111&f=cap_mega,sh_opt_option&r=1"
+        url = "https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option&ft=2&o=-perf3y#google_vignette&r=1"
         
         page_count = 1
         total_stocks = 0
