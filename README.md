@@ -207,3 +207,18 @@ poetry run python data_collection/finviz.py >> /Users/ananth/code/optionsmagic/l
 poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/ananth/code/optionsmagic/logs/yahoo_finance.log
 poetry run python data_collection/update_tradeable_options.py >> /Users/ananth/code/optionsmagic/logs/tradeable.log
 ```
+how to run without logs
+
+```
+cd /Users/ananth/code/optionsmagic 
+poetry run python data_collection/finviz.py
+poetry run python data_collection/yahoo_finance_options_postgres.py
+poetry run python data_collection/update_tradeable_options.py
+```
+
+
+### Supabase options query API
+
+curl 'https://cqsbeacrzfpnukwpdvhc.supabase.co/rest/v1/tradeable_options?select=collateral&limit=10' \
+-H "apikey: sb_secret_FGM1wT184TEtWq6lKmJEhg_7zyrzOHB" \
+-H "Authorization: Bearer sb_secret_FGM1wT184TEtWq6lKmJEhg_7zyrzOHB"

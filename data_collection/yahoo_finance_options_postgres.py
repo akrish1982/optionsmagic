@@ -93,13 +93,17 @@ def extract_options_dates(ticker):
     url = f"https://finance.yahoo.com/quote/{ticker}/options"
     
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'Accept': 'text/html',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Connection': 'keep-alive'
+        }
     
     try:
         response = requests.get(url, headers=headers)
         
         if response.status_code != 200:
+            logger.info(f"https://finance.yahoo.com/quote/{ticker}/options")
             logger.info(f"Error: Received status code {response.status_code}")
             return []
         
@@ -187,7 +191,10 @@ def get_options_table_from_url(url):
     """
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'Accept': 'text/html',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Connection': 'keep-alive'
         }
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
@@ -483,6 +490,17 @@ def get_latest_tickers():
             SELECT DISTINCT ticker
             FROM public.stock_quotes
             WHERE quote_date = (SELECT MAX(quote_date) FROM public.stock_quotes)
+            ORDER BY ticker ASC
+        """
+        # THE BELOW QUERY WAS USED WHEN THIS PROGRAM TIMED OUT AND I HAD TO ADD LOGIC JUSt ProCESS UNPROCESSED ONEs
+        query = """
+        SELECT DISTINCT ticker
+            FROM public.stock_quotes sq
+            left join yahoo_finance_options yfo
+                ON sq.ticker = yfo.symbol
+                and sq.quote_date = yfo.date
+            WHERE quote_date = (SELECT MAX(quote_date) FROM public.stock_quotes)
+                and yfo.symbol is NULL
             ORDER BY ticker ASC
         """
 
