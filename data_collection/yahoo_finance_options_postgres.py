@@ -40,6 +40,24 @@ db_params = {
     'password': DB_PASSWORD
 }
 
+def get_yahoo_headers():
+    """Get headers for Yahoo Finance requests that mimic a real browser."""
+    return {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Referer': 'https://www.google.com/',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1'
+    }
+
+def get_yahoo_session():
+    """Create a requests session with Yahoo Finance headers."""
+    session = requests.Session()
+    session.headers.update(get_yahoo_headers())
+    return session
+
 # def generate_yahoo_options_urls(ticker):
 #     """
 #     Generates a list of Yahoo Finance options URLs for the next 8 Fridays.
@@ -92,20 +110,23 @@ def extract_options_dates(ticker):
     """
     url = f"https://finance.yahoo.com/quote/{ticker}/options"
     
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
+    session = get_yahoo_session()
     
     try:
-        response = requests.get(url, headers=headers)
+        response = session.get(url, timeout=15)
         
         if response.status_code != 200:
-            logger.info(f"Error: Received status code {response.status_code}")
+            logger.info(f"Error: Received status code {response.status_code} for URL: {url}")
+            logger.info(f"Response text (first 500 chars): {response.text[:500]}")
             return []
         
         # First try the escaped JSON pattern (\\\"expirationDates\\\":)
         pattern = r'\\\"expirationDates\\\":\[([0-9,]+)\]'
         match = re.search(pattern, response.text)
+        
+        if not match:
+            logger.info(f"Could not find expirationDates pattern in response")
+            return []
         
         # Extract and parse the timestamps array
         timestamps_str = "[" + match.group(1) + "]"
@@ -186,10 +207,8 @@ def get_options_table_from_url(url):
         str or None: The HTML content of the options table as a string, or None if an error occurs.
     """
     try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        response = requests.get(url, headers=headers)
+        session = get_yahoo_session()
+        response = session.get(url, timeout=15)
         response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
 
         soup = BeautifulSoup(response.content, 'html.parser')

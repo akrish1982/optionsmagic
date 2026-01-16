@@ -83,6 +83,7 @@ def create_table_if_not_exists(conn):
     """Create the stock_quotes table if it doesn't exist."""
     try:
         with conn.cursor() as cur:
+            # Create table if it doesn't exist
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS stock_quotes (
                     ticker VARCHAR(20) NOT NULL,
@@ -100,12 +101,39 @@ def create_table_if_not_exists(conn):
                     industry VARCHAR(100),
                     has_options BOOLEAN DEFAULT TRUE,
                     last_updated TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-                    PRIMARY KEY (ticker, quote_date, quote_time)
+                    PRIMARY KEY (ticker, quote_date)
                 );
                 
                 CREATE INDEX IF NOT EXISTS idx_stock_quotes_ticker ON stock_quotes (ticker);
                 CREATE INDEX IF NOT EXISTS idx_stock_quotes_date ON stock_quotes (quote_date);
             """)
+            
+            # Check if table exists with old primary key (3 columns) and migrate it
+            cur.execute("""
+                SELECT constraint_name 
+                FROM information_schema.table_constraints 
+                WHERE table_name = 'stock_quotes' 
+                AND constraint_type = 'PRIMARY KEY'
+            """)
+            pk_result = cur.fetchone()
+            
+            if pk_result:
+                pk_constraint_name = pk_result[0]
+                # Check column count in the primary key
+                cur.execute("""
+                    SELECT COUNT(*)
+                    FROM information_schema.key_column_usage
+                    WHERE table_name = 'stock_quotes'
+                    AND constraint_name = %s
+                """, (pk_constraint_name,))
+                pk_column_count = cur.fetchone()[0]
+                
+                if pk_column_count == 3:
+                    # Migrate: drop old primary key and create new one
+                    logger.info("Migrating primary key from (ticker, quote_date, quote_time) to (ticker, quote_date)")
+                    cur.execute(f"ALTER TABLE stock_quotes DROP CONSTRAINT {pk_constraint_name}")
+                    cur.execute("ALTER TABLE stock_quotes ADD PRIMARY KEY (ticker, quote_date)")
+            
             conn.commit()
             logger.info("Table stock_quotes created or already exists")
     except Exception as e:
