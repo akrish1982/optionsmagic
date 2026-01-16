@@ -51,7 +51,7 @@ where stcks.ticker not in (select distinct opt.symbol from public.alpha_vantage_
 
 #### Future Improvements
 - schedule to run this locally every 15 minutes and email me if it fails
-	- set up email using `security add-generic-password -a <user>@gmail.com -s smtp.gmail.com -w 'your_email_password'`
+	- set up email using `security add-generic-password -a <your_email>@gmail.com -s smtp.gmail.com -w 'your_email_password'`
 - connect locally to finviz and yahoo options database and update supabase only for tradeable_options
 
 - Alphavantage fails after 25 stocks. To go away from it, i may create 2 id's and use 50 stocks at a time
@@ -190,13 +190,13 @@ date, implied_volatility, delta, gamma, theta, vega, rho
 #### Scheduling the crons
 ```
 # finviz.py every hour on weekdays (Mon–Fri)
-0 * * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/finviz_heartbeat || echo "finviz.py failed" | mail -s "finviz.py CRON Job Failed" <user>@gmail.com
+0 * * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/finviz_heartbeat || echo "finviz.py failed" | mail -s "finviz.py CRON Job Failed" <your_email>@gmail.com
 
 # yahoo_finance_options_postgres.py every weekday, hourly 9AM–4PM
-2 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/yahoo_heartbeat || echo "yahoo_finance_options_postgres.py failed" | mail -s "Options CRON Job Failed" <user>@gmail.com
+2 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/yahoo_heartbeat || echo "yahoo_finance_options_postgres.py failed" | mail -s "Options CRON Job Failed" <your_email>@gmail.com
 
 # update_tradeable_options.py every weekday, hourly 9AM–4PM
-12 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/update_tradeable_options.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/tradeable_heartbeat || echo "update_tradeable_options.py failed" | mail -s "Tradeable Options Job Failed" <user>@gmail.com
+12 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/update_tradeable_options.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/tradeable_heartbeat || echo "update_tradeable_options.py failed" | mail -s "Tradeable Options Job Failed" <your_email>@gmail.com
 ```
 
 #### Running the program from command line
@@ -220,5 +220,6 @@ poetry run python data_collection/update_tradeable_options.py
 ### Supabase options query API
 
 curl 'https://cqsbeacrzfpnukwpdvhc.supabase.co/rest/v1/tradeable_options?select=collateral&limit=10' \
--H "apikey: sb_secret_FGM1wT184TEtWq6lKmJEhg_7zyrzOHB" \
--H "Authorization: Bearer sb_secret_FGM1wT184TEtWq6lKmJEhg_7zyrzOHB"
+-H "apikey: <secret>" \
+-H "Authorization: Bearer <secret>"
+=======

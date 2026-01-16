@@ -3,3 +3,4 @@
 *_readme.md
 logs/*.log
 heartbeat/*
+tokens.json
