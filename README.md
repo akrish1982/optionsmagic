@@ -33,25 +33,25 @@ where stcks.ticker not in (select distinct opt.symbol from public.alpha_vantage_
 
 - to schedule to run every 15 minutes
 ```
-/Users/ananth/.local/bin/poetry run python data_collection/finviz.py
+/Users/<user>/.local/bin/poetry run python data_collection/finviz.py
 ```
 
 - To run options program every day
 ```
-/Users/ananth/.local/bin/poetry run python data_collection/yahoo_finance_options_postgres.py
+/Users/<user>/.local/bin/poetry run python data_collection/yahoo_finance_options_postgres.py
 
 ```
 
 - To run summarized data every day/hour
 ```
-/Users/ananth/.local/bin/poetry run python data_collection/update_tradeable_options.py
+/Users/<user>/.local/bin/poetry run python data_collection/update_tradeable_options.py
 
 ```
 - If python packages are not installed or need to be reloaded, use `poetry install`. if you changed pytoml, use `poetry lock`
 
 #### Future Improvements
 - schedule to run this locally every 15 minutes and email me if it fails
-	- set up email using `security add-generic-password -a akrish1982@gmail.com -s smtp.gmail.com -w 'your_email_password'`
+	- set up email using `security add-generic-password -a <user>@gmail.com -s smtp.gmail.com -w 'your_email_password'`
 - connect locally to finviz and yahoo options database and update supabase only for tradeable_options
 
 - Alphavantage fails after 25 stocks. To go away from it, i may create 2 id's and use 50 stocks at a time
@@ -190,27 +190,27 @@ date, implied_volatility, delta, gamma, theta, vega, rho
 #### Scheduling the crons
 ```
 # finviz.py every hour on weekdays (Mon–Fri)
-0 * * * 1-5 cd /Users/ananth/code/optionsmagic && /Users/ananth/.local/bin/poetry run python data_collection/finviz.py >> /Users/ananth/code/optionsmagic/logs/finviz.log 2>&1 && touch /Users/ananth/code/optionsmagic/heartbeat/finviz_heartbeat || echo "finviz.py failed" | mail -s "finviz.py CRON Job Failed" akrish1982@gmail.com
+0 * * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/finviz_heartbeat || echo "finviz.py failed" | mail -s "finviz.py CRON Job Failed" <user>@gmail.com
 
 # yahoo_finance_options_postgres.py every weekday, hourly 9AM–4PM
-2 9-16 * * 1-5 cd /Users/ananth/code/optionsmagic && /Users/ananth/.local/bin/poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/ananth/code/optionsmagic/logs/yahoo_finance.log 2>&1 && touch /Users/ananth/code/optionsmagic/heartbeat/yahoo_heartbeat || echo "yahoo_finance_options_postgres.py failed" | mail -s "Options CRON Job Failed" akrish1982@gmail.com
+2 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/yahoo_heartbeat || echo "yahoo_finance_options_postgres.py failed" | mail -s "Options CRON Job Failed" <user>@gmail.com
 
 # update_tradeable_options.py every weekday, hourly 9AM–4PM
-12 9-16 * * 1-5 cd /Users/ananth/code/optionsmagic && /Users/ananth/.local/bin/poetry run python data_collection/update_tradeable_options.py >> /Users/ananth/code/optionsmagic/logs/tradeable.log 2>&1 && touch /Users/ananth/code/optionsmagic/heartbeat/tradeable_heartbeat || echo "update_tradeable_options.py failed" | mail -s "Tradeable Options Job Failed" akrish1982@gmail.com
+12 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/update_tradeable_options.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/tradeable_heartbeat || echo "update_tradeable_options.py failed" | mail -s "Tradeable Options Job Failed" <user>@gmail.com
 ```
 
 #### Running the program from command line
 
 ```
-cd /Users/ananth/code/optionsmagic 
-poetry run python data_collection/finviz.py >> /Users/ananth/code/optionsmagic/logs/finviz.log
-poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/ananth/code/optionsmagic/logs/yahoo_finance.log
-poetry run python data_collection/update_tradeable_options.py >> /Users/ananth/code/optionsmagic/logs/tradeable.log
+cd /Users/<user>/code/optionsmagic 
+poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log
+poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log
+poetry run python data_collection/update_tradeable_options.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log
 ```
 how to run without logs
 
 ```
-cd /Users/ananth/code/optionsmagic 
+cd /Users/<user>/code/optionsmagic 
 poetry run python data_collection/finviz.py
 poetry run python data_collection/yahoo_finance_options_postgres.py
 poetry run python data_collection/update_tradeable_options.py
