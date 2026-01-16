@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 # Database configuration - set these as environment variables in your production environment
 DB_NAME = os.environ.get("DB_NAME", "postgres")
-DB_USER = os.environ.get("DB_USER", "ananth")
+DB_USER = os.environ.get("DB_USER", "<user>")
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
 DB_HOST = os.environ.get("DB_HOST", "localhost")
 DB_PORT = os.environ.get("DB_PORT", "5432")
@@ -502,6 +502,17 @@ def get_latest_tickers():
             SELECT DISTINCT ticker
             FROM public.stock_quotes
             WHERE quote_date = (SELECT MAX(quote_date) FROM public.stock_quotes)
+            ORDER BY ticker ASC
+        """
+        # THE BELOW QUERY WAS USED WHEN THIS PROGRAM TIMED OUT AND I HAD TO ADD LOGIC JUSt ProCESS UNPROCESSED ONEs
+        query = """
+        SELECT DISTINCT ticker
+            FROM public.stock_quotes sq
+            left join yahoo_finance_options yfo
+                ON sq.ticker = yfo.symbol
+                and sq.quote_date = yfo.date
+            WHERE quote_date = (SELECT MAX(quote_date) FROM public.stock_quotes)
+                and yfo.symbol is NULL
             ORDER BY ticker ASC
         """
 
