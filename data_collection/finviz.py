@@ -7,9 +7,6 @@ import pytz
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-import psycopg2
-from psycopg2 import sql
-from psycopg2.extras import execute_values
 import re
 from urllib.parse import urlencode
 from dotenv import load_dotenv
@@ -28,12 +25,27 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Database configuration - set these as environment variables in your production environment
+# Storage backend configuration: "supabase" (default) or "postgres"
+STORAGE_BACKEND = os.environ.get("STORAGE_BACKEND", "supabase")
+
+# Supabase configuration
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+
+# Local PostgreSQL configuration (used when STORAGE_BACKEND=postgres)
 DB_NAME = os.environ.get("DB_NAME", "postgres")
 DB_USER = os.environ.get("DB_USER", "<user>")
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
 DB_HOST = os.environ.get("DB_HOST", "localhost")
 DB_PORT = os.environ.get("DB_PORT", "5432")
+
+# Conditional imports based on backend
+if STORAGE_BACKEND == "postgres":
+    import psycopg2
+    from psycopg2 import sql
+    from psycopg2.extras import execute_values
+else:
+    from supabase import create_client, Client
 
 # Finviz configuration
 BASE_URL = "https://finviz.com/screener.ashx"
@@ -64,8 +76,15 @@ def get_headers():
         "Cache-Control": "max-age=0",
     }
 
+def get_supabase_client() -> "Client":
+    """Get a Supabase client instance."""
+    if not SUPABASE_URL or not SUPABASE_KEY:
+        raise ValueError("SUPABASE_URL and SUPABASE_KEY environment variables must be set")
+    return create_client(SUPABASE_URL, SUPABASE_KEY)
+
+
 def get_db_connection():
-    """Establish a connection to the PostgreSQL database."""
+    """Establish a connection to the PostgreSQL database (only used when STORAGE_BACKEND=postgres)."""
     try:
         conn = psycopg2.connect(
             dbname=DB_NAME,
@@ -80,7 +99,7 @@ def get_db_connection():
         raise
 
 def create_table_if_not_exists(conn):
-    """Create the stock_quotes table if it doesn't exist."""
+    """Create the stock_quotes table if it doesn't exist (only used when STORAGE_BACKEND=postgres)."""
     try:
         with conn.cursor() as cur:
             # Create table if it doesn't exist
@@ -100,13 +119,34 @@ def create_table_if_not_exists(conn):
                     sector VARCHAR(100),
                     industry VARCHAR(100),
                     has_options BOOLEAN DEFAULT TRUE,
+                    rsi NUMERIC(6, 2),
+                    sma50 NUMERIC(10, 2),
+                    sma200 NUMERIC(10, 2),
+                    distance_from_support NUMERIC(8, 2),
                     last_updated TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (ticker, quote_date)
                 );
-                
+
                 CREATE INDEX IF NOT EXISTS idx_stock_quotes_ticker ON stock_quotes (ticker);
                 CREATE INDEX IF NOT EXISTS idx_stock_quotes_date ON stock_quotes (quote_date);
             """)
+
+            # Add new columns if they don't exist (for existing tables)
+            for column, col_type in [
+                ('rsi', 'NUMERIC(6, 2)'),
+                ('sma50', 'NUMERIC(10, 2)'),
+                ('sma200', 'NUMERIC(10, 2)'),
+                ('distance_from_support', 'NUMERIC(8, 2)')
+            ]:
+                cur.execute(f"""
+                    DO $$
+                    BEGIN
+                        IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                                      WHERE table_name = 'stock_quotes' AND column_name = '{column}') THEN
+                            ALTER TABLE stock_quotes ADD COLUMN {column} {col_type};
+                        END IF;
+                    END $$;
+                """)
             
             # Check if table exists with old primary key (3 columns) and migrate it
             cur.execute("""
@@ -372,8 +412,12 @@ def extract_stock_data_from_html(html_content):
                     'sector': sector,
                     'industry': industry,
                     'has_options': True,  # We're filtering for stocks with options
+                    'rsi': None,  # Will be fetched from technical view
+                    'sma50': None,  # Will be fetched from technical view
+                    'sma200': None,  # Will be fetched from technical view
+                    'distance_from_support': None,  # Will be calculated or fetched
                 }
-                
+
                 stocks_data.append(stock_data)
                 
             except Exception as e:
@@ -479,14 +523,66 @@ def parse_volume(volume_text):
         logger.warning(f"Error parsing volume '{volume_text}': {str(e)}")
         return None
 
-def upsert_stock_data(conn, stock_data):
+def upsert_stock_data_supabase(supabase_client, stock_data):
     """
-    Upsert stock data into the database.
+    Upsert stock data into Supabase.
     """
     if not stock_data:
         logger.warning("No stock data to upsert")
-        return
-    
+        return 0
+
+    try:
+        # Prepare records for Supabase upsert
+        records = []
+        for data in stock_data:
+            record = {
+                'ticker': data['ticker'],
+                'quote_date': str(data['quote_date']),
+                'quote_time': str(data['quote_time']),
+                'price': float(data['price']) if data['price'] is not None else None,
+                'change_percent': float(data['change_percent']) if data['change_percent'] is not None else None,
+                'volume': int(data['volume']) if data['volume'] is not None else None,
+                'relative_volume': float(data['relative_volume']) if data['relative_volume'] is not None else None,
+                'market_cap': float(data['market_cap']) if data['market_cap'] is not None else None,
+                'pe_ratio': float(data['pe_ratio']) if data['pe_ratio'] is not None else None,
+                'eps': float(data['eps']) if data['eps'] is not None else None,
+                'dividend_yield': float(data['dividend_yield']) if data['dividend_yield'] is not None else None,
+                'sector': data['sector'],
+                'industry': data['industry'],
+                'has_options': data['has_options'],
+                'rsi': float(data['rsi']) if data.get('rsi') is not None else None,
+                'sma50': float(data['sma50']) if data.get('sma50') is not None else None,
+                'sma200': float(data['sma200']) if data.get('sma200') is not None else None,
+                'distance_from_support': float(data['distance_from_support']) if data.get('distance_from_support') is not None else None,
+                'last_updated': datetime.now(pytz.utc).isoformat(),
+            }
+            records.append(record)
+
+        # Upsert in batches (Supabase has limits on request size)
+        batch_size = 100
+        for i in range(0, len(records), batch_size):
+            batch = records[i:i + batch_size]
+            supabase_client.table('stock_quotes').upsert(
+                batch,
+                on_conflict='ticker,quote_date'
+            ).execute()
+
+        logger.info(f"Successfully upserted data for {len(stock_data)} stocks to Supabase")
+        return len(stock_data)
+
+    except Exception as e:
+        logger.error(f"Error upserting stock data to Supabase: {str(e)}")
+        raise
+
+
+def upsert_stock_data_postgres(conn, stock_data):
+    """
+    Upsert stock data into local PostgreSQL database.
+    """
+    if not stock_data:
+        logger.warning("No stock data to upsert")
+        return 0
+
     try:
         with conn.cursor() as cur:
             # Define the columns we want to insert/update
@@ -494,9 +590,9 @@ def upsert_stock_data(conn, stock_data):
                 'ticker', 'quote_date', 'quote_time', 'price', 'change_percent',
                 'volume', 'relative_volume', 'market_cap', 'pe_ratio',
                 'eps', 'dividend_yield', 'sector', 'industry', 'has_options',
-                'last_updated'
+                'rsi', 'sma50', 'sma200', 'distance_from_support', 'last_updated'
             ]
-            
+
             # Prepare values in the format expected by execute_values
             values = []
             for data in stock_data:
@@ -515,10 +611,14 @@ def upsert_stock_data(conn, stock_data):
                     data['sector'],
                     data['industry'],
                     data['has_options'],
+                    data.get('rsi'),
+                    data.get('sma50'),
+                    data.get('sma200'),
+                    data.get('distance_from_support'),
                     datetime.now(pytz.utc)
                 )
                 values.append(row)
-            
+
             # Build the SQL query for upserting data
             insert_stmt = sql.SQL("""
                 INSERT INTO stock_quotes ({})
@@ -536,79 +636,190 @@ def upsert_stock_data(conn, stock_data):
                     sector = EXCLUDED.sector,
                     industry = EXCLUDED.industry,
                     has_options = EXCLUDED.has_options,
+                    rsi = EXCLUDED.rsi,
+                    sma50 = EXCLUDED.sma50,
+                    sma200 = EXCLUDED.sma200,
+                    distance_from_support = EXCLUDED.distance_from_support,
                     last_updated = EXCLUDED.last_updated
             """).format(
                 sql.SQL(', ').join(map(sql.Identifier, columns))
             )
-            
+
             # Execute the query
             execute_values(cur, insert_stmt, values)
             conn.commit()
-            
-            logger.info(f"Successfully upserted data for {len(stock_data)} stocks")
+
+            logger.info(f"Successfully upserted data for {len(stock_data)} stocks to PostgreSQL")
             return len(stock_data)
-    
+
     except Exception as e:
         conn.rollback()
-        logger.error(f"Error upserting stock data: {str(e)}")
+        logger.error(f"Error upserting stock data to PostgreSQL: {str(e)}")
         raise
+
+
+def upsert_stock_data(db_client, stock_data):
+    """
+    Upsert stock data into the configured database backend.
+    """
+    if STORAGE_BACKEND == "postgres":
+        return upsert_stock_data_postgres(db_client, stock_data)
+    else:
+        return upsert_stock_data_supabase(db_client, stock_data)
+
+def fetch_technical_data(ticker):
+    """
+    Fetch technical indicators (RSI, SMA50, SMA200) for a specific ticker from Finviz.
+
+    Args:
+        ticker: Stock ticker symbol
+
+    Returns:
+        Dictionary with technical indicators or None if failed
+    """
+    url = f"https://finviz.com/quote.ashx?t={ticker}"
+
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0"
+        }
+        time.sleep(random.uniform(0.5, 1.5))  # Rate limiting
+        response = requests.get(url, headers=headers, timeout=15)
+
+        if response.status_code != 200:
+            logger.warning(f"Failed to fetch technical data for {ticker}: {response.status_code}")
+            return None
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Find the snapshot table with technical data
+        technical_data = {
+            'rsi': None,
+            'sma50': None,
+            'sma200': None,
+            'distance_from_support': None
+        }
+
+        # Look for the data table rows
+        table = soup.find('table', class_='snapshot-table2')
+        if not table:
+            return technical_data
+
+        rows = table.find_all('tr')
+        for row in rows:
+            cells = row.find_all('td')
+            for i, cell in enumerate(cells):
+                text = cell.text.strip()
+                if text == 'RSI (14)' and i + 1 < len(cells):
+                    try:
+                        technical_data['rsi'] = float(cells[i + 1].text.strip())
+                    except (ValueError, TypeError):
+                        pass
+                elif text == 'SMA50' and i + 1 < len(cells):
+                    try:
+                        # SMA50 is shown as percentage from current price
+                        sma_text = cells[i + 1].text.strip().replace('%', '')
+                        technical_data['sma50'] = float(sma_text)
+                    except (ValueError, TypeError):
+                        pass
+                elif text == 'SMA200' and i + 1 < len(cells):
+                    try:
+                        # SMA200 is shown as percentage from current price
+                        sma_text = cells[i + 1].text.strip().replace('%', '')
+                        technical_data['sma200'] = float(sma_text)
+                    except (ValueError, TypeError):
+                        pass
+
+        return technical_data
+
+    except Exception as e:
+        logger.warning(f"Error fetching technical data for {ticker}: {str(e)}")
+        return None
+
+
+def enrich_with_technical_data(stocks_data, max_tickers=50):
+    """
+    Enrich stock data with technical indicators.
+    Limited to max_tickers to avoid rate limiting.
+
+    Args:
+        stocks_data: List of stock data dictionaries
+        max_tickers: Maximum number of tickers to fetch technical data for
+
+    Returns:
+        Updated stocks_data with technical indicators
+    """
+    for i, stock in enumerate(stocks_data[:max_tickers]):
+        ticker = stock['ticker']
+        logger.info(f"Fetching technical data for {ticker} ({i+1}/{min(len(stocks_data), max_tickers)})")
+
+        technical_data = fetch_technical_data(ticker)
+        if technical_data:
+            stock.update(technical_data)
+
+    return stocks_data
+
 
 def scrape_finviz_stocks_with_options():
     """
     Scrape stocks with options from Finviz screener.
     """
     try:
-        # Get database connection
-        conn = get_db_connection()
-        
-        # Create table if it doesn't exist
-        create_table_if_not_exists(conn)
-        
-        # Use the exact URL specified by the user
-        url = "https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option&ft=2&o=-perf3y#google_vignette&r=1"
-        
+        # Get database client based on configured backend
+        if STORAGE_BACKEND == "postgres":
+            db_client = get_db_connection()
+            create_table_if_not_exists(db_client)
+            logger.info("Using local PostgreSQL backend")
+        else:
+            db_client = get_supabase_client()
+            logger.info("Using Supabase backend")
+
+        # Include filters for Large Cap,
+        url = "https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa&ft=3&o=-perf3y"
+
         page_count = 1
         total_stocks = 0
         max_pages = 30
-        
+
         while url and page_count <= max_pages:
             logger.info(f"Scraping page {page_count}: {url}")
-            
+
             # Fetch the page content
             html_content = fetch_finviz_page(url)
-            
+
             if not html_content:
                 logger.error(f"Failed to fetch page {page_count}")
                 break
-            
+
             # Extract stock data from the page
             stocks_data, next_page_url = extract_stock_data_from_html(html_content)
-            
+
             if stocks_data:
                 # Upsert data to database
-                inserted_count = upsert_stock_data(conn, stocks_data)
+                inserted_count = upsert_stock_data(db_client, stocks_data)
                 total_stocks += inserted_count
                 logger.info(f"Added {inserted_count} stocks from page {page_count} (total: {total_stocks})")
             else:
                 logger.warning(f"No stocks found on page {page_count}")
-            
+
             # Move to next page if available
             url = next_page_url
             page_count += 1
-            
+
             # Add a delay between requests
             if url:
                 delay = random.uniform(2.0, 4.0)
                 logger.info(f"Waiting {delay:.2f} seconds before next page...")
                 time.sleep(delay)
-        
+
         logger.info(f"Scraping completed. Total stocks: {total_stocks}")
-        
-        # Close the database connection
-        conn.close()
-        
+
+        # Close the database connection (only for PostgreSQL)
+        if STORAGE_BACKEND == "postgres":
+            db_client.close()
+
         return total_stocks
-    
+
     except Exception as e:
         logger.error(f"Error in scrape_finviz_stocks_with_options: {str(e)}")
         return 0

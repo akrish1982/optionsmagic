@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-OptionsMagic is a Python-based stock options data collection and analysis system. It scrapes stock and options data from multiple sources (Finviz, Yahoo Finance), stores it in PostgreSQL, and provides a Cloudflare Worker API for accessing filtered options trading opportunities.
+OptionsMagic is a Python-based stock options data collection and analysis system. It scrapes stock and options data from multiple sources (Finviz, Yahoo Finance, TradeStation), stores it in Supabase/PostgreSQL, and provides a Cloudflare Worker API for accessing filtered options trading opportunities.
 
 ## Common Commands
 
@@ -18,23 +18,26 @@ poetry lock
 # Run data collection scripts
 poetry run python data_collection/finviz.py                      # Scrape stock quotes from Finviz
 poetry run python data_collection/yahoo_finance_options_postgres.py  # Fetch options data from Yahoo Finance
+poetry run python data_collection/tradestation_api_access.py     # Fetch options data from TradeStation API (alternative)
 poetry run python data_collection/update_tradeable_options.py    # Generate tradeable_options summary table
 
 # Start local PostgreSQL
-brew services start postgresql
+sudo brew services start postgresql
 ```
 
 ## Architecture
 
 ### Data Flow
-1. **finviz.py** - Scrapes stock quotes (price, volume, market cap, sector) for stocks with options from Finviz screener → stores in `stock_quotes` table
+1. **finviz.py** - Scrapes stock quotes (price, volume, market cap, sector, RSI, SMA50, SMA200) for stocks with options from Finviz screener → stores in `stock_quotes` table (Supabase by default, local PostgreSQL optional)
 2. **yahoo_finance_options_postgres.py** - Fetches options chains (calls/puts for next 8 weeks) from Yahoo Finance for all tickers in `stock_quotes` → stores in `yahoo_finance_options` table. Uses `calculate_option_greeks.py` to compute delta via Black-Scholes since Yahoo doesn't provide Greeks.
+2b. **tradestation_api_access.py** - Alternative to Yahoo Finance. Fetches options data with full Greeks from TradeStation API v3 → stores in `tradestation_options` table. Requires TradeStation API credentials.
 3. **update_tradeable_options.py** - Joins stock and options data, filters for attractive put options (strike < price, return > 2%), and populates `tradeable_options` summary table
 4. **api/worker.js** - Cloudflare Worker that reads from Supabase (mirrored from local Postgres) and exposes `/api/options` and `/api/expirations` endpoints
 
-### Database Tables (PostgreSQL)
-- `stock_quotes` - Daily stock price/volume data, keyed by (ticker, quote_date)
-- `yahoo_finance_options` - Options contract data with Greeks, keyed by (contractID, date)
+### Database Tables (PostgreSQL/Supabase)
+- `stock_quotes` - Daily stock price/volume data with technical indicators (RSI, SMA50, SMA200, distance_from_support), keyed by (ticker, quote_date)
+- `yahoo_finance_options` - Options contract data with Greeks from Yahoo, keyed by (contractID, date)
+- `tradestation_options` - Options contract data with Greeks from TradeStation API, keyed by (contractID, date)
 - `tradeable_options` - Pre-filtered put options for trading, keyed by contractid
 
 ### Key Module: calculate_option_greeks.py
@@ -42,11 +45,23 @@ Implements Black-Scholes delta calculation since Yahoo Finance doesn't provide G
 
 ## Environment Variables
 
-Database connection configured via `.env` file:
+Storage backend selection:
+- `STORAGE_BACKEND` - "supabase" (default) or "postgres"
+
+Supabase configuration (default backend):
+- `SUPABASE_URL`, `SUPABASE_KEY`
+
+Local PostgreSQL configuration (when `STORAGE_BACKEND=postgres`):
 - `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`
 
-Cloudflare Worker uses:
-- `SUPABASE_URL`, `SUPABASE_KEY`
+TradeStation API (for tradestation_api_access.py):
+- `TRADESTATION_CLIENT_ID`, `TRADESTATION_CLIENT_SECRET`, `TRADESTATION_REFRESH_TOKEN`
+- Or use `tokens.json` file with `client_id`, `client_secret`, `refresh_token`
+
+To use local PostgreSQL instead of Supabase:
+```bash
+export STORAGE_BACKEND=postgres
+```
 
 ## Scheduling (Cron)
 

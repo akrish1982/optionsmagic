@@ -19,6 +19,7 @@ html5lib = "^1.1"
 pytz = "^2025.1"
 python-dotenv = "^1.0.1"
 scipy = "^1.15.2"
+supabase = "^2.27.2"
 
 
 [build-system]

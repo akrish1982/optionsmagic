@@ -1,0 +1,77 @@
+2026-01-19 20:03:40,125 - __main__ - ERROR - Database connection error: connection to server at "aws-0-us-east-1.pooler.supabase.com" (52.45.94.125), port 6543 failed: FATAL:  Tenant or user not found
+connection to server at "aws-0-us-east-1.pooler.supabase.com" (52.45.94.125), port 6543 failed: FATAL:  Tenant or user not found
+
+2026-01-19 20:03:40,126 - __main__ - ERROR - Error in scrape_finviz_stocks_with_options: connection to server at "aws-0-us-east-1.pooler.supabase.com" (52.45.94.125), port 6543 failed: FATAL:  Tenant or user not found
+connection to server at "aws-0-us-east-1.pooler.supabase.com" (52.45.94.125), port 6543 failed: FATAL:  Tenant or user not found
+
+2026-01-19 20:03:40,126 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 0
+2026-01-19 20:03:42,768 - __main__ - INFO - Error retrieving tickers: connection to server at "aws-0-us-east-1.pooler.supabase.com" (44.208.221.186), port 6543 failed: FATAL:  Tenant or user not found
+connection to server at "aws-0-us-east-1.pooler.supabase.com" (44.208.221.186), port 6543 failed: FATAL:  Tenant or user not found
+
+2026-01-19 20:37:43,280 - __main__ - ERROR - Error in scrape_finviz_stocks_with_options: SUPABASE_URL and SUPABASE_KEY environment variables must be set
+2026-01-19 20:37:43,280 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 0
+2026-01-19 21:15:23,789 - __main__ - ERROR - Error in scrape_finviz_stocks_with_options: SUPABASE_URL and SUPABASE_KEY environment variables must be set
+2026-01-19 21:15:23,789 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 0
+2026-01-19 21:20:11,220 - __main__ - INFO - Using Supabase backend
+2026-01-19 21:20:11,220 - __main__ - INFO - Scraping page 1: https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa&ft=3&o=-perf3y
+2026-01-19 21:20:11,220 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa&ft=3&o=-perf3y
+2026-01-19 21:20:12,812 - __main__ - INFO - Successfully fetched page, length: 178165
+2026-01-19 21:20:12,893 - __main__ - INFO - Found 16 tables in the document
+2026-01-19 21:20:12,894 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2026-01-19 21:20:12,894 - __main__ - INFO - Found 20 data rows
+2026-01-19 21:20:12,896 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=21
+2026-01-19 21:20:12,896 - __main__ - INFO - Extracted data for 20 stocks
+2026-01-19 21:20:13,572 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?on_conflict=ticker%2Cquote_date&columns=%22pe_ratio%22%2C%22price%22%2C%22has_options%22%2C%22change_percent%22%2C%22volume%22%2C%22ticker%22%2C%22rsi%22%2C%22industry%22%2C%22sector%22%2C%22sma50%22%2C%22relative_volume%22%2C%22quote_time%22%2C%22dividend_yield%22%2C%22last_updated%22%2C%22quote_date%22%2C%22distance_from_support%22%2C%22eps%22%2C%22sma200%22%2C%22market_cap%22 "HTTP/2 404 Not Found"
+2026-01-19 21:20:13,573 - __main__ - ERROR - Error upserting stock data to Supabase: {'message': "Could not find the table 'public.stock_quotes' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2026-01-19 21:20:13,573 - __main__ - ERROR - Error in scrape_finviz_stocks_with_options: {'message': "Could not find the table 'public.stock_quotes' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2026-01-19 21:20:13,573 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 0
+2026-01-19 21:43:34,768 - __main__ - INFO - Using Supabase backend
+2026-01-19 21:43:34,768 - __main__ - INFO - Scraping page 1: https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa&ft=3&o=-perf3y
+2026-01-19 21:43:34,768 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa&ft=3&o=-perf3y
+2026-01-19 21:43:36,265 - __main__ - INFO - Successfully fetched page, length: 178165
+2026-01-19 21:43:36,338 - __main__ - INFO - Found 16 tables in the document
+2026-01-19 21:43:36,338 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2026-01-19 21:43:36,339 - __main__ - INFO - Found 20 data rows
+2026-01-19 21:43:36,340 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=21
+2026-01-19 21:43:36,340 - __main__ - INFO - Extracted data for 20 stocks
+2026-01-19 21:43:36,898 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?on_conflict=ticker%2Cquote_date&columns=%22industry%22%2C%22pe_ratio%22%2C%22ticker%22%2C%22sma50%22%2C%22distance_from_support%22%2C%22market_cap%22%2C%22volume%22%2C%22price%22%2C%22sector%22%2C%22rsi%22%2C%22relative_volume%22%2C%22change_percent%22%2C%22quote_time%22%2C%22sma200%22%2C%22quote_date%22%2C%22eps%22%2C%22has_options%22%2C%22last_updated%22%2C%22dividend_yield%22 "HTTP/2 201 Created"
+2026-01-19 21:43:36,901 - __main__ - INFO - Successfully upserted data for 20 stocks to Supabase
+2026-01-19 21:43:36,901 - __main__ - INFO - Added 20 stocks from page 1 (total: 20)
+2026-01-19 21:43:36,901 - __main__ - INFO - Waiting 2.10 seconds before next page...
+2026-01-19 21:43:39,006 - __main__ - INFO - Scraping page 2: https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=21
+2026-01-19 21:43:39,007 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=21
+2026-01-19 21:43:41,119 - __main__ - INFO - Successfully fetched page, length: 178990
+2026-01-19 21:43:41,164 - __main__ - INFO - Found 16 tables in the document
+2026-01-19 21:43:41,164 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2026-01-19 21:43:41,164 - __main__ - INFO - Found 20 data rows
+2026-01-19 21:43:41,166 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=41
+2026-01-19 21:43:41,166 - __main__ - INFO - Extracted data for 20 stocks
+2026-01-19 21:43:41,625 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?on_conflict=ticker%2Cquote_date&columns=%22industry%22%2C%22pe_ratio%22%2C%22ticker%22%2C%22sma50%22%2C%22distance_from_support%22%2C%22market_cap%22%2C%22volume%22%2C%22price%22%2C%22sector%22%2C%22rsi%22%2C%22relative_volume%22%2C%22change_percent%22%2C%22quote_time%22%2C%22sma200%22%2C%22quote_date%22%2C%22eps%22%2C%22has_options%22%2C%22last_updated%22%2C%22dividend_yield%22 "HTTP/2 201 Created"
+2026-01-19 21:43:41,629 - __main__ - INFO - Successfully upserted data for 20 stocks to Supabase
+2026-01-19 21:43:41,629 - __main__ - INFO - Added 20 stocks from page 2 (total: 40)
+2026-01-19 21:43:41,629 - __main__ - INFO - Waiting 2.01 seconds before next page...
+2026-01-19 21:43:43,639 - __main__ - INFO - Scraping page 3: https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=41
+2026-01-19 21:43:43,640 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=41
+2026-01-19 21:43:46,128 - __main__ - INFO - Successfully fetched page, length: 179323
+2026-01-19 21:43:46,179 - __main__ - INFO - Found 16 tables in the document
+2026-01-19 21:43:46,179 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2026-01-19 21:43:46,179 - __main__ - INFO - Found 20 data rows
+2026-01-19 21:43:46,181 - __main__ - INFO - Next Link HREF: screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=61
+2026-01-19 21:43:46,181 - __main__ - INFO - Extracted data for 20 stocks
+2026-01-19 21:43:46,366 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?on_conflict=ticker%2Cquote_date&columns=%22industry%22%2C%22pe_ratio%22%2C%22ticker%22%2C%22sma50%22%2C%22distance_from_support%22%2C%22market_cap%22%2C%22volume%22%2C%22price%22%2C%22sector%22%2C%22rsi%22%2C%22relative_volume%22%2C%22change_percent%22%2C%22quote_time%22%2C%22sma200%22%2C%22quote_date%22%2C%22eps%22%2C%22has_options%22%2C%22last_updated%22%2C%22dividend_yield%22 "HTTP/2 201 Created"
+2026-01-19 21:43:46,370 - __main__ - INFO - Successfully upserted data for 20 stocks to Supabase
+2026-01-19 21:43:46,370 - __main__ - INFO - Added 20 stocks from page 3 (total: 60)
+2026-01-19 21:43:46,370 - __main__ - INFO - Waiting 2.12 seconds before next page...
+2026-01-19 21:43:48,497 - __main__ - INFO - Scraping page 4: https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=61
+2026-01-19 21:43:48,497 - __main__ - INFO - Fetching page: https://finviz.com/screener.ashx?v=111&f=cap_largeover,fa_eps5years_o10,fa_grossmargin_o25,fa_sales5years_o10,sh_opt_option,ta_sma200_pa&ft=3&o=-perf3y&r=61
+2026-01-19 21:43:50,839 - __main__ - INFO - Successfully fetched page, length: 158902
+2026-01-19 21:43:50,913 - __main__ - INFO - Found 16 tables in the document
+2026-01-19 21:43:50,914 - __main__ - INFO - Found headers: ['No.', 'Ticker', 'Company', 'Sector', 'Industry', 'Country', 'Market Cap', 'P/E', 'Price', 'Change', 'Volume']
+2026-01-19 21:43:50,914 - __main__ - INFO - Found 11 data rows
+2026-01-19 21:43:50,915 - __main__ - INFO - No 'next' link found.
+2026-01-19 21:43:50,915 - __main__ - INFO - Extracted data for 11 stocks
+2026-01-19 21:43:51,086 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?on_conflict=ticker%2Cquote_date&columns=%22industry%22%2C%22pe_ratio%22%2C%22ticker%22%2C%22sma50%22%2C%22distance_from_support%22%2C%22market_cap%22%2C%22volume%22%2C%22price%22%2C%22sector%22%2C%22rsi%22%2C%22relative_volume%22%2C%22change_percent%22%2C%22quote_time%22%2C%22sma200%22%2C%22quote_date%22%2C%22eps%22%2C%22has_options%22%2C%22last_updated%22%2C%22dividend_yield%22 "HTTP/2 201 Created"
+2026-01-19 21:43:51,087 - __main__ - INFO - Successfully upserted data for 11 stocks to Supabase
+2026-01-19 21:43:51,087 - __main__ - INFO - Added 11 stocks from page 4 (total: 71)
+2026-01-19 21:43:51,087 - __main__ - INFO - Scraping completed. Total stocks: 71
+2026-01-19 21:43:51,088 - __main__ - INFO - Stock data collection completed successfully. Total stocks: 71
