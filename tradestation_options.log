@@ -874,3 +874,33 @@
 2026-01-19 23:41:52,500 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?on_conflict=contractid%2Cdate&columns=%22bid%22%2C%22date%22%2C%22contractid%22%2C%22mark%22%2C%22vega%22%2C%22delta%22%2C%22strike%22%2C%22ask%22%2C%22last%22%2C%22type%22%2C%22implied_volatility%22%2C%22bid_size%22%2C%22symbol%22%2C%22expiration%22%2C%22gamma%22%2C%22open_interest%22%2C%22volume%22%2C%22theta%22%2C%22rho%22%2C%22ask_size%22 "HTTP/2 200 OK"
 2026-01-19 23:41:52,507 - __main__ - INFO - Upserted 60 options to options_quotes
 2026-01-19 23:41:53,010 - __main__ - INFO - Fetching AEM options for 2026-01-30
+2026-01-19 23:42:03,567 - __main__ - INFO - Reached time limit, got 60 contracts
+2026-01-19 23:42:03,568 - __main__ - INFO - Retrieved 60 contracts for AEM exp 2026-01-30
+2026-01-19 23:42:03,898 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?on_conflict=contractid%2Cdate&columns=%22bid%22%2C%22date%22%2C%22contractid%22%2C%22mark%22%2C%22vega%22%2C%22delta%22%2C%22strike%22%2C%22ask%22%2C%22last%22%2C%22type%22%2C%22implied_volatility%22%2C%22bid_size%22%2C%22symbol%22%2C%22expiration%22%2C%22gamma%22%2C%22open_interest%22%2C%22volume%22%2C%22theta%22%2C%22rho%22%2C%22ask_size%22 "HTTP/2 200 OK"
+2026-01-19 23:42:03,906 - __main__ - INFO - Upserted 60 options to options_quotes
+2026-01-19 23:42:04,411 - __main__ - INFO - Fetching AEM options for 2026-02-06
+2026-01-19 23:42:15,036 - __main__ - INFO - Reached time limit, got 60 contracts
+2026-01-19 23:42:15,036 - __main__ - INFO - Retrieved 60 contracts for AEM exp 2026-02-06
+2026-01-19 23:42:15,643 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?on_conflict=contractid%2Cdate&columns=%22bid%22%2C%22date%22%2C%22contractid%22%2C%22mark%22%2C%22vega%22%2C%22delta%22%2C%22strike%22%2C%22ask%22%2C%22last%22%2C%22type%22%2C%22implied_volatility%22%2C%22bid_size%22%2C%22symbol%22%2C%22expiration%22%2C%22gamma%22%2C%22open_interest%22%2C%22volume%22%2C%22theta%22%2C%22rho%22%2C%22ask_size%22 "HTTP/2 200 OK"
+2026-01-19 23:42:15,654 - __main__ - INFO - Upserted 60 options to options_quotes
+2026-01-19 23:42:16,159 - __main__ - INFO - Fetching AEM options for 2026-02-13
+2026-01-19 23:42:26,640 - __main__ - INFO - Reached time limit, got 60 contracts
+2026-01-19 23:42:26,640 - __main__ - INFO - Retrieved 60 contracts for AEM exp 2026-02-13
+2026-01-19 23:42:27,130 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?on_conflict=contractid%2Cdate&columns=%22bid%22%2C%22date%22%2C%22contractid%22%2C%22mark%22%2C%22vega%22%2C%22delta%22%2C%22strike%22%2C%22ask%22%2C%22last%22%2C%22type%22%2C%22implied_volatility%22%2C%22bid_size%22%2C%22symbol%22%2C%22expiration%22%2C%22gamma%22%2C%22open_interest%22%2C%22volume%22%2C%22theta%22%2C%22rho%22%2C%22ask_size%22 "HTTP/2 200 OK"
+2026-01-19 23:42:27,139 - __main__ - INFO - Upserted 60 options to options_quotes
+2026-01-19 23:42:27,642 - __main__ - INFO - Fetching AEM options for 2026-02-20
+2026-01-19 23:42:38,279 - __main__ - INFO - Reached time limit, got 52 contracts
+2026-01-19 23:42:38,279 - __main__ - INFO - Retrieved 52 contracts for AEM exp 2026-02-20
+2026-01-19 23:42:38,764 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?on_conflict=contractid%2Cdate&columns=%22bid%22%2C%22date%22%2C%22contractid%22%2C%22mark%22%2C%22vega%22%2C%22delta%22%2C%22strike%22%2C%22ask%22%2C%22last%22%2C%22type%22%2C%22implied_volatility%22%2C%22bid_size%22%2C%22symbol%22%2C%22expiration%22%2C%22gamma%22%2C%22open_interest%22%2C%22volume%22%2C%22theta%22%2C%22rho%22%2C%22ask_size%22 "HTTP/2 200 OK"
+2026-01-19 23:42:38,769 - __main__ - INFO - Upserted 52 options to options_quotes
+2026-01-19 23:42:39,275 - __main__ - INFO - Fetching AEM options for 2026-02-27
+2026-01-19 23:42:49,849 - __main__ - INFO - Reached time limit, got 60 contracts
+2026-01-19 23:42:49,851 - __main__ - INFO - Retrieved 60 contracts for AEM exp 2026-02-27
+2026-01-19 23:42:50,166 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?on_conflict=contractid%2Cdate&columns=%22bid%22%2C%22date%22%2C%22contractid%22%2C%22mark%22%2C%22vega%22%2C%22delta%22%2C%22strike%22%2C%22ask%22%2C%22last%22%2C%22type%22%2C%22implied_volatility%22%2C%22bid_size%22%2C%22symbol%22%2C%22expiration%22%2C%22gamma%22%2C%22open_interest%22%2C%22volume%22%2C%22theta%22%2C%22rho%22%2C%22ask_size%22 "HTTP/2 200 OK"
+2026-01-19 23:42:50,173 - __main__ - INFO - Upserted 60 options to options_quotes
+2026-01-19 23:42:50,679 - __main__ - INFO - Fetching AEM options for 2026-03-20
+2026-01-19 23:43:01,191 - __main__ - INFO - Reached time limit, got 52 contracts
+2026-01-19 23:43:01,191 - __main__ - INFO - Retrieved 52 contracts for AEM exp 2026-03-20
+2026-01-19 23:43:01,835 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?on_conflict=contractid%2Cdate&columns=%22bid%22%2C%22date%22%2C%22contractid%22%2C%22mark%22%2C%22vega%22%2C%22delta%22%2C%22strike%22%2C%22ask%22%2C%22last%22%2C%22type%22%2C%22implied_volatility%22%2C%22bid_size%22%2C%22symbol%22%2C%22expiration%22%2C%22gamma%22%2C%22open_interest%22%2C%22volume%22%2C%22theta%22%2C%22rho%22%2C%22ask_size%22 "HTTP/2 200 OK"
+2026-01-19 23:43:01,841 - __main__ - INFO - Upserted 52 options to options_quotes
+2026-01-19 23:43:02,346 - __main__ - INFO - Fetching AEM options for 2026-04-17

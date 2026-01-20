@@ -2,6 +2,7 @@
 .env.local
 *_readme.md
 logs/*.log
+*/*.log
 heartbeat/*
 tokens.json.env
 tokens.json
