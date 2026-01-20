@@ -1,0 +1,30 @@
+name: Keep Supabase Alive
+
+# Run every 6 days to prevent Supabase free tier from pausing (7-day inactivity limit)
+on:
+  schedule:
+    - cron: '0 0 */6 * *'  # At midnight every 6 days
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  ping-database:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase Database
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          # Simple query to keep database active
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/stock_quotes?select=ticker&limit=1" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}")
+
+          if [ "$response" = "200" ]; then
+            echo "✓ Database ping successful (HTTP $response)"
+          else
+            echo "✗ Database ping failed (HTTP $response)"
+            exit 1
+          fi
