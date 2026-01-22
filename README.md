@@ -127,34 +127,39 @@ PRIMARY KEY (contractid, date)
   CREATE INDEX IF NOT EXISTS idx_options_quotes_symbol ON options_quotes (symbol);                                                    
   CREATE INDEX IF NOT EXISTS idx_options_quotes_date ON options_quotes (date);                                                        
   CREATE INDEX IF NOT EXISTS idx_options_quotes_expiration ON options_quotes (expiration);  
-
-
-CREATE TABLE IF NOT EXISTS options_opportunities (
-    opportunity_id SERIAL PRIMARY KEY,
-    ticker VARCHAR(20),
-    strategy_type VARCHAR(10), -- 'CSP' or 'VPC'
-    
-    -- Option Specifics
-    expiration_date DATE,
-    strike_price NUMERIC(10, 2),
-    width NUMERIC(10, 2),      -- For VPCs (Difference between Long and Short strike)
-    net_credit NUMERIC(10, 2), -- 'Income' from your previous CSP table
-    collateral NUMERIC(10, 2), -- Required buying power
-    return_pct NUMERIC(6, 2),  -- (Net Credit / Collateral) * 100
-    annualized_return NUMERIC(6, 2),
-    
-    -- Technical Filters (Long Bias)
-    rsi_14 NUMERIC(6, 2),
-    iv_percentile NUMERIC(6, 2),
-    price_vs_bb_lower NUMERIC(6, 2), -- % distance from Lower Bollinger Band
-    above_sma_200 BOOLEAN,          -- Long-only trend filter
-    
-    -- Greeks
-    delta NUMERIC(6, 4),
-    theta NUMERIC(6, 4),
-    
-    last_updated TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+-- Create options_opportunities table                                                                                               
+  CREATE TABLE IF NOT EXISTS options_opportunities (                                                                                  
+      opportunity_id SERIAL PRIMARY KEY,                                                                                              
+      ticker VARCHAR(20),                                                                                                             
+      strategy_type VARCHAR(10),  -- 'CSP' or 'VPC'                                                                                   
+                                                                                                                                      
+      -- Option Specifics                                                                                                             
+      expiration_date DATE,                                                                                                           
+      strike_price NUMERIC(10, 2),                                                                                                    
+      width NUMERIC(10, 2),       -- For VPCs (difference between strikes)                                                            
+      net_credit NUMERIC(10, 2),  -- Premium collected                                                                                
+      collateral NUMERIC(10, 2),  -- Required buying power                                                                            
+      return_pct TYPE NUMERIC(10, 2),  -- (Net Credit / Collateral) * 100                                                                  
+      annualized_return TYPE NUMERIC(10, 2)                                                                                     
+                                                                                                                                      
+      -- Technical Filters (Long Bias)                                                                                                
+      rsi_14 NUMERIC(6, 2),                                                                                                           
+      iv_percentile NUMERIC(6, 2),                                                                                                    
+      price_vs_bb_lower NUMERIC(6, 2),  -- % distance from Lower Bollinger Band                                                       
+      above_sma_200 BOOLEAN,            -- Long-only trend filter                                                                     
+                                                                                                                                      
+      -- Greeks                                                                                                                       
+      delta NUMERIC(6, 4),                                                                                                            
+      theta NUMERIC(6, 4),                                                                                                            
+                                                                                                                                      
+      last_updated TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP                                                                 
+  );                                                                                                                                  
+                                                                                                                                      
+  -- Create indexes for UI queries                                                                                                    
+  CREATE INDEX IF NOT EXISTS idx_opportunities_ticker ON options_opportunities (ticker);                                              
+  CREATE INDEX IF NOT EXISTS idx_opportunities_strategy ON options_opportunities (strategy_type);                                     
+  CREATE INDEX IF NOT EXISTS idx_opportunities_return ON options_opportunities (return_pct DESC);                                     
+  CREATE INDEX IF NOT EXISTS idx_opportunities_rsi ON options_opportunities (rsi_14);     
 
 SELECT strike * 100 as collateral, bid*100 as income, bid/strike*100 as return_pct,contractid, 
 symbol, expiration, strike, type, last, mark, bid, bid_size, ask, ask_size, opt.volume, open_interest, 
@@ -213,18 +218,43 @@ date, implied_volatility, delta, gamma, theta, vega, rho
 ```
 cd /Users/<user>/code/optionsmagic 
 poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log
-poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log
-poetry run python data_collection/update_tradeable_options.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log
+poetry run python data_collection/tradestation_options.py  >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log
+poetry run python data_collection/generate_options_opportunities.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log
 ```
 how to run without logs
 
 ```
 cd /Users/<user>/code/optionsmagic 
 poetry run python data_collection/finviz.py
-poetry run python data_collection/yahoo_finance_options_postgres.py
-poetry run python data_collection/update_tradeable_options.py
+poetry run python data_collection/tradestation_options.py
+poetry run python data_collection/generate_options_opportunities.py   
 ```
-
+### Logic for filter
+What it does:                                                                                                                       
+  ┌─────────────┬─────────────────────────────────────────────────┐                                                                   
+  │    Step     │                     Action                      │                                                                   
+  ├─────────────┼─────────────────────────────────────────────────┤                                                                   
+  │ 1. Truncate │ Clears old opportunities                        │                                                                   
+  ├─────────────┼─────────────────────────────────────────────────┤                                                                   
+  │ 2. Filter   │ Finds stocks with RSI 30-48, price > SMA200     │                                                                   
+  ├─────────────┼─────────────────────────────────────────────────┤                                                                   
+  │ 3. CSP Calc │ Finds puts with delta < 0.30, calculates yield  │                                                                   
+  ├─────────────┼─────────────────────────────────────────────────┤                                                                   
+  │ 4. VPC Calc │ Pairs puts for credit spreads, calculates yield │                                                                   
+  ├─────────────┼─────────────────────────────────────────────────┤                                                                   
+  │ 5. Upsert   │ Inserts top 5 opportunities per ticker          │                                                                   
+  └─────────────┴─────────────────────────────────────────────────┘                                                                   
+  Strategy Logic:                                                                                                                     
+                                                                                                                                      
+  CSP (Cash-Secured Put):                                                                                                             
+  - Return % = (Bid / Strike) × 100                                                                                                   
+  - Collateral = Strike × 100                                                                                                         
+  - Filter: Delta < 0.30                                                                                                              
+                                                                                                                                      
+  VPC (Vertical Put Credit Spread):                                                                                                   
+  - Net Credit = Short Bid - Long Ask                                                                                                 
+  - Max Risk = Width - Net Credit                                                                                                     
+  - Return % = (Net Credit / Max Risk) × 100   
 
 ### Supabase options query API
 

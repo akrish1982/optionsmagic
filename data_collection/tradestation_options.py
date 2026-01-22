@@ -105,6 +105,18 @@ class TradeStationAPI:
             return self.refresh_access_token()
         return True
 
+    def _handle_response(self, response, retry_func, *args, **kwargs):
+        """Handle API response, refreshing token on 401 and retrying once."""
+        if response.status_code == 401:
+            logger.warning("Access token expired, refreshing...")
+            if self.refresh_access_token():
+                # Retry the request with new token
+                return retry_func(*args, **kwargs)
+            else:
+                logger.error("Failed to refresh token")
+                return None
+        return response
+
     def get_option_expirations(self, symbol):
         """Get available option expiration dates."""
         if not self._ensure_auth():
@@ -140,7 +152,7 @@ class TradeStationAPI:
             logger.error(f"Failed to get strikes: {response.status_code}")
             return None
 
-    def get_option_chain(self, symbol, expiration, strike_proximity=15):
+    def get_option_chain(self, symbol, expiration, strike_proximity=15, _retry=False):
         """
         Get option chain with quotes and Greeks.
         Uses the streaming endpoint to get full data.
@@ -164,6 +176,15 @@ class TradeStationAPI:
                 timeout=(5, 10),  # (connect timeout, read timeout)
                 stream=True
             )
+
+            # Handle 401 - token expired, refresh and retry once
+            if response.status_code == 401 and not _retry:
+                logger.warning("Access token expired, refreshing...")
+                if self.refresh_access_token():
+                    return self.get_option_chain(symbol, expiration, strike_proximity, _retry=True)
+                else:
+                    logger.error("Failed to refresh token")
+                    return None
 
             if not response.ok:
                 logger.error(f"Option chain request failed: {response.status_code} - {response.text[:200]}")
@@ -447,8 +468,51 @@ def get_tickers_from_supabase(supabase):
         return []
 
 
-def main():
-    """Main function to fetch options data for all tracked tickers."""
+PROGRESS_FILE = "tradestation_progress.json"
+
+
+def load_progress():
+    """Load progress from file to resume from last successful ticker."""
+    try:
+        if os.path.exists(PROGRESS_FILE):
+            with open(PROGRESS_FILE, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        logger.warning(f"Could not load progress file: {e}")
+    return {"last_completed_ticker": None, "date": None}
+
+
+def save_progress(ticker):
+    """Save progress after successfully processing a ticker."""
+    try:
+        progress = {
+            "last_completed_ticker": ticker,
+            "date": str(date.today()),
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+        with open(PROGRESS_FILE, 'w') as f:
+            json.dump(progress, f)
+    except Exception as e:
+        logger.warning(f"Could not save progress: {e}")
+
+
+def clear_progress():
+    """Clear progress file after successful completion."""
+    try:
+        if os.path.exists(PROGRESS_FILE):
+            os.remove(PROGRESS_FILE)
+            logger.info("Progress file cleared")
+    except Exception as e:
+        logger.warning(f"Could not clear progress file: {e}")
+
+
+def main(resume=True):
+    """
+    Main function to fetch options data for all tracked tickers.
+
+    Args:
+        resume: If True, resume from last successful ticker (default True)
+    """
     logger.info("Starting TradeStation options data collection")
 
     # Initialize API client
@@ -468,20 +532,42 @@ def main():
         logger.warning("No tickers found in stock_quotes")
         return
 
+    # Check for resume point
+    start_index = 0
+    if resume:
+        progress = load_progress()
+        if progress["last_completed_ticker"] and progress["date"] == str(date.today()):
+            last_ticker = progress["last_completed_ticker"]
+            if last_ticker in tickers:
+                start_index = tickers.index(last_ticker) + 1
+                logger.info(f"Resuming from ticker #{start_index + 1} (after {last_ticker})")
+
+    if start_index >= len(tickers):
+        logger.info("All tickers already processed today")
+        return
+
     # Process each ticker
     total_options = 0
-    for i, ticker in enumerate(tickers):
+    for i, ticker in enumerate(tickers[start_index:], start=start_index):
         logger.info(f"Processing {ticker} ({i+1}/{len(tickers)})")
         try:
             count = fetch_options_for_ticker(api, supabase, ticker, max_days=90)
             total_options += count
+
+            # Save progress after each successful ticker
+            save_progress(ticker)
+
         except Exception as e:
             logger.error(f"Error processing {ticker}: {e}")
+            # Save progress even on error so we can resume
+            logger.info(f"Progress saved. Run again to resume from {ticker}")
             continue
 
         # Rate limiting between tickers
         time.sleep(1)
 
+    # Clear progress file on successful completion
+    clear_progress()
     logger.info(f"Completed. Total options stored: {total_options}")
 
 
