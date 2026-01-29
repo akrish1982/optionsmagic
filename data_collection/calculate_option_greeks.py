@@ -8,7 +8,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("finviz_scraper.log"),
+        logging.FileHandler(logs/finviz_scraper.log"),
         logging.StreamHandler()
     ]
 )

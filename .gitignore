@@ -7,3 +7,4 @@ heartbeat/*
 tokens.json.env
 tokens.json
 tradestation_progress.json
+run_pipeline.sh

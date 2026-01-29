@@ -25,7 +25,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("tradestation_options.log"),
+        logging.FileHandler("logs/tradestation_options.log"),
         logging.StreamHandler()
     ]
 )

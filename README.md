@@ -161,6 +161,14 @@ PRIMARY KEY (contractid, date)
   CREATE INDEX IF NOT EXISTS idx_opportunities_return ON options_opportunities (return_pct DESC);                                     
   CREATE INDEX IF NOT EXISTS idx_opportunities_rsi ON options_opportunities (rsi_14);     
 
+-- allow anyone (anon + authenticated) to read rows
+create policy "public read options_opportunities"
+on public.options_opportunities
+for select
+to anon, authenticated
+using (true);
+
+
 SELECT strike * 100 as collateral, bid*100 as income, bid/strike*100 as return_pct,contractid, 
 symbol, expiration, strike, type, last, mark, bid, bid_size, ask, ask_size, opt.volume, open_interest, 
 date, implied_volatility, delta, gamma, theta, vega, rho
@@ -204,10 +212,10 @@ date, implied_volatility, delta, gamma, theta, vega, rho
 #### Scheduling the crons
 ```
 # finviz.py every hour on weekdays (Mon–Fri)
-0 * * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/finviz_heartbeat || echo "finviz.py failed" | mail -s "finviz.py CRON Job Failed" <your_email>@gmail.com
+0 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/finviz_heartbeat || echo "finviz.py failed" | mail -s "finviz.py CRON Job Failed" <your_email>@gmail.com
 
-# yahoo_finance_options_postgres.py every weekday, hourly 9AM–4PM
-2 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/yahoo_finance_options_postgres.py >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/yahoo_heartbeat || echo "yahoo_finance_options_postgres.py failed" | mail -s "Options CRON Job Failed" <your_email>@gmail.com
+# tradestation_options.py every weekday, hourly 9AM–4PM
+2 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/tradestation_options.py >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/yahoo_heartbeat || echo "tradestation_options.py failed" | mail -s "Options CRON Job Failed" <your_email>@gmail.com
 
 # update_tradeable_options.py every weekday, hourly 9AM–4PM
 12 9-16 * * 1-5 cd /Users/<user>/code/optionsmagic && /Users/<user>/.local/bin/poetry run python data_collection/update_tradeable_options.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log 2>&1 && touch /Users/<user>/code/optionsmagic/heartbeat/tradeable_heartbeat || echo "update_tradeable_options.py failed" | mail -s "Tradeable Options Job Failed" <your_email>@gmail.com
@@ -218,7 +226,7 @@ date, implied_volatility, delta, gamma, theta, vega, rho
 ```
 cd /Users/<user>/code/optionsmagic 
 poetry run python data_collection/finviz.py >> /Users/<user>/code/optionsmagic/logs/finviz.log
-poetry run python data_collection/tradestation_options.py  >> /Users/<user>/code/optionsmagic/logs/yahoo_finance.log
+poetry run python data_collection/tradestation_options.py  >> /Users/<user>/code/optionsmagic/logs/tradestation_options.log
 poetry run python data_collection/generate_options_opportunities.py >> /Users/<user>/code/optionsmagic/logs/tradeable.log
 ```
 how to run without logs
@@ -258,7 +266,7 @@ What it does:
 
 ### Supabase options query API
 
-curl 'https://cqsbeacrzfpnukwpdvhc.supabase.co/rest/v1/tradeable_options?select=collateral&limit=10' \
+curl 'https://xxxxxxxx.supabase.co/rest/v1/tradeable_options?select=collateral&limit=10' \
 -H "apikey: <secret>" \
 -H "Authorization: Bearer <secret>"
 =======

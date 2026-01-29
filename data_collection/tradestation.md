@@ -1,1 +1,0 @@
-https://signin.tradestation.com/authorize?response_type=code&client_id=DOHds3QAG2AtFSzJ4pKXU7S5uGjHb7fT&redirect_uri=http://localhost:8080&audience=https://api.tradestation.com&state=STATE&scope=openid offline_access profile MarketData ReadAccount Trade Matrix OptionSpreads
