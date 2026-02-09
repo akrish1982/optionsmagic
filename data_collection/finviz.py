@@ -775,7 +775,9 @@ def scrape_finviz_stocks_with_options():
             logger.info("Using Supabase backend")
 
         # Include filters for Large Cap,
-        url = "https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa&ft=3&o=-perf3y"
+        # url = "https://finviz.com/screener.ashx?v=111&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa&ft=3&o=-perf3y"
+        # adding filter for over 30% above SMA200.
+        url = "https://finviz.com/screener.ashx?v=171&f=cap_largeover%2Cfa_eps5years_o10%2Cfa_grossmargin_o25%2Cfa_sales5years_o10%2Csh_opt_option%2Cta_sma200_pa30&ft=3&o=-perf3y"
 
         page_count = 1
         total_stocks = 0

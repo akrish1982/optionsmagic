@@ -1,0 +1,1 @@
+"""Approval-based trade automation."""

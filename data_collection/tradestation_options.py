@@ -38,6 +38,7 @@ API_BASE_URL = 'https://api.tradestation.com/v3'
 # Supabase configuration
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 
 # Table to store options data (same schema as yahoo_finance_options)
 OPTIONS_TABLE = "options_quotes"
@@ -105,28 +106,28 @@ class TradeStationAPI:
             return self.refresh_access_token()
         return True
 
-    def _handle_response(self, response, retry_func, *args, **kwargs):
-        """Handle API response, refreshing token on 401 and retrying once."""
+    def _request(self, method, url, **kwargs):
+        """Request wrapper that refreshes token once on 401."""
+        if not self._ensure_auth():
+            raise RuntimeError("TradeStation auth failed: no access token")
+
+        response = requests.request(method, url, headers=self._get_headers(), **kwargs)
+
         if response.status_code == 401:
             logger.warning("Access token expired, refreshing...")
-            if self.refresh_access_token():
-                # Retry the request with new token
-                return retry_func(*args, **kwargs)
-            else:
-                logger.error("Failed to refresh token")
-                return None
+            if not self.refresh_access_token():
+                raise RuntimeError("TradeStation auth failed: refresh token rejected")
+            response = requests.request(method, url, headers=self._get_headers(), **kwargs)
+
         return response
 
     def get_option_expirations(self, symbol):
         """Get available option expiration dates."""
-        if not self._ensure_auth():
-            return None
-
         url = f'{API_BASE_URL}/marketdata/options/expirations/{symbol}'
         logger.debug(f"Requesting: {url}")
         logger.debug(f"Token (first 20 chars): {self.access_token[:20] if self.access_token else 'None'}...")
 
-        response = requests.get(url, headers=self._get_headers(), timeout=15)
+        response = self._request("GET", url, timeout=15)
 
         if response.ok:
             data = response.json()
@@ -138,12 +139,9 @@ class TradeStationAPI:
 
     def get_option_strikes(self, symbol, expiration):
         """Get available strikes for a symbol and expiration."""
-        if not self._ensure_auth():
-            return None
-
         url = f'{API_BASE_URL}/marketdata/options/strikes/{symbol}'
         params = {'expiration': expiration}
-        response = requests.get(url, headers=self._get_headers(), params=params, timeout=15)
+        response = self._request("GET", url, params=params, timeout=15)
 
         if response.ok:
             data = response.json()
@@ -157,9 +155,6 @@ class TradeStationAPI:
         Get option chain with quotes and Greeks.
         Uses the streaming endpoint to get full data.
         """
-        if not self._ensure_auth():
-            return None
-
         url = f'{API_BASE_URL}/marketdata/stream/options/chains/{symbol}'
         params = {
             'expiration': expiration,
@@ -169,22 +164,13 @@ class TradeStationAPI:
 
         try:
             # Use a session with shorter timeouts for streaming
-            response = requests.get(
+            response = self._request(
+                "GET",
                 url,
-                headers=self._get_headers(),
                 params=params,
                 timeout=(5, 10),  # (connect timeout, read timeout)
-                stream=True
+                stream=True,
             )
-
-            # Handle 401 - token expired, refresh and retry once
-            if response.status_code == 401 and not _retry:
-                logger.warning("Access token expired, refreshing...")
-                if self.refresh_access_token():
-                    return self.get_option_chain(symbol, expiration, strike_proximity, _retry=True)
-                else:
-                    logger.error("Failed to refresh token")
-                    return None
 
             if not response.ok:
                 logger.error(f"Option chain request failed: {response.status_code} - {response.text[:200]}")
@@ -231,9 +217,10 @@ class TradeStationAPI:
 
 def get_supabase_client():
     """Get Supabase client."""
-    if not SUPABASE_URL or not SUPABASE_KEY:
-        raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set")
-    return create_client(SUPABASE_URL, SUPABASE_KEY)
+    key = SUPABASE_SERVICE_ROLE_KEY or SUPABASE_KEY
+    if not SUPABASE_URL or not key:
+        raise ValueError("SUPABASE_URL and (SUPABASE_SERVICE_ROLE_KEY or SUPABASE_KEY) must be set")
+    return create_client(SUPABASE_URL, key)
 
 
 def get_stock_price(supabase, symbol):
@@ -354,6 +341,20 @@ def upsert_options_to_supabase(supabase, options_data, table_name=OPTIONS_TABLE)
         return 0
 
     try:
+        # Deduplicate within this batch to avoid ON CONFLICT affecting same row twice
+        deduped = {}
+        for row in options_data:
+            key = (row.get("contractid"), row.get("date"))
+            if None in key:
+                continue
+            deduped[key] = row  # keep last occurrence
+        if len(deduped) != len(options_data):
+            logger.info(
+                f"Deduped options batch: {len(options_data)} -> {len(deduped)} rows"
+            )
+
+        options_data = list(deduped.values())
+
         batch_size = 100
         total = 0
 
@@ -559,8 +560,7 @@ def main(resume=True):
 
         except Exception as e:
             logger.error(f"Error processing {ticker}: {e}")
-            # Save progress even on error so we can resume
-            logger.info(f"Progress saved. Run again to resume from {ticker}")
+            logger.info("Progress not advanced for this ticker; rerun to retry.")
             continue
 
         # Rate limiting between tickers

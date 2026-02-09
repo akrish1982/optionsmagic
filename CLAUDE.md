@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-OptionsMagic is a Python-based stock options data collection and analysis system. It scrapes stock and options data from multiple sources (Finviz, Yahoo Finance, TradeStation), stores it in Supabase/PostgreSQL, and provides a Cloudflare Worker API for accessing filtered options trading opportunities.
+OptionsMagic is a Python-based stock options data collection and analysis system. It scrapes stock and options data from multiple sources (Finviz, TradeStation), stores it in Supabase/PostgreSQL, and provides a Cloudflare Worker API for accessing filtered options trading opportunities. It is starting trade automation on a trial basis to try buys option chains on Tradestation account.
 
 ## Common Commands
 
@@ -29,19 +29,16 @@ sudo brew services start postgresql
 
 ### Data Flow
 1. **finviz.py** - Scrapes stock quotes (price, volume, market cap, sector, RSI, SMA50, SMA200) for stocks with options from Finviz screener → stores in `stock_quotes` table (Supabase by default, local PostgreSQL optional)
-2. **yahoo_finance_options_postgres.py** - Fetches options chains (calls/puts for next 8 weeks) from Yahoo Finance for all tickers in `stock_quotes` → stores in `yahoo_finance_options` table. Uses `calculate_option_greeks.py` to compute delta via Black-Scholes since Yahoo doesn't provide Greeks.
+2. **tradestation_options.py** - Fetches options chains (calls/puts for next 8 weeks) from tradestation Finance for all tickers in `stock_quotes` → stores in `tradestation_options` table.
 2b. **tradestation_api_access.py** - Alternative to Yahoo Finance. Fetches options data with full Greeks from TradeStation API v3 → stores in `tradestation_options` table. Requires TradeStation API credentials.
 3. **update_tradeable_options.py** - Joins stock and options data, filters for attractive put options (strike < price, return > 2%), and populates `tradeable_options` summary table
 4. **api/worker.js** - Cloudflare Worker that reads from Supabase (mirrored from local Postgres) and exposes `/api/options` and `/api/expirations` endpoints
 
 ### Database Tables (PostgreSQL/Supabase)
 - `stock_quotes` - Daily stock price/volume data with technical indicators (RSI, SMA50, SMA200, distance_from_support), keyed by (ticker, quote_date)
-- `yahoo_finance_options` - Options contract data with Greeks from Yahoo, keyed by (contractID, date)
 - `tradestation_options` - Options contract data with Greeks from TradeStation API, keyed by (contractID, date)
 - `tradeable_options` - Pre-filtered put options for trading, keyed by contractid
 
-### Key Module: calculate_option_greeks.py
-Implements Black-Scholes delta calculation since Yahoo Finance doesn't provide Greeks. Used by `yahoo_finance_options_postgres.py` to enrich options data.
 
 ## Environment Variables
 
