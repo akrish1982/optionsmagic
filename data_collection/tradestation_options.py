@@ -374,7 +374,7 @@ def upsert_options_to_supabase(supabase, options_data, table_name=OPTIONS_TABLE)
         raise
 
 
-def fetch_options_for_ticker(api, supabase, ticker, max_days=90):
+def fetch_options_for_ticker(api, supabase, ticker, max_days=60, max_expirations=4):
     """
     Fetch options data for a ticker and store in Supabase.
     Similar to yahoo_finance_options_postgres.py flow.
@@ -421,6 +421,11 @@ def fetch_options_for_ticker(api, supabase, ticker, max_days=90):
             continue
 
     logger.info(f"Found {len(valid_expirations)} expirations within {max_days} days for {ticker}")
+    
+    # Limit to first N expirations (optimization to reduce data volume)
+    if len(valid_expirations) > max_expirations:
+        logger.info(f"Limiting to first {max_expirations} expirations (out of {len(valid_expirations)})")
+        valid_expirations = valid_expirations[:max_expirations]
 
     # Process each valid expiration
     for exp_date in valid_expirations:
@@ -436,7 +441,18 @@ def fetch_options_for_ticker(api, supabase, ticker, max_days=90):
         for contract in contracts:
             option_data = parse_option_contract(contract, ticker, exp_date, stock_price)
             if option_data:
-                parsed.append(option_data)
+                # Filter strikes within ±20% of current price (optimization)
+                if stock_price:
+                    strike = option_data.get('strike')
+                    if strike:
+                        strike_pct = (strike / stock_price)
+                        # Only keep strikes between 80% and 120% of current price
+                        if 0.8 <= strike_pct <= 1.2:
+                            parsed.append(option_data)
+                    else:
+                        parsed.append(option_data)
+                else:
+                    parsed.append(option_data)
 
         # Store in Supabase
         if parsed:
