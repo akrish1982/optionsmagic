@@ -9,3 +9,8 @@ tokens.json.env
 tokens.json
 tradestation_progress.json
 run_pipeline.sh
+# Frontend
+frontend/node_modules/
+frontend/.wrangler/
+frontend/.dev.vars
+frontend/dist/

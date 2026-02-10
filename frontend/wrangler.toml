@@ -1,0 +1,36 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "optionsmagic-api"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers Sites configuration for serving static HTML
+[site]
+bucket = "./public"
+
+# Environment variables (Supabase credentials)
+# These should be set via wrangler secrets or dashboard for security
+# For local dev: create .dev.vars file with SUPABASE_URL and SUPABASE_KEY
+[vars]
+# SUPABASE_URL will be set via wrangler secret or .dev.vars
+# SUPABASE_KEY will be set via wrangler secret or .dev.vars
+
+# Production route configuration
+# Uncomment and update when ready to deploy to custom domain
+# routes = [
+#   { pattern = "options-magic.com", custom_domain = true },
+#   { pattern = "www.options-magic.com", custom_domain = true }
+# ]
+
+# Development configuration
+# Run locally with: npm run dev
+[env.development]
+name = "optionsmagic-api-dev"
+
+# Staging environment
+[env.staging]
+name = "optionsmagic-api-staging"
+
+# Production environment
+[env.production]
+name = "optionsmagic-api-production"
