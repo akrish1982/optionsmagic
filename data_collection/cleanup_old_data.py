@@ -13,8 +13,10 @@ Date: 2026-02-10
 
 import os
 import sys
+import glob
 import logging
 from datetime import date, timedelta
+from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -99,15 +101,36 @@ def cleanup_table(supabase, table_name, date_column, dry_run=False):
         return 0
 
 
+def cleanup_logs(dry_run=False):
+    """Truncate all log files in the logs/ directory."""
+    base_dir = Path(__file__).resolve().parent.parent
+    log_dir = base_dir / "logs"
+    log_files = glob.glob(str(log_dir / "*.log"))
+
+    if not log_files:
+        logger.info("  No log files found")
+        return
+
+    for log_file in log_files:
+        size = os.path.getsize(log_file)
+        if size == 0:
+            continue
+        if dry_run:
+            logger.info(f"  Would truncate {os.path.basename(log_file)} ({size:,} bytes)")
+        else:
+            open(log_file, 'w').close()
+            logger.info(f"  Truncated {os.path.basename(log_file)} ({size:,} bytes cleared)")
+
+
 def main():
     """Main cleanup execution."""
     # Check for dry-run flag
     dry_run = '--dry-run' in sys.argv
-    
+
     if dry_run:
-        logger.info("🔍 DRY RUN MODE - No data will be deleted")
+        logger.info("DRY RUN MODE - No data will be deleted")
     else:
-        logger.info("🧹 CLEANUP MODE - Deleting old data")
+        logger.info("CLEANUP MODE - Deleting old data")
     
     logger.info(f"📅 Retention period: {RETENTION_DAYS} days")
     logger.info("")
@@ -130,14 +153,19 @@ def main():
             total_deleted += deleted
             logger.info("")
         
+        # Cleanup log files
+        logger.info("Processing: log files")
+        cleanup_logs(dry_run)
+        logger.info("")
+
         # Summary
         if dry_run:
-            logger.info(f"🔍 DRY RUN SUMMARY: Would delete {total_deleted} total records")
+            logger.info(f"DRY RUN SUMMARY: Would delete {total_deleted} total records")
         else:
-            logger.info(f"✅ CLEANUP COMPLETE: Deleted {total_deleted} total records")
-        
-        logger.info(f"📊 Database now contains only data from last {RETENTION_DAYS} days")
-        
+            logger.info(f"CLEANUP COMPLETE: Deleted {total_deleted} total records")
+
+        logger.info(f"Database now contains only data from last {RETENTION_DAYS} days")
+
         return 0
         
     except Exception as e:

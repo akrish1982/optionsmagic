@@ -1,6 +1,0 @@
-# Local development environment variables
-# Copy this file to .dev.vars and fill in your actual values
-# .dev.vars is gitignored for security
-
-SUPABASE_URL=https://xxxxx.supabase.co
-SUPABASE_KEY=your_anon_key_here
