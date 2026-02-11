@@ -1,0 +1,26 @@
+{
+  "name": "optionsmagic",
+  "version": "1.0.0",
+  "description": "To start local postgres `sudo brew services start postgresql`",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "wrangler": "^4.63.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akrish1982/optionsmagic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akrish1982/optionsmagic/issues"
+  },
+  "homepage": "https://github.com/akrish1982/optionsmagic#readme"
+}
