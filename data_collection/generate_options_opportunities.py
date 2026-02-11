@@ -73,8 +73,8 @@ def get_long_bias_candidates(supabase):
             rsi = row.get('rsi')
             sma200 = row.get('sma200')
 
-            # Skip if missing data
-            if price is None or sma200 is None:
+            # Skip if missing critical data (RSI required, SMA200 optional)
+            if price is None or rsi is None:
                 continue
 
             # Long-bias filter: price > sma200, RSI in range
@@ -88,15 +88,10 @@ def get_long_bias_candidates(supabase):
                 sma200_val = float(sma200) if sma200 else None
                 rsi_val = float(rsi) if rsi else None
 
-                # Check uptrend: price above SMA200
-                # If sma200 is percentage from price: negative = price above SMA
-                above_sma200 = True  # Default if we can't determine
-                if sma200_val is not None:
-                    # If it's a percentage (like -5.2 meaning 5.2% above)
-                    if -50 < sma200_val < 50:  # Likely a percentage
-                        above_sma200 = sma200_val < 0  # Negative = price above SMA
-                    else:  # Likely actual price value
-                        above_sma200 = price_val > sma200_val
+                # Check uptrend: price above SMA200 (if available)
+                # TEMPORARY: SMA200 data not available from finviz, skip this check
+                above_sma200 = True  # Always true for now (SMA200 parsing issue)
+                # TODO: Fix finviz SMA200 parsing and re-enable this filter
 
                 # Check RSI in range (oversold but not crashed)
                 rsi_in_range = rsi_val is not None and 30 <= rsi_val <= 48

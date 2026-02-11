@@ -101,8 +101,9 @@ pipeline_main() {
     "$HB_DIR/tradestation_heartbeat" || return $?
   
   # Step 3: Generate options opportunities (for trade automation)
-  step "generate_options_opportunities.py" "$T_OPPORTUNITIES" \
-    "data_collection/generate_options_opportunities.py" \
+  # Using simple script (works for both CSP + VPC)
+  step "generate_opportunities_simple.py" "$T_OPPORTUNITIES" \
+    "data_collection/generate_opportunities_simple.py" \
     "$LOG_DIR/opportunities.log" \
     "$HB_DIR/opportunities_heartbeat" || return $?
   

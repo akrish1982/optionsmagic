@@ -350,29 +350,38 @@ def extract_stock_data_from_html(html_content):
                 
                 ticker = ticker_link.text.strip()
                 
-                # Extract other data based on column positions in the typical Finviz overview layout
-                # Normally cells are: No., Ticker, Company, Sector, Industry, Country, Market Cap, P/E, Price, Change, Volume
+                # Extract other data based on column positions for v=171 (technical view)
+                # v=171 columns: No., Ticker, Beta, ATR, SMA20, SMA50, SMA200, 52W High, 52W Low, RSI, Price, Change, Change from Open, Gap, Volume
                 
-                company = cells[2].text.strip() if len(cells) > 2 else None
-                sector = cells[3].text.strip() if len(cells) > 3 else None
-                industry = cells[4].text.strip() if len(cells) > 4 else None
-                country = cells[5].text.strip() if len(cells) > 5 else None
-                
-                # Extract numeric values
+                # Parse SMA values (columns 4, 5, 6)
                 try:
-                    market_cap_text = cells[6].text.strip() if len(cells) > 6 else None
-                    market_cap = parse_market_cap(market_cap_text)
+                    sma20_text = cells[4].text.strip() if len(cells) > 4 else None
+                    sma20 = float(sma20_text.replace(',', '')) if sma20_text and sma20_text != '-' else None
                 except:
-                    market_cap = None
+                    sma20 = None
                 
                 try:
-                    pe_text = cells[7].text.strip() if len(cells) > 7 else None
-                    pe_ratio = float(pe_text.replace(',', '')) if pe_text and pe_text != '-' else None
+                    sma50_text = cells[5].text.strip() if len(cells) > 5 else None
+                    sma50 = float(sma50_text.replace(',', '')) if sma50_text and sma50_text != '-' else None
                 except:
-                    pe_ratio = None
+                    sma50 = None
                 
                 try:
-                    price_text = cells[8].text.strip() if len(cells) > 8 else None
+                    sma200_text = cells[6].text.strip() if len(cells) > 6 else None
+                    sma200 = float(sma200_text.replace(',', '')) if sma200_text and sma200_text != '-' else None
+                except:
+                    sma200 = None
+                
+                # Parse RSI (column 9)
+                try:
+                    rsi_text = cells[9].text.strip() if len(cells) > 9 else None
+                    rsi = float(rsi_text) if rsi_text and rsi_text != '-' else None
+                except:
+                    rsi = None
+                
+                # Parse Price (column 10)
+                try:
+                    price_text = cells[10].text.strip() if len(cells) > 10 else None
                     # Remove color tags or other elements if present
                     if price_text:
                         price_text = re.sub(r'[^\d.,]', '', price_text)
@@ -380,8 +389,9 @@ def extract_stock_data_from_html(html_content):
                 except:
                     price = None
                 
+                # Parse Change (column 11)
                 try:
-                    change_text = cells[9].text.strip() if len(cells) > 9 else None
+                    change_text = cells[11].text.strip() if len(cells) > 11 else None
                     # Remove % and color tags or other elements if present
                     if change_text:
                         change_text = re.sub(r'[^\d.,\-]', '', change_text)
@@ -390,11 +400,18 @@ def extract_stock_data_from_html(html_content):
                 except:
                     change_percent = None
                 
+                # Parse Volume (column 14)
                 try:
-                    volume_text = cells[10].text.strip() if len(cells) > 10 else None
+                    volume_text = cells[14].text.strip() if len(cells) > 14 else None
                     volume = parse_volume(volume_text)
                 except:
                     volume = None
+                
+                # v=171 doesn't have these fields - set to None
+                market_cap = None
+                pe_ratio = None
+                sector = None
+                industry = None
                 
                 # Create stock data entry
                 stock_data = {
@@ -404,18 +421,18 @@ def extract_stock_data_from_html(html_content):
                     'price': price,
                     'change_percent': change_percent,
                     'volume': volume,
-                    'relative_volume': None,  # Not available in basic view
-                    'market_cap': market_cap,
-                    'pe_ratio': pe_ratio,
-                    'eps': None,  # Not available in basic view
-                    'dividend_yield': None,  # Not available in basic view
-                    'sector': sector,
-                    'industry': industry,
+                    'relative_volume': None,  # Not available in v=171
+                    'market_cap': market_cap,  # Not available in v=171
+                    'pe_ratio': pe_ratio,  # Not available in v=171
+                    'eps': None,  # Not available in v=171
+                    'dividend_yield': None,  # Not available in v=171
+                    'sector': sector,  # Not available in v=171
+                    'industry': industry,  # Not available in v=171
                     'has_options': True,  # We're filtering for stocks with options
-                    'rsi': None,  # Will be fetched from technical view
-                    'sma50': None,  # Will be fetched from technical view
-                    'sma200': None,  # Will be fetched from technical view
-                    'distance_from_support': None,  # Will be calculated or fetched
+                    'rsi': rsi,  # Now parsed from v=171 column 9
+                    'sma50': sma50,  # Now parsed from v=171 column 5
+                    'sma200': sma200,  # Now parsed from v=171 column 6
+                    'distance_from_support': None,  # Will be calculated
                 }
 
                 stocks_data.append(stock_data)
