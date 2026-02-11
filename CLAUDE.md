@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-OptionsMagic is a Python-based stock options data collection and analysis system. It scrapes stock and options data from multiple sources (Finviz, TradeStation), stores it in Supabase/PostgreSQL, and provides a Cloudflare Worker API for accessing filtered options trading opportunities. It is starting trade automation on a trial basis to try buys option chains on Tradestation account.
+OptionsMagic is a Python-based stock options data collection and analysis system. It scrapes stock and options data from Finviz and TradeStation, stores it in Supabase, and generates filtered options trading opportunities (CSP and VPC strategies). Trade automation via Telegram approval is in development under `trade_automation/`.
 
 ## Common Commands
 
@@ -15,54 +15,66 @@ poetry install
 # Update lock file after changing pyproject.toml
 poetry lock
 
-# Run data collection scripts
-poetry run python data_collection/finviz.py                      # Scrape stock quotes from Finviz
-poetry run python data_collection/yahoo_finance_options_postgres.py  # Fetch options data from Yahoo Finance
-poetry run python data_collection/tradestation_api_access.py     # Fetch options data from TradeStation API (alternative)
-poetry run python data_collection/update_tradeable_options.py    # Generate tradeable_options summary table
+# Run the full production pipeline (3 steps with timeouts and locking)
+bash run_pipeline_v2.sh
 
-# Start local PostgreSQL
-sudo brew services start postgresql
+# Run individual data collection scripts
+poetry run python data_collection/finviz.py                        # Step 1: Scrape stock quotes from Finviz
+poetry run python data_collection/tradestation_options.py          # Step 2: Fetch options data from TradeStation API
+poetry run python data_collection/generate_opportunities_simple.py # Step 3: Generate CSP/VPC opportunities
+
+# Weekly cleanup (database + logs)
+poetry run python data_collection/cleanup_old_data.py
+poetry run python data_collection/cleanup_old_data.py --dry-run    # Preview what would be deleted
+
+# One-time TradeStation OAuth setup
+poetry run python data_collection/tradestation_oauth_setup.py
 ```
 
 ## Architecture
 
-### Data Flow
-1. **finviz.py** - Scrapes stock quotes (price, volume, market cap, sector, RSI, SMA50, SMA200) for stocks with options from Finviz screener → stores in `stock_quotes` table (Supabase by default, local PostgreSQL optional)
-2. **tradestation_options.py** - Fetches options chains (calls/puts for next 8 weeks) from tradestation Finance for all tickers in `stock_quotes` → stores in `tradestation_options` table.
-2b. **tradestation_api_access.py** - Alternative to Yahoo Finance. Fetches options data with full Greeks from TradeStation API v3 → stores in `tradestation_options` table. Requires TradeStation API credentials.
-3. **update_tradeable_options.py** - Joins stock and options data, filters for attractive put options (strike < price, return > 2%), and populates `tradeable_options` summary table
-4. **api/worker.js** - Cloudflare Worker that reads from Supabase (mirrored from local Postgres) and exposes `/api/options` and `/api/expirations` endpoints
+### Pipeline (`run_pipeline_v2.sh`)
 
-### Database Tables (PostgreSQL/Supabase)
-- `stock_quotes` - Daily stock price/volume data with technical indicators (RSI, SMA50, SMA200, distance_from_support), keyed by (ticker, quote_date)
-- `tradestation_options` - Options contract data with Greeks from TradeStation API, keyed by (contractID, date)
-- `tradeable_options` - Pre-filtered put options for trading, keyed by contractid
+The pipeline runs three scripts sequentially with per-step timeouts, a directory-based lock to prevent concurrent runs, and heartbeat files to track successful completions:
 
+1. **finviz.py** (6 min timeout) - Scrapes stock quotes (price, volume, market cap, sector, RSI, SMA50, SMA200) from Finviz screener -> stores in `stock_quotes` table
+2. **tradestation_options.py** (30 min timeout) - Fetches options chains with full Greeks from TradeStation API v3 -> stores in `options_quotes` table. Requires `tokens.json` for authentication.
+3. **generate_opportunities_simple.py** (6 min timeout) - Joins stock and options data, filters for attractive CSP and VPC opportunities, upserts to `options_opportunities` table
+
+### Weekly Maintenance
+
+**cleanup_old_data.py** runs via cron on Sundays at 2 AM ET:
+- Deletes database records older than 30 days from all tables
+- Truncates all log files in `logs/`
+
+### Database Tables (Supabase)
+
+- `stock_quotes` - Daily stock price/volume data with technical indicators (RSI, SMA50, SMA200), keyed by (ticker, quote_date)
+- `options_quotes` - Options contract data with Greeks from TradeStation API
+- `options_opportunities` - Pre-filtered CSP and VPC opportunities
+
+### Key Directories
+
+- `data_collection/` - All pipeline scripts (finviz, tradestation, opportunities, cleanup)
+- `trade_automation/` - Upcoming trade execution with Telegram approval (not yet wired into pipeline)
+- `heartbeat/` - Timestamp files updated on successful pipeline step completion
+- `locks/` - Directory-based lock to prevent concurrent pipeline runs (stale after 4 hours)
+- `logs/` - Per-step log files, truncated weekly by cleanup script
 
 ## Environment Variables
 
-Storage backend selection:
-- `STORAGE_BACKEND` - "supabase" (default) or "postgres"
-
-Supabase configuration (default backend):
+Supabase (required):
 - `SUPABASE_URL`, `SUPABASE_KEY`
 
-Local PostgreSQL configuration (when `STORAGE_BACKEND=postgres`):
+TradeStation API credentials are read from `tokens.json`:
+- `client_id`, `client_secret`, `refresh_token`
+
+Optional (finviz.py supports local Postgres as alternate backend):
+- `STORAGE_BACKEND` - "supabase" (default) or "postgres"
 - `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`
-
-TradeStation API (for tradestation_api_access.py):
-- `TRADESTATION_CLIENT_ID`, `TRADESTATION_CLIENT_SECRET`, `TRADESTATION_REFRESH_TOKEN`
-- Or use `tokens.json` file with `client_id`, `client_secret`, `refresh_token`
-
-To use local PostgreSQL instead of Supabase:
-```bash
-export STORAGE_BACKEND=postgres
-```
 
 ## Scheduling (Cron)
 
-The scripts are designed to run on weekdays during market hours via cron:
-- `finviz.py` - hourly on weekdays
-- `yahoo_finance_options_postgres.py` - hourly 9AM-4PM ET on weekdays
-- `update_tradeable_options.py` - hourly 9AM-4PM ET on weekdays (runs after yahoo script)
+Run `scripts/setup_cron_jobs.sh` to install:
+- Hourly pipeline: Mon-Fri, 9 AM - 4 PM ET
+- Weekly cleanup: Sunday 2 AM ET
