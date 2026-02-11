@@ -35,6 +35,100 @@ SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 from supabase import create_client
 
 
+def calculate_trade_score(return_pct, rsi, days_to_exp, annualized_return):
+    """
+    Calculate trade score (A+ to F) based on multiple factors.
+    
+    Scoring criteria:
+    - Return %: Higher is better (up to 50 points)
+    - RSI: 30-70 range is best (up to 25 points)
+    - Days to expiration: 14-45 days ideal (up to 15 points)
+    - Annualized return: Bonus for high annualized (up to 10 points)
+    
+    Total: 100 points max
+    A+: 95-100, A: 90-94, A-: 85-89
+    B+: 80-84, B: 75-79, B-: 70-74
+    C+: 65-69, C: 60-64, C-: 55-59
+    D+: 50-54, D: 45-49, D-: 40-44
+    F: < 40
+    """
+    score = 0
+    
+    # Return % score (0-50 points)
+    # 0-2%: 0-20pts, 2-5%: 20-35pts, 5-10%: 35-45pts, >10%: 45-50pts
+    if return_pct >= 10:
+        score += 50
+    elif return_pct >= 5:
+        score += 35 + ((return_pct - 5) / 5) * 15
+    elif return_pct >= 2:
+        score += 20 + ((return_pct - 2) / 3) * 15
+    else:
+        score += (return_pct / 2) * 20
+    
+    # RSI score (0-25 points)
+    # Ideal range: 30-70 (neutral to slightly oversold)
+    if rsi:
+        if 30 <= rsi <= 70:
+            score += 25
+        elif 20 <= rsi < 30 or 70 < rsi <= 80:
+            score += 15
+        else:
+            score += 5
+    else:
+        score += 10  # Neutral if no RSI
+    
+    # Days to expiration score (0-15 points)
+    # Ideal: 14-45 days (sweet spot for theta decay)
+    if days_to_exp:
+        if 14 <= days_to_exp <= 45:
+            score += 15
+        elif 7 <= days_to_exp < 14 or 45 < days_to_exp <= 60:
+            score += 10
+        else:
+            score += 5
+    else:
+        score += 7  # Neutral if unknown
+    
+    # Annualized return bonus (0-10 points)
+    if annualized_return:
+        if annualized_return >= 100:
+            score += 10
+        elif annualized_return >= 50:
+            score += 7
+        elif annualized_return >= 25:
+            score += 5
+        else:
+            score += 2
+    
+    # Convert score to letter grade
+    if score >= 95:
+        return 'A+'
+    elif score >= 90:
+        return 'A'
+    elif score >= 85:
+        return 'A-'
+    elif score >= 80:
+        return 'B+'
+    elif score >= 75:
+        return 'B'
+    elif score >= 70:
+        return 'B-'
+    elif score >= 65:
+        return 'C+'
+    elif score >= 60:
+        return 'C'
+    elif score >= 55:
+        return 'C-'
+    elif score >= 50:
+        return 'D+'
+    elif score >= 45:
+        return 'D'
+    elif score >= 40:
+        return 'D-'
+    else:
+        return 'F'
+
+
 def get_supabase_client():
     """Get Supabase client."""
     if not SUPABASE_URL or not SUPABASE_KEY:
@@ -126,7 +220,7 @@ def generate_simple_opportunities():
             
             # Calculate metrics (Cash Secured Put style)
             collateral = strike * 100  # Per contract
-            income = bid * 100  # Premium collected
+            income = bid * 100  # Premium collected (per contract)
             return_pct = (bid / strike) * 100  # Return on collateral
             
             # Calculate days to expiration
@@ -153,17 +247,27 @@ def generate_simple_opportunities():
             if days_to_exp and days_to_exp > 90:  # Max 90 days out
                 continue
             
+            # Calculate trade score
+            trade_score = calculate_trade_score(
+                return_pct=return_pct,
+                rsi=stock.get('rsi'),
+                days_to_exp=days_to_exp,
+                annualized_return=annualized_return
+            )
+            
             # Create opportunity record
             opportunity = {
                 'ticker': symbol,
+                'stock_price': price,  # Current stock price
                 'strategy_type': 'CSP',  # Cash Secured Put
                 'expiration_date': exp_date_str,
                 'strike_price': strike,
                 'width': None,  # N/A for CSP
-                'net_credit': bid,
+                'net_credit': bid * 100,  # Income per contract (×100)
                 'collateral': collateral,
                 'return_pct': round(return_pct, 2),
                 'annualized_return': round(annualized_return, 2) if annualized_return else None,
+                'trade_score': trade_score,  # Letter grade (A+ to F)
                 'rsi_14': stock.get('rsi'),
                 'iv_percentile': None,
                 'price_vs_bb_lower': None,
@@ -205,6 +309,11 @@ def generate_simple_opportunities():
                     short_bid = float(short_leg.get('bid', 0))
                     
                     if short_strike <= 0 or short_bid <= 0:
+                        continue
+                    
+                    # Filter out ITM (In-The-Money) VPCs
+                    # For puts: ITM when price >= strike
+                    if price >= short_strike:
                         continue
                     
                     # Look for long leg at lower strikes
@@ -252,17 +361,27 @@ def generate_simple_opportunities():
                         if days_to_exp and days_to_exp > 90:  # Max 90 days out
                             continue
                         
+                        # Calculate trade score
+                        trade_score = calculate_trade_score(
+                            return_pct=return_pct,
+                            rsi=stock.get('rsi'),
+                            days_to_exp=days_to_exp,
+                            annualized_return=annualized_return
+                        )
+                        
                         # Create VPC opportunity
                         vpc_opp = {
                             'ticker': symbol,
+                            'stock_price': price,  # Current stock price
                             'strategy_type': 'VPC',  # Vertical Put Credit Spread
                             'expiration_date': exp_date_str,
                             'strike_price': short_strike,  # Short leg strike
                             'width': width,  # Spread width
-                            'net_credit': net_credit,
+                            'net_credit': net_credit * 100,  # Income per contract (×100)
                             'collateral': collateral,
                             'return_pct': round(return_pct, 2),
                             'annualized_return': round(annualized_return, 2) if annualized_return else None,
+                            'trade_score': trade_score,  # Letter grade (A+ to F)
                             'rsi_14': stock.get('rsi'),
                             'iv_percentile': None,
                             'price_vs_bb_lower': None,
@@ -284,11 +403,26 @@ def generate_simple_opportunities():
     logger.info(f"Generated {vpc_count} VPC opportunities")
     logger.info(f"Total opportunities: {len(opportunities)} ({csp_count} CSP + {vpc_count} VPC)")
     
-    # Sort by return_pct and take top 500
+    # Group opportunities by ticker and take top 3 per ticker
+    # Sort by return_pct descending first
     opportunities.sort(key=lambda x: x['return_pct'], reverse=True)
-    top_opportunities = opportunities[:500]
     
-    logger.info(f"Keeping top {len(top_opportunities)} opportunities")
+    ticker_opps = {}
+    for opp in opportunities:
+        ticker = opp['ticker']
+        if ticker not in ticker_opps:
+            ticker_opps[ticker] = []
+        
+        # Only keep top 3 per ticker
+        if len(ticker_opps[ticker]) < 3:
+            ticker_opps[ticker].append(opp)
+    
+    # Flatten back to list
+    top_opportunities = []
+    for ticker_list in ticker_opps.values():
+        top_opportunities.extend(ticker_list)
+    
+    logger.info(f"Keeping top 3 per ticker: {len(top_opportunities)} opportunities ({len(ticker_opps)} tickers)")
     
     # Insert in batches of 100
     if top_opportunities:
