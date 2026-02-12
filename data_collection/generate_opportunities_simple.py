@@ -155,14 +155,14 @@ def generate_simple_opportunities():
     logger.info("Cleared options_opportunities table")
     
     # Get latest dates
-    opt_date_result = supabase.table('options_quotes').select('date').order('date', desc=True).limit(1).execute()
+    opt_date_result = supabase.table('options_quotes').select('quote_date').order('quote_date', desc=True).limit(1).execute()
     stock_date_result = supabase.table('stock_quotes').select('quote_date').order('quote_date', desc=True).limit(1).execute()
     
     if not opt_date_result.data or not stock_date_result.data:
         logger.error("No data found in options_quotes or stock_quotes")
         return 0
     
-    latest_opt_date = opt_date_result.data[0]['date']
+    latest_opt_date = opt_date_result.data[0]['quote_date']
     latest_stock_date = stock_date_result.data[0]['quote_date']
     
     logger.info(f"Using options date: {latest_opt_date}, stock date: {latest_stock_date}")
@@ -172,7 +172,7 @@ def generate_simple_opportunities():
     options_result = supabase.table('options_quotes').select(
         'contractid, symbol, expiration, strike, bid, ask, delta, theta, '
         'implied_volatility, open_interest, volume'
-    ).eq('date', latest_opt_date).eq('type', 'put').execute()
+    ).eq('quote_date', latest_opt_date).eq('type', 'put').execute()
     
     logger.info(f"Found {len(options_result.data)} put options")
     
