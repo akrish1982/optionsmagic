@@ -39,19 +39,19 @@ CREATE TABLE IF NOT EXISTS options_quotes (
       ask_size INTEGER,                                                                                                               
       volume INTEGER,                                                                                                                 
       open_interest INTEGER,                                                                                                          
-      date DATE NOT NULL,                                                                                                             
+      quote_date DATE NOT NULL,                                                                                                             
       implied_volatility DECIMAL,                                                                                                     
       delta DECIMAL,                                                                                                                  
       gamma DECIMAL,                                                                                                                  
       theta DECIMAL,                                                                                                                  
       vega DECIMAL,                                                                                                                   
       rho DECIMAL,                                                                                                             
-PRIMARY KEY (contractid, date)                                                                                                  
+PRIMARY KEY (contractid, quote_date)                                                                                                  
   );                                                                                                                                  
                                                                                                                                       
   -- Create indexes for common queries                                                                                                
   CREATE INDEX IF NOT EXISTS idx_options_quotes_symbol ON options_quotes (symbol);                                                    
-  CREATE INDEX IF NOT EXISTS idx_options_quotes_date ON options_quotes (date);                                                        
+  CREATE INDEX IF NOT EXISTS idx_options_quotes_date ON options_quotes (quote_date);                                                        
   CREATE INDEX IF NOT EXISTS idx_options_quotes_expiration ON options_quotes (expiration);  
 -- Create options_opportunities table                                                                                               
   CREATE TABLE IF NOT EXISTS options_opportunities (                                                                                  
@@ -65,8 +65,8 @@ PRIMARY KEY (contractid, date)
       width NUMERIC(10, 2),       -- For VPCs (difference between strikes)                                                            
       net_credit NUMERIC(10, 2),  -- Premium collected                                                                                
       collateral NUMERIC(10, 2),  -- Required buying power                                                                            
-      return_pct TYPE NUMERIC(10, 2),  -- (Net Credit / Collateral) * 100                                                                  
-      annualized_return TYPE NUMERIC(10, 2)                                                                                     
+      return_pct NUMERIC(10, 2),  -- (Net Credit / Collateral) * 100                                                                  
+      annualized_return NUMERIC(10, 2),                                                                                     
                                                                                                                                       
       -- Technical Filters (Long Bias)                                                                                                
       rsi_14 NUMERIC(6, 2),                                                                                                           

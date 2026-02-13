@@ -321,7 +321,7 @@ def parse_option_contract(contract, underlying, expiration_date, stock_price):
             'ask_size': ask_size,
             'volume': volume,
             'open_interest': open_interest,
-            'date': str(date.today()),
+            'quote_date': str(date.today()),
             'implied_volatility': implied_volatility,
             'delta': delta,
             'gamma': gamma,
@@ -344,7 +344,7 @@ def upsert_options_to_supabase(supabase, options_data, table_name=OPTIONS_TABLE)
         # Deduplicate within this batch to avoid ON CONFLICT affecting same row twice
         deduped = {}
         for row in options_data:
-            key = (row.get("contractid"), row.get("date"))
+            key = (row.get("contractid"), row.get("quote_date"))
             if None in key:
                 continue
             deduped[key] = row  # keep last occurrence
@@ -362,7 +362,7 @@ def upsert_options_to_supabase(supabase, options_data, table_name=OPTIONS_TABLE)
             batch = options_data[i:i + batch_size]
             supabase.table(table_name).upsert(
                 batch,
-                on_conflict='contractid,date'
+                on_conflict='contractid,quote_date'
             ).execute()
             total += len(batch)
 
