@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+from datetime import datetime, timedelta
 from typing import Dict, Any, List
 
 from trade_automation.config import Settings
@@ -20,6 +21,9 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Timeout for trade approval (5 minutes)
+APPROVAL_TIMEOUT_MINUTES = 5
 
 
 def request_from_dict(data: Dict[str, Any]) -> TradeRequest:
@@ -43,53 +47,159 @@ def request_from_dict(data: Dict[str, Any]) -> TradeRequest:
     )
 
 
-def _apply_commands(commands: List[Dict[str, str]], state: Dict[str, Any],
-                    settings: Settings, notifier) -> None:
+def is_expired(created_at: str, timeout_minutes: int = APPROVAL_TIMEOUT_MINUTES) -> bool:
+    """Check if a trade request has exceeded the approval timeout."""
+    try:
+        created = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
+        expiry = created + timedelta(minutes=timeout_minutes)
+        return datetime.utcnow() > expiry
+    except Exception as e:
+        logger.warning(f"Could not parse created_at '{created_at}': {e}")
+        return False
+
+
+def check_and_expire_requests(state: Dict[str, Any], notifier) -> None:
+    """Check for expired requests and auto-reject them."""
+    requests = state.get("requests", {})
+    expired_count = 0
+
+    for request_id, req in requests.items():
+        if req.get("status") == "pending":
+            created_at = req.get("created_at", "")
+            if is_expired(created_at):
+                update_request_status(state, request_id, "rejected", notes="Auto-rejected: timeout")
+                notifier.send_message(f"⏱️ Request {request_id} auto-rejected (5 min timeout)")
+                expired_count += 1
+
+    if expired_count > 0:
+        logger.info(f"Auto-rejected {expired_count} expired requests")
+
+
+def _apply_commands(
+    commands: List[Dict[str, str]],
+    state: Dict[str, Any],
+    settings: Settings,
+    notifier,
+    is_callback: bool = False
+) -> None:
+    """Process approve/reject commands (from text or callback)."""
     trader = TradeStationTradingClient(settings)
 
     for cmd in commands:
         request_id = cmd["request_id"]
         action = cmd["action"]
+        message_id = cmd.get("message_id")
 
         req = state.get("requests", {}).get(request_id)
         if not req:
-            notifier.send_message(f"Unknown request id: {request_id}")
+            if is_callback:
+                notifier.answer_callback_query(cmd.get("callback_query_id"), "❌ Request not found")
+            notifier.send_message(f"❌ Unknown request id: {request_id}")
             continue
+
         if req.get("status") != "pending":
-            notifier.send_message(f"Request {request_id} is already {req.get('status')}")
+            msg = f"Request {request_id} is already {req.get('status')}"
+            if is_callback:
+                notifier.answer_callback_query(cmd.get("callback_query_id"), msg)
+            notifier.send_message(msg)
+            continue
+
+        # Check if expired
+        if is_expired(req.get("created_at", "")):
+            update_request_status(state, request_id, "rejected", notes="Auto-rejected: timeout")
+            msg = f"⏱️ Request {request_id} expired and was auto-rejected"
+            if is_callback:
+                notifier.answer_callback_query(cmd.get("callback_query_id"), "⏱️ Request expired")
+            notifier.send_message(msg)
+            if message_id:
+                notifier.edit_message_text(
+                    message_id,
+                    f"❌ <b>REJECTED (Expired)</b>\n\nID: <code>{request_id}</code>\n"
+                    f"Ticker: {req.get('ticker')}\n<i>Auto-rejected after 5 minutes</i>"
+                )
             continue
 
         if action == "reject":
             update_request_status(state, request_id, "rejected")
-            notifier.send_message(f"Rejected {request_id}")
+            if is_callback:
+                notifier.answer_callback_query(cmd.get("callback_query_id"), "❌ Trade rejected")
+            notifier.send_message(f"❌ Rejected {request_id}")
+            if message_id:
+                notifier.edit_message_text(
+                    message_id,
+                    f"❌ <b>REJECTED</b>\n\nID: <code>{request_id}</code>\n"
+                    f"Ticker: {req.get('ticker')}\nStrategy: {req.get('strategy_type')}"
+                )
             continue
 
         if action == "approve":
             update_request_status(state, request_id, "approved")
+            if is_callback:
+                notifier.answer_callback_query(cmd.get("callback_query_id"), "✅ Trade approved! Executing...")
+            notifier.send_message(f"✅ Approved {request_id} - Executing...")
+
             trade = request_from_dict(req)
             try:
                 result = trader.place_order(trade)
                 if result.get("ok") or result.get("dry_run"):
                     update_request_status(state, request_id, "executed")
-                    notifier.send_message(f"Executed {request_id}")
+                    notifier.send_message(f"✅ Executed {request_id}")
+                    if message_id:
+                        notifier.edit_message_text(
+                            message_id,
+                            f"✅ <b>APPROVED & EXECUTED</b>\n\nID: <code>{request_id}</code>\n"
+                            f"Ticker: {req.get('ticker')}\nStrategy: {req.get('strategy_type')}\n"
+                            f"<i>Trade has been submitted</i>"
+                        )
                 else:
                     update_request_status(state, request_id, "failed", notes=str(result))
-                    notifier.send_message(f"Failed {request_id}: {result}")
+                    notifier.send_message(f"❌ Failed {request_id}: {result}")
+                    if message_id:
+                        notifier.edit_message_text(
+                            message_id,
+                            f"⚠️ <b>APPROVED BUT FAILED</b>\n\nID: <code>{request_id}</code>\n"
+                            f"Error: {result}"
+                        )
             except Exception as exc:
                 update_request_status(state, request_id, "failed", notes=str(exc))
-                notifier.send_message(f"Failed {request_id}: {exc}")
+                notifier.send_message(f"❌ Failed {request_id}: {exc}")
+                if message_id:
+                    notifier.edit_message_text(
+                        message_id,
+                        f"⚠️ <b>APPROVED BUT ERROR</b>\n\nID: <code>{request_id}</code>\n"
+                        f"Error: {exc}"
+                    )
 
 
 def run_once(settings: Settings, state: Dict[str, Any],
              telegram: TelegramNotifier, discord: DiscordNotifier) -> None:
-    commands: List[Dict[str, str]] = []
+    # First, check for expired requests
+    if "telegram" in settings.approval_backends:
+        check_and_expire_requests(state, telegram)
+    if "discord" in settings.approval_backends:
+        check_and_expire_requests(state, discord)
 
+    # Process callback queries (button clicks) first
     if "telegram" in settings.approval_backends:
         last_update_id = state.get("telegram", {}).get("last_update_id", 0)
+
+        # Get callback queries
+        callback_updates = telegram.get_callback_queries(offset=last_update_id + 1)
+        if callback_updates:
+            state.setdefault("telegram", {})["last_update_id"] = callback_updates[-1]["update_id"]
+            callbacks = telegram.parse_callback_queries(callback_updates)
+            if callbacks:
+                logger.info(f"Processing {len(callbacks)} Telegram callbacks")
+                _apply_commands(callbacks, state, settings, telegram, is_callback=True)
+
+        # Also check for text commands (backward compatibility)
         updates = telegram.get_updates(offset=last_update_id + 1)
         if updates:
             state.setdefault("telegram", {})["last_update_id"] = updates[-1]["update_id"]
-        commands.extend(telegram.parse_commands(updates))
+            commands = telegram.parse_commands(updates)
+            if commands:
+                logger.info(f"Processing {len(commands)} Telegram text commands")
+                _apply_commands(commands, state, settings, telegram, is_callback=False)
 
     if "discord" in settings.approval_backends:
         last_message_id = state.get("discord", {}).get("last_message_id", "")
@@ -97,13 +207,10 @@ def run_once(settings: Settings, state: Dict[str, Any],
         if messages:
             newest_id = max(int(msg["id"]) for msg in messages if msg.get("id"))
             state.setdefault("discord", {})["last_message_id"] = str(newest_id)
-        commands.extend(discord.parse_commands(messages, last_message_id))
-
-    for cmd in commands:
-        if cmd.get("source") == "telegram":
-            _apply_commands([cmd], state, settings, telegram)
-        elif cmd.get("source") == "discord":
-            _apply_commands([cmd], state, settings, discord)
+        commands = discord.parse_commands(messages, last_message_id)
+        if commands:
+            logger.info(f"Processing {len(commands)} Discord commands")
+            _apply_commands(commands, state, settings, discord, is_callback=False)
 
 
 def main():
@@ -112,6 +219,8 @@ def main():
     discord = DiscordNotifier(settings)
 
     logger.info("Starting approval worker")
+    logger.info(f"Approval timeout: {APPROVAL_TIMEOUT_MINUTES} minutes")
+
     while True:
         state = load_state()
         run_once(settings, state, telegram, discord)

@@ -1,10 +1,10 @@
 import logging
 import json
+from datetime import datetime
 
 from trade_automation.config import Settings
 from trade_automation.opportunities import fetch_opportunities, filter_opportunities, build_trade_request
 from trade_automation.store import load_state, save_state, upsert_request
-from trade_automation.messages import format_trade_request
 from trade_automation.notifier_telegram import TelegramNotifier
 from trade_automation.notifier_discord import DiscordNotifier
 from trade_automation.supabase_client import get_supabase_client
@@ -19,6 +19,18 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+
+def format_trade_details(trade) -> str:
+    """Format additional trade details for the message."""
+    legs_info = []
+    for leg in trade.legs:
+        legs_info.append(f"{leg.action} {leg.quantity} {leg.contractid}")
+
+    if trade.strategy_type == "VPC" and trade.width:
+        return f"Spread width: ${trade.width:.2f} | Legs: {', '.join(legs_info)}"
+    else:
+        return f"Legs: {', '.join(legs_info)}"
 
 
 def main():
@@ -45,13 +57,37 @@ def main():
             continue
 
         trade_dict = json.loads(json.dumps(trade, default=lambda o: o.__dict__))
+
+        # Store created_at for timeout tracking
+        trade_dict["created_at"] = datetime.utcnow().isoformat()
+
         upsert_request(state, trade_dict)
         created += 1
 
-        message = format_trade_request(trade)
-        if "telegram" in settings.approval_backends:
-            telegram.send_message(message)
+        # Send with inline buttons via Telegram
+        if "telegram" in settings.approval_backends and telegram.is_configured():
+            details = format_trade_details(trade)
+            result = telegram.send_trade_proposal_with_buttons(
+                request_id=trade.request_id,
+                ticker=trade.ticker,
+                strategy=trade.strategy_type,
+                expiration=trade.expiration_date,
+                strike=trade.strike_price,
+                return_pct=trade.return_pct,
+                collateral=trade.collateral,
+                details=details
+            )
+            if result:
+                # Store message_id for later editing
+                trade_dict["telegram_message_id"] = result.get("message_id")
+                logger.info(f"Sent Telegram proposal for {trade.request_id}")
+            else:
+                logger.warning(f"Failed to send Telegram proposal for {trade.request_id}")
+
+        # Send via Discord (text-based for now)
         if "discord" in settings.approval_backends:
+            from trade_automation.messages import format_trade_request
+            message = format_trade_request(trade)
             discord.send_message(message)
 
         logger.info("Queued trade request %s for %s", trade.request_id, trade.ticker)
