@@ -4,12 +4,18 @@
 
 set -euo pipefail
 
-BASE_DIR="/home/openclaw/.openclaw/workspace/optionsmagic"
-POETRY="$HOME/.local/bin/poetry"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+POETRY="${POETRY:-$(command -v poetry || true)}"
 PIDFILE="$BASE_DIR/trade_automation/worker.pid"
 LOGFILE="$BASE_DIR/logs/approval_worker.log"
 
 cd "$BASE_DIR"
+
+if [ -z "$POETRY" ]; then
+    echo "poetry command not found in PATH"
+    exit 1
+fi
 
 usage() {
     echo "Usage: $0 {start|stop|restart|status|logs}"

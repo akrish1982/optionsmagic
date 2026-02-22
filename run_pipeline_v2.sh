@@ -8,8 +8,8 @@
 set -euo pipefail
 
 # ===== Configuration =====
-BASE_DIR="/home/openclaw/.openclaw/workspace/optionsmagic"
-POETRY="$HOME/.local/bin/poetry"
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+POETRY="${POETRY:-$(command -v poetry || true)}"
 LOG_DIR="$BASE_DIR/logs"
 HB_DIR="$BASE_DIR/heartbeat"
 LOCK_DIR="$BASE_DIR/locks"
@@ -27,6 +27,20 @@ T_PIPELINE=$((50 * 60))        # 50 minutes total pipeline timeout
 mkdir -p "$LOG_DIR" "$HB_DIR" "$LOCK_DIR"
 cd "$BASE_DIR"
 
+if [ -z "$POETRY" ]; then
+  echo "poetry command not found in PATH"
+  exit 1
+fi
+
+TIMEOUT_BIN="$(command -v timeout || true)"
+if [ -z "$TIMEOUT_BIN" ]; then
+  TIMEOUT_BIN="$(command -v gtimeout || true)"
+fi
+if [ -z "$TIMEOUT_BIN" ]; then
+  echo "timeout command not found (install coreutils for gtimeout on macOS)"
+  exit 1
+fi
+
 log() { 
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
 }
@@ -34,7 +48,7 @@ log() {
 # Linux has native timeout command - use it!
 run_with_timeout() {
   local timeout_secs="$1"; shift
-  timeout "$timeout_secs" "$@"
+  "$TIMEOUT_BIN" "$timeout_secs" "$@"
 }
 
 # ===== Lock Management =====

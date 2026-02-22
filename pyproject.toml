@@ -21,6 +21,9 @@ python-dotenv = "^1.0.1"
 scipy = "^1.15.2"
 supabase = "^2.27.2"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.2"
+
 
 [build-system]
 requires = ["poetry-core"]

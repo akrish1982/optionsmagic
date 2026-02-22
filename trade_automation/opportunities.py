@@ -144,3 +144,49 @@ def filter_opportunities(opportunities: List[Dict[str, Any]], settings: Settings
             continue
         filtered.append(opp)
     return filtered
+
+
+class OpportunitiesFetcher:
+    """
+    Compatibility wrapper for async callers (for example, exit automation).
+    The underlying Supabase client is sync, so this class exposes an async
+    API without changing query behavior.
+    """
+
+    def __init__(self, settings: Settings, supabase):
+        self.settings = settings
+        self.supabase = supabase
+
+    async def fetch_opportunities(
+        self,
+        limit: int = 10,
+        min_return_pct: float = 0,
+        max_collateral: float = 0,
+        strategy_types: Optional[List[str]] = None,
+    ) -> List[Dict[str, Any]]:
+        response = (
+            self.supabase.table(self.settings.opportunities_table)
+            .select("*")
+            .order("return_pct", desc=True)
+            .limit(limit)
+            .execute()
+        )
+        opportunities = response.data or []
+
+        filtered: List[Dict[str, Any]] = []
+        strategy_set = {s.upper() for s in (strategy_types or [])}
+
+        for opp in opportunities:
+            return_pct = float(opp.get("return_pct") or 0)
+            collateral = float(opp.get("collateral") or 0)
+            strategy = (opp.get("strategy_type") or "").upper()
+
+            if strategy_set and strategy not in strategy_set:
+                continue
+            if min_return_pct and return_pct < min_return_pct:
+                continue
+            if max_collateral and collateral > max_collateral:
+                continue
+            filtered.append(opp)
+
+        return filtered

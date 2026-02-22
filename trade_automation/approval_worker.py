@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+import asyncio
 from datetime import datetime, timedelta
 from typing import Dict, Any, List
 
@@ -152,12 +153,12 @@ def _apply_commands(
                     try:
                         entry_price = result.get("execution_price", req.get("net_credit", 0))
                         quantity = int(req.get("quantity", 1))
-                        position = position_mgr.create_position(
+                        position = asyncio.run(position_mgr.create_position(
                             trade,
                             entry_price=entry_price,
                             quantity=quantity,
                             execution_data=result
-                        )
+                        ))
                         notifier.send_message(
                             f"✅ Executed {request_id}\n"
                             f"Position ID: {position.get('position_id')}"

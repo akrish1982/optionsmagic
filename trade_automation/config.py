@@ -50,7 +50,8 @@ class Settings:
         self.ts_order_url = os.environ.get("TRADESTATION_ORDER_URL", "")
         self.ts_account_id = os.environ.get("TRADESTATION_ACCOUNT_ID", "")
         self.ts_dry_run = get_bool("TRADESTATION_DRY_RUN", True)
-        self.ts_env = os.environ.get("TRADESTATION_ENV", "LIVE").upper()
+        # SIM default is safer for first-time setup.
+        self.ts_env = os.environ.get("TRADESTATION_ENV", "SIM").upper()
         self.ts_order_type = os.environ.get("TRADESTATION_ORDER_TYPE", "Market")
         self.ts_time_in_force = os.environ.get("TRADESTATION_TIME_IN_FORCE", "DAY")
         self.ts_limit_price = os.environ.get("TRADESTATION_LIMIT_PRICE", "")
@@ -77,6 +78,9 @@ class Settings:
         # Execution
         self.default_quantity = int(os.environ.get("TRADE_QUANTITY", "1"))
         self.poll_interval_seconds = int(os.environ.get("APPROVAL_POLL_SECONDS", "10"))
+
+        # Backward-compatible alias used in older docs/scripts.
+        self.tradestation_dry_run = self.ts_dry_run
 
     def supabase_auth_key(self) -> str:
         return self.supabase_service_role_key or self.supabase_key

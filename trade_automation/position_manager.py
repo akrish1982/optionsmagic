@@ -36,7 +36,14 @@ class PositionManager:
         execution_data: Dict
     ) -> Dict:
         """Create a new position record"""
-        
+
+        legs_payload = []
+        for leg in request.legs:
+            if hasattr(leg, "__dict__"):
+                legs_payload.append(dict(leg.__dict__))
+            elif isinstance(leg, dict):
+                legs_payload.append(leg)
+
         position_data = {
             "request_id": request.request_id,
             "ticker": request.ticker,
@@ -45,7 +52,7 @@ class PositionManager:
             "entry_date": datetime.utcnow().isoformat(),
             "entry_price": entry_price,
             "quantity": quantity,
-            "legs": request.legs,  # Store legs as JSON
+            "legs": legs_payload,  # Store legs as JSON
             "stop_loss": self._calculate_stop_loss(request),
             "profit_target": self._calculate_profit_target(request),
             "notes": f"Executed from request {request.request_id}"
