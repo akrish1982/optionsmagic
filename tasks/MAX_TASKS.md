@@ -80,21 +80,42 @@
 
 ---
 
+## Summary - Weekend Progress
+
+### ✅ Phase 1: Telegram Approval System (COMPLETED)
+- Inline ✅/❌ buttons for APPROVE/REJECT
+- 5-minute auto-reject timeout
+- Message editing to show final status
+- Callback query handling + backward compatible text commands
+
+### ✅ Phase 2: Pipeline Integration (COMPLETED)
+- Step 4 added to `run_pipeline_v2.sh` (propose_trades.py)
+- Worker management script (`worker.sh`)
+- systemd service file for production deployment
+- Complete documentation in `trade_automation/README.md`
+
+---
+
 ## Next Steps
 
-### Immediate (Today) ✅ DONE
-1. ✅ Review existing code
-2. ✅ Implement inline keyboard buttons in `notifier_telegram.py`
-3. ✅ Add callback query handling
-4. ✅ Add 5-minute timeout logic
-5. ✅ Update `approval_worker.py` to handle callbacks
+### Testing (Requires Network Access)
+1. Test full pipeline: `bash run_pipeline_v2.sh`
+2. Start worker: `bash trade_automation/worker.sh start`
+3. Verify Telegram proposals with buttons
+4. Test approve/reject flow end-to-end
+5. Confirm TradeStation orders in SIM mode
 
-### Testing (Pending Network Access)
-- Test pipeline end-to-end with actual Supabase connection
-- Verify data flows: finviz → stock_quotes → tradestation → options_quotes → opportunities
-- Test Telegram bot with real button interactions
+### Phase 3: Future Enhancements (Optional)
+- Discord button support (currently text-only)
+- Web dashboard for trade history
+- Email notifications for executed trades
+- Position tracking and P&L reporting
 
-### Phase 2: Pipeline Integration ✅ COMPLETED
+---
+
+## Blockers
+
+None - Ready for testing on host with network access.
 
 **Integration Steps:**
 
