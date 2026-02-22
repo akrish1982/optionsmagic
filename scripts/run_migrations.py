@@ -7,9 +7,13 @@ import sys
 import os
 import logging
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Load environment variables from .env
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 from trade_automation.config import Settings
 from trade_automation.supabase_client import get_supabase_client
