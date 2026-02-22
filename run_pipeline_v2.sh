@@ -20,7 +20,8 @@ STALE_HOURS=4
 T_FINVIZ=$((6 * 60))           # 6 minutes for stock scraping
 T_TRADESTATION=$((30 * 60))    # 30 minutes for options data (70 tickers)
 T_OPPORTUNITIES=$((6 * 60))    # 6 minutes for opportunity generation
-T_PIPELINE=$((46 * 60))        # 46 minutes total pipeline timeout
+T_PROPOSE_TRADES=$((2 * 60))   # 2 minutes to send trade proposals
+T_PIPELINE=$((50 * 60))        # 50 minutes total pipeline timeout
 
 # ===== Setup =====
 mkdir -p "$LOG_DIR" "$HB_DIR" "$LOCK_DIR"
@@ -93,20 +94,27 @@ pipeline_main() {
     "data_collection/finviz.py" \
     "$LOG_DIR/finviz.log" \
     "$HB_DIR/finviz_heartbeat" || return $?
-  
+
   # Step 2: Fetch options data from TradeStation
   step "tradestation_options.py" "$T_TRADESTATION" \
     "data_collection/tradestation_options.py" \
     "$LOG_DIR/tradestation_options.log" \
     "$HB_DIR/tradestation_heartbeat" || return $?
-  
+
   # Step 3: Generate options opportunities (for trade automation)
   # Using simple script (works for both CSP + VPC)
   step "generate_opportunities_simple.py" "$T_OPPORTUNITIES" \
     "data_collection/generate_opportunities_simple.py" \
     "$LOG_DIR/opportunities.log" \
     "$HB_DIR/opportunities_heartbeat" || return $?
-  
+
+  # Step 4: Send trade proposals for approval (Telegram/Discord)
+  # Requires approval_worker.py to be running to process responses
+  step "propose_trades.py" "$T_PROPOSE_TRADES" \
+    "trade_automation/propose_trades.py" \
+    "$LOG_DIR/propose_trades.log" \
+    "$HB_DIR/propose_trades_heartbeat" || return $?
+
   return 0
 }
 

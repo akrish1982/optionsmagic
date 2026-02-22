@@ -94,10 +94,34 @@
 - Verify data flows: finviz → stock_quotes → tradestation → options_quotes → opportunities
 - Test Telegram bot with real button interactions
 
-### Phase 2: Pipeline Integration
-- Integrate `propose_trades.py` into `run_pipeline_v2.sh` as Step 4
-- Add `approval_worker.py` as a background service
-- Set up systemd service or screen/tmux session for worker
+### Phase 2: Pipeline Integration ✅ COMPLETED
+
+**Integration Steps:**
+
+#### Updated `run_pipeline_v2.sh`
+- ✅ Added Step 4: `propose_trades.py` with 2-minute timeout
+- ✅ Added heartbeat file: `propose_trades_heartbeat`
+- ✅ Total pipeline timeout increased to 50 minutes
+
+#### Created Worker Management
+- ✅ `trade_automation/worker.sh` - Bash script for start/stop/restart/status/logs
+- ✅ `trade_automation/optionsmagic-worker.service` - systemd service file
+- ✅ Updated `trade_automation/README.md` with complete setup instructions
+
+**Usage:**
+```bash
+# Start the approval worker
+bash trade_automation/worker.sh start
+
+# Check status
+bash trade_automation/worker.sh status
+
+# View logs
+bash trade_automation/worker.sh logs
+
+# Or use systemd
+sudo systemctl start optionsmagic-worker
+```
 
 ---
 

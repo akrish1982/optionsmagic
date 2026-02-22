@@ -1,0 +1,18 @@
+[Unit]
+Description=OptionsMagic Trade Approval Worker
+After=network.target
+
+[Service]
+Type=simple
+User=openclaw
+WorkingDirectory=/home/openclaw/.openclaw/workspace/optionsmagic
+Environment="PATH=/home/openclaw/.local/bin:/usr/local/bin:/usr/bin"
+Environment="POETRY_VIRTUALENVS_IN_PROJECT=true"
+ExecStart=/home/openclaw/.local/bin/poetry run python trade_automation/approval_worker.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/openclaw/.openclaw/workspace/optionsmagic/logs/approval_worker.log
+StandardError=append:/home/openclaw/.openclaw/workspace/optionsmagic/logs/approval_worker.log
+
+[Install]
+WantedBy=multi-user.target

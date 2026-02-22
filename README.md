@@ -32,13 +32,14 @@ TradeStation auth is read from `tokens.json` at the project root:
 
 ## Pipeline
 
-The production pipeline is `run_pipeline_v2.sh`. It runs three steps sequentially with timeouts, locking, and heartbeat tracking:
+The production pipeline is `run_pipeline_v2.sh`. It runs four steps sequentially with timeouts, locking, and heartbeat tracking:
 
 | Step | Script | Timeout | Description |
 |------|--------|---------|-------------|
 | 1 | `data_collection/finviz.py` | 6 min | Scrape stock quotes (price, volume, RSI, SMA50, SMA200) from Finviz |
 | 2 | `data_collection/tradestation_options.py` | 30 min | Fetch options chains with Greeks from TradeStation API |
 | 3 | `data_collection/generate_opportunities_simple.py` | 6 min | Filter and score CSP/VPC opportunities, upsert to Supabase |
+| 4 | `trade_automation/propose_trades.py` | 2 min | Send trade proposals to Telegram/Discord for approval |
 
 Run manually:
 ```bash
@@ -88,7 +89,7 @@ This sets up:
 
 ```
 optionsmagic/
-  run_pipeline_v2.sh              # Production pipeline (3 steps)
+  run_pipeline_v2.sh              # Production pipeline (4 steps)
   tokens.json                     # TradeStation API credentials (gitignored)
   .env                            # Supabase credentials (gitignored)
   pyproject.toml                  # Python dependencies
@@ -99,7 +100,14 @@ optionsmagic/
     generate_options_opportunities.py # Full opportunity generator (alternate)
     cleanup_old_data.py           # Weekly DB + log cleanup
     tradestation_oauth_setup.py   # One-time OAuth token setup
-  trade_automation/               # Trade execution (in development)
+  trade_automation/               # Trade execution (Step 4)
+    propose_trades.py             # Send trade proposals for approval
+    approval_worker.py            # Background worker (always running)
+    notifier_telegram.py          # Telegram bot integration
+    notifier_discord.py           # Discord bot integration
+    tradestation.py               # TradeStation order execution
+    worker.sh                     # Worker process manager
+    optionsmagic-worker.service   # systemd service file
   database/ddl/                   # SQL schema definitions
   scripts/                        # Cron setup helpers
   heartbeat/                      # Pipeline health tracking files
@@ -107,19 +115,36 @@ optionsmagic/
   logs/                           # Pipeline log files (truncated weekly)
 ```
 
-## Trade Automation (Upcoming)
+## Trade Automation
 
-The `trade_automation/` folder contains an approval-based trade execution system currently in development. Once complete, it will be added as a step in the pipeline after opportunity generation.
+The `trade_automation/` folder contains an approval-based trade execution system. Step 4 of the pipeline sends trade proposals via Telegram (or Discord) with inline APPROVE/REJECT buttons.
 
-**Planned workflow:**
-1. `propose_trades.py` selects the top 2-3 opportunities and sends trade proposals to Telegram for approval
-2. A user reviews and approves/rejects each trade via Telegram commands
-3. On approval, orders are submitted to TradeStation (simulation mode by default, with a dry-run safety flag)
+**Workflow:**
+1. Pipeline Step 4 (`propose_trades.py`) sends top opportunities to Telegram with ✅/❌ buttons
+2. You review and click APPROVE or REJECT (or let auto-reject after 5 minutes)
+3. `approval_worker.py` (background service) processes your response
+4. On approval, orders are submitted to TradeStation (SIM by default)
+
+**Setup:**
+```bash
+# 1. Configure Telegram in .env
+TELEGRAM_BOT_TOKEN=...
+TELEGRAM_CHAT_ID=...
+TELEGRAM_APPROVER_IDS=...
+
+# 2. Start the approval worker
+bash trade_automation/worker.sh start
+
+# 3. Run pipeline (Step 4 sends proposals)
+bash run_pipeline_v2.sh
+```
 
 **Key features:**
-- Telegram integration for real-time trade approval notifications
-- TradeStation order execution (SIM and LIVE environments)
-- Dry-run mode enabled by default to prevent accidental trades
-- Supports CSP and VPC strategies with configurable filters (min return %, max collateral)
+- ✅/❌ Inline buttons for instant approval/rejection
+- ⏱️ 5-minute auto-reject timeout
+- 📱 Telegram notifications with trade details
+- 🔒 Dry-run mode by default (`TRADESTATION_DRY_RUN=true`)
+- 🧪 SIM environment support (`TRADESTATION_ENV=SIM`)
+- 👤 Only authorized approver IDs can interact
 
-See `trade_automation/README.md` for setup details and environment variables.
+See `trade_automation/README.md` for full setup details.
