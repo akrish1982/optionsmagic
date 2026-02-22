@@ -9,6 +9,8 @@ from trade_automation.store import load_state, save_state, update_request_status
 from trade_automation.notifier_telegram import TelegramNotifier
 from trade_automation.notifier_discord import DiscordNotifier
 from trade_automation.tradestation import TradeStationTradingClient
+from trade_automation.position_manager import PositionManager
+from trade_automation.supabase_client import get_supabase_client
 from trade_automation.models import TradeRequest, OptionLeg
 
 
@@ -80,10 +82,12 @@ def _apply_commands(
     state: Dict[str, Any],
     settings: Settings,
     notifier,
+    supabase_client,
     is_callback: bool = False
 ) -> None:
     """Process approve/reject commands (from text or callback)."""
     trader = TradeStationTradingClient(settings)
+    position_mgr = PositionManager(supabase_client)
 
     for cmd in commands:
         request_id = cmd["request_id"]
@@ -143,7 +147,27 @@ def _apply_commands(
                 result = trader.place_order(trade)
                 if result.get("ok") or result.get("dry_run"):
                     update_request_status(state, request_id, "executed")
-                    notifier.send_message(f"✅ Executed {request_id}")
+                    
+                    # Create position record in database
+                    try:
+                        entry_price = result.get("execution_price", req.get("net_credit", 0))
+                        quantity = int(req.get("quantity", 1))
+                        position = position_mgr.create_position(
+                            trade,
+                            entry_price=entry_price,
+                            quantity=quantity,
+                            execution_data=result
+                        )
+                        notifier.send_message(
+                            f"✅ Executed {request_id}\n"
+                            f"Position ID: {position.get('position_id')}"
+                        )
+                    except Exception as pos_exc:
+                        logger.error(f"Failed to create position for {request_id}: {pos_exc}")
+                        notifier.send_message(
+                            f"⚠️ Trade executed but position tracking failed: {pos_exc}"
+                        )
+                    
                     if message_id:
                         notifier.edit_message_text(
                             message_id,
@@ -173,6 +197,13 @@ def _apply_commands(
 
 def run_once(settings: Settings, state: Dict[str, Any],
              telegram: TelegramNotifier, discord: DiscordNotifier) -> None:
+    # Initialize Supabase client
+    try:
+        supabase = get_supabase_client(settings)
+    except Exception as e:
+        logger.error(f"Failed to initialize Supabase client: {e}")
+        supabase = None
+    
     # First, check for expired requests
     if "telegram" in settings.approval_backends:
         check_and_expire_requests(state, telegram)
@@ -190,7 +221,7 @@ def run_once(settings: Settings, state: Dict[str, Any],
             callbacks = telegram.parse_callback_queries(callback_updates)
             if callbacks:
                 logger.info(f"Processing {len(callbacks)} Telegram callbacks")
-                _apply_commands(callbacks, state, settings, telegram, is_callback=True)
+                _apply_commands(callbacks, state, settings, telegram, supabase, is_callback=True)
 
         # Also check for text commands (backward compatibility)
         updates = telegram.get_updates(offset=last_update_id + 1)
@@ -199,7 +230,7 @@ def run_once(settings: Settings, state: Dict[str, Any],
             commands = telegram.parse_commands(updates)
             if commands:
                 logger.info(f"Processing {len(commands)} Telegram text commands")
-                _apply_commands(commands, state, settings, telegram, is_callback=False)
+                _apply_commands(commands, state, settings, telegram, supabase, is_callback=False)
 
     if "discord" in settings.approval_backends:
         last_message_id = state.get("discord", {}).get("last_message_id", "")
@@ -210,7 +241,7 @@ def run_once(settings: Settings, state: Dict[str, Any],
         commands = discord.parse_commands(messages, last_message_id)
         if commands:
             logger.info(f"Processing {len(commands)} Discord commands")
-            _apply_commands(commands, state, settings, discord, is_callback=False)
+            _apply_commands(commands, state, settings, discord, supabase, is_callback=False)
 
 
 def main():
