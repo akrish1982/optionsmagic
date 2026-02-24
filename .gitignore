@@ -15,3 +15,6 @@ frontend/.wrangler/
 frontend/.dev.vars
 frontend/dist/
 node_modules/
+
+#pycache
+*/__pycache__/*

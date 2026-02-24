@@ -23,13 +23,13 @@
 
 **Must-Do (30 minutes):**
 
-- [ ] Apply database migration
+- [x] Apply database migration
   - File: `database/ddl/002_positions_and_trade_history.sql`
   - Copy entire SQL into Supabase SQL Editor
   - Click "Execute"
   - Verify: Tables created, no errors
 
-- [ ] Verify TradeStation SIM credentials
+- [x] Verify TradeStation SIM credentials
   - Check `optionsmagic/.env`
   - Should show:
     ```
@@ -37,7 +37,7 @@
     TRADESTATION_DRY_RUN=true
     ```
 
-- [ ] Verify Telegram bot access
+- [x] Verify Telegram bot access
   - Ananth should have Telegram credentials in `.env`
   - Test by sending a message to bot
 
