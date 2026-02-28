@@ -77,16 +77,20 @@ class PreDeploymentValidator:
                 self.check_fail(f"{name} missing", f"Set in .env file")
 
         # Optional for Phase 1, required for Phase 2
-        optional = [
-            ("TWITTER_API_KEY", settings.twitter_api_key),
-            ("TWITTER_API_SECRET", settings.twitter_api_secret),
-        ]
-        
-        for name, value in optional:
-            if value:
-                self.check_pass(f"{name} configured (Phase 2)")
-            else:
-                self.check_warning(f"{name} not set", "Required for Phase 2 (Mar 8+)")
+        try:
+            optional = [
+                ("TWITTER_API_KEY", settings.twitter_api_key),
+                ("TWITTER_API_SECRET", settings.twitter_api_secret),
+                ("LINKEDIN_API_KEY", settings.linkedin_api_key),
+            ]
+            
+            for name, value in optional:
+                if value:
+                    self.check_pass(f"{name} configured (Phase 2)")
+                else:
+                    self.check_warning(f"{name} not set", "Required for Phase 2 (Mar 8+)")
+        except AttributeError:
+            self.check_warning("Phase 2 API Keys", "Not yet configured - needed for Phase 2")
 
         return self.checks_failed == 0
 
@@ -99,7 +103,7 @@ class PreDeploymentValidator:
             supabase = get_supabase_client(settings)
             
             # Test connection
-            result = supabase.table("opportunities").select("count", count="exact").execute()
+            result = supabase.table("options_opportunities").select("count", count="exact").execute()
             self.check_pass("Supabase connected", f"Found {result.count} opportunities")
             
             return True
@@ -117,7 +121,7 @@ class PreDeploymentValidator:
             
             # Check tables
             tables = [
-                ("opportunities", "Trade opportunities"),
+                ("options_opportunities", "Trade opportunities"),
                 ("positions", "Position tracking"),
                 ("trade_history", "Trade history"),
             ]
@@ -152,8 +156,7 @@ class PreDeploymentValidator:
         self.print_header("4. CODE FILES")
 
         required_files = [
-            ("trade_automation/proposal_worker.py", "Proposal generation"),
-            ("trade_automation/approval_worker.py", "Trade approval"),
+            ("trade_automation/approval_worker.py", "Trade approval & proposals"),
             ("trade_automation/position_manager.py", "Position tracking"),
             ("trade_automation/exit_automation.py", "Exit automation"),
             ("trade_automation/tradestation.py", "TradeStation API"),
@@ -251,7 +254,7 @@ class PreDeploymentValidator:
             notifier = TelegramNotifier(settings)
             
             # Don't actually send a message, just verify bot is initialized
-            if notifier.bot_token and notifier.chat_id:
+            if notifier.is_configured():
                 self.check_pass("Telegram bot configured", f"Ready to send notifications")
             else:
                 self.check_fail("Telegram bot not configured", "Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID")

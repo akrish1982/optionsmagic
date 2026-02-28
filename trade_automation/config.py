@@ -78,6 +78,21 @@ class Settings:
         # Execution
         self.default_quantity = int(os.environ.get("TRADE_QUANTITY", "1"))
         self.poll_interval_seconds = int(os.environ.get("APPROVAL_POLL_SECONDS", "10"))
+        
+        # Trade Mode (backward compatibility)
+        self.trade_mode = os.environ.get("TRADE_MODE", "DRY_RUN").upper()
+
+        # Phase 2: Social Media APIs
+        self.twitter_api_key = os.environ.get("TWITTER_API_KEY", "")
+        self.twitter_api_secret = os.environ.get("TWITTER_API_SECRET", "")
+        self.twitter_access_token = os.environ.get("TWITTER_ACCESS_TOKEN", "")
+        self.twitter_access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET", "")
+        
+        self.linkedin_api_key = os.environ.get("LINKEDIN_API_KEY", "")
+        self.linkedin_access_token = os.environ.get("LINKEDIN_ACCESS_TOKEN", "")
+        
+        self.instagram_api_key = os.environ.get("INSTAGRAM_API_KEY", "")
+        self.instagram_access_token = os.environ.get("INSTAGRAM_ACCESS_TOKEN", "")
 
         # Backward-compatible alias used in older docs/scripts.
         self.tradestation_dry_run = self.ts_dry_run

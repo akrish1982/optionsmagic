@@ -20,6 +20,9 @@ pytz = "^2025.1"
 python-dotenv = "^1.0.1"
 scipy = "^1.15.2"
 supabase = "^2.27.2"
+pillow = "^12.1.1"
+tweepy = "^4.16.0"
+selenium = "^4.41.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^9.0.2"
