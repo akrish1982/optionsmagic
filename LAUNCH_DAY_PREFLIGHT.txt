@@ -1,0 +1,272 @@
+================================================================================
+🚀 LAUNCH DAY PRE-FLIGHT CHECKLIST — March 8, 2026
+================================================================================
+Print this and check off items as you complete them
+
+TARGET TIME: 6:00 AM - 9:00 AM ET
+LAUNCH TIME: 9:00 AM ET (Market opens at 9:30 AM)
+LOG FILE: logs/launch_day_2026-03-08.log
+
+================================================================================
+6:00 AM — INITIAL VERIFICATION (30 min)
+================================================================================
+
+SYSTEM CHECKS:
+  [ ] Time verified (should be 6:00-6:30 AM ET)
+  [ ] .env file exists and readable
+  [ ] Database credentials in .env (SUPABASE_URL, SUPABASE_KEY)
+  [ ] Telegram credentials in .env (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+  [ ] Twitter credentials in .env (4 fields - added Mar 7)
+  [ ] LinkedIn credentials in .env (3 fields - added Mar 7)
+
+FILE SYSTEM CHECKS:
+  [ ] Directory: logs/ exists
+  [ ] Directory: scripts/ exists
+  [ ] Directory: trade_automation/ exists
+  [ ] Directory: database/ exists
+  [ ] Write permissions: Can create files in logs/
+
+DEPENDENCY CHECKS:
+  [ ] Poetry available (poetry --version)
+  [ ] Python3 available (python3 --version)
+  [ ] Git available (git --version)
+
+RUN AUTOMATED TESTS:
+  [ ] Execute: bash scripts/launch_day_runbook.sh
+  [ ] Capture exit code: _____ (should be 0)
+  [ ] Check log file created: logs/launch_day_2026-03-08.log
+  [ ] Review any failures (there should be none)
+
+RESULT OF 6:00 AM CHECK:
+  [ ] All items checked
+  [ ] Exit code: 0 (GO) or 1 (CAUTION) or 2 (NO-GO)
+  [ ] Notes: _________________________________________________________________
+
+================================================================================
+7:00 AM — CONTENT VERIFICATION (15 min)
+================================================================================
+
+GENERATOR CHECKS:
+  [ ] File exists: trade_automation/morning_brief_generator.py
+  [ ] File exists: trade_automation/daily_scorecard_generator.py
+  [ ] File exists: trade_automation/twitter_poster.py
+  [ ] File exists: trade_automation/linkedin_poster.py
+
+OPTIONAL - TEST GENERATION (if time permits):
+  [ ] Test dry-run trade simulator:
+      poetry run python scripts/generate_launch_trades.py --dry-run
+  [ ] Review output (should show realistic trades with P&L)
+
+RESULT OF 7:00 AM CHECK:
+  [ ] All generators present and accounted for
+  [ ] Notes: _________________________________________________________________
+
+================================================================================
+8:00 AM — FINAL SYSTEM CHECK (15 min)
+================================================================================
+
+REPEAT AUTOMATED CHECKS:
+  [ ] Execute: bash scripts/launch_day_runbook.sh (again)
+  [ ] Capture exit code: _____ (should still be 0)
+  [ ] Compare to 6:00 AM run (should be same or better)
+
+DATABASE VERIFICATION:
+  [ ] Can connect to Supabase
+  [ ] Can query positions table
+  [ ] Can query trade_history table
+  [ ] Can query options_opportunities table
+
+SOCIAL MEDIA CREDENTIALS:
+  [ ] Twitter credentials in .env (verify not empty)
+  [ ] LinkedIn credentials in .env (verify not empty)
+
+RESULT OF 8:00 AM CHECK:
+  [ ] All systems still green
+  [ ] Ready to proceed to market open
+  [ ] Notes: _________________________________________________________________
+
+================================================================================
+8:30 AM — GO/NO-GO DECISION (30 min before market open)
+================================================================================
+
+FINAL DECISION POINT:
+
+Exit code from runbook:
+  [ ] 0 = 🟢 GO FOR LAUNCH ✅ → Proceed to 9:00 AM
+  [ ] 1 = 🟡 CAUTION → Review warnings, fix if needed, re-run
+  [ ] 2 = 🔴 NO-GO → Do NOT launch, investigate critical issues
+
+Any critical failures detected?
+  [ ] NO - Safe to launch
+  [ ] YES - Must fix before proceeding
+
+DECISION: 🟢 GO / 🟡 CAUTION / 🔴 NO-GO (circle one)
+
+Decision made at: _______ AM ET
+Decision maker: __________________
+Notes/Concerns: ___________________________________________________________
+
+================================================================================
+9:00 AM — MARKET OPEN & LAUNCH
+================================================================================
+
+MONITORING BEGINS:
+  [ ] Market opens (S&P 500 futures active)
+  [ ] Monitor Twitter (@OptionsMagic) for morning brief
+  [ ] Monitor LinkedIn for morning brief
+  [ ] Expected: Posts within 1 minute of 9:00 AM
+
+MORNING BRIEF VERIFICATION:
+  [ ] Post appears on Twitter
+  [ ] Post appears on LinkedIn
+  [ ] Content is correct (opportunities, market data)
+  [ ] Images display properly (if used)
+  [ ] Disclaimer present: "Hypothetical performance. Not financial advice."
+
+If posts DON'T appear:
+  [ ] Check logs: tail -50 logs/launch_day_2026-03-08.log
+  [ ] Check for errors related to morning_brief
+  [ ] Verify Twitter/LinkedIn credentials are correct
+  [ ] Manual fallback: Post brief manually to social media
+
+RESULT AT 9:00 AM:
+  [ ] Posts appeared on time ✅
+  [ ] Content is correct ✅
+  [ ] Ready for trading day ahead ✅
+
+Time posts verified: _______ AM ET
+Notes: _____________________________________________________________________
+
+================================================================================
+12:00 PM — MIDDAY CHECK
+================================================================================
+
+TRADING STATUS:
+  [ ] Market is open and trading normally
+  [ ] Check database for any trades executed
+  [ ] Verify position tracking if trades exist
+
+ENGAGEMENT CHECK:
+  [ ] Morning brief impressions (estimate from platform)
+  [ ] Engagement (likes, comments, shares, retweets)
+  [ ] Any issues or complaints in comments?
+
+NOTES: _____________________________________________________________________
+
+================================================================================
+4:00 PM — MARKET CLOSE & AFTERNOON POST
+================================================================================
+
+MONITORING FOR SCORECARD:
+  [ ] Monitor Twitter for daily scorecard
+  [ ] Monitor LinkedIn for daily scorecard
+  [ ] Expected: Posts within 1 minute of 4:00 PM
+
+DAILY SCORECARD VERIFICATION:
+  [ ] Post appears on Twitter
+  [ ] Post appears on LinkedIn
+  [ ] Content shows: trades, win rate, P&L
+  [ ] Images display properly (if used)
+  [ ] Disclaimer present
+
+If posts DON'T appear:
+  [ ] Check logs for errors
+  [ ] Verify database has trade data
+  [ ] Check scorer card generator output
+
+RESULT AT 4:00 PM:
+  [ ] Posts appeared on time ✅
+  [ ] Content is correct ✅
+  [ ] Market day complete ✅
+
+Time posts verified: _______ PM ET
+Notes: _____________________________________________________________________
+
+================================================================================
+5:00 PM — LAUNCH DAY SUMMARY & REPORT
+================================================================================
+
+MORNING BRIEF RESULTS:
+  Status: ✅ Posted / ❌ Failed
+  Time posted: ________
+  Impressions (est.): ________
+  Engagement (est.): ________
+
+DAILY SCORECARD RESULTS:
+  Status: ✅ Posted / ❌ Failed
+  Time posted: ________
+  Impressions (est.): ________
+  Engagement (est.): ________
+
+OVERALL STATUS:
+  [ ] Both posts appeared successfully ✅
+  [ ] Minor issues (fix Monday)
+  [ ] Major issues (investigate immediately)
+
+NEXT STEPS:
+  [ ] Daily monitoring next week (Mar 9-15)
+  [ ] Track engagement metrics
+  [ ] Monitor for any automation failures
+  [ ] Weekly report on Mar 14
+
+LAUNCH SUMMARY:
+  Date: March 8, 2026
+  Status: 🟢 SUCCESSFUL LAUNCH
+  Posts: 2/2 appeared ✅
+  Content: Correct ✅
+  Ready for continued operation: ✅
+
+Signed by: _________________________ Date: __________ Time: __________
+
+================================================================================
+QUICK REFERENCE: TROUBLESHOOTING
+================================================================================
+
+PROBLEM: Exit code 2 (No-Go) at 6:00 AM
+SOLUTION: 
+  1. Check logs: tail -100 logs/launch_day_2026-03-08.log
+  2. Look for ❌ marked items
+  3. Fix critical issues
+  4. Re-run: bash scripts/launch_day_runbook.sh
+  5. Repeat until exit code is 0 or 1
+
+PROBLEM: Posts don't appear at 9:00 AM
+SOLUTION:
+  1. Check Twitter manually (@OptionsMagic)
+  2. Check LinkedIn manually (company page)
+  3. Check logs for errors: grep "ERROR\|error\|fail" logs/launch_day_*
+  4. Verify credentials are correct in .env
+  5. If credentials wrong, update and restart
+  6. Manual fallback: Post content manually while troubleshooting
+
+PROBLEM: Content is wrong or missing
+SOLUTION:
+  1. Check database: Does it have opportunities? Trades?
+  2. Run content generator test: poetry run python scripts/test_content_generation.py
+  3. Verify market data is current
+  4. Re-run generator with fresh data
+  5. Post corrected content
+
+PROBLEM: Can't connect to database
+SOLUTION:
+  1. Check .env has SUPABASE_URL and SUPABASE_KEY
+  2. Verify network connectivity: ping google.com
+  3. Test Supabase access directly
+  4. Contact system admin if still failing
+  5. Manual workaround: Create posts manually from current data
+
+================================================================================
+CONTACT & ESCALATION
+================================================================================
+
+Technical Issues: Max (arya)
+Social Media Admin: Zoe
+Project Owner: Ananth
+
+Emergency: Check git logs for recent changes
+          Check /tmp/ for debug files
+          Check logs/ directory for detailed error messages
+
+================================================================================
+END OF CHECKLIST — GOOD LUCK! 🚀
+================================================================================
