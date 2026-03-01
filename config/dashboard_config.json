@@ -1,0 +1,56 @@
+{
+  "name": "OptionsMagic Trading Dashboard",
+  "refresh_interval": 60,
+  "metrics": [
+    {
+      "name": "Daily P&L",
+      "query": "SELECT SUM(pnl_realized) FROM trade_history WHERE date=TODAY",
+      "display": "Large Card",
+      "color": "green_if_positive"
+    },
+    {
+      "name": "Win Rate",
+      "query": "SELECT COUNT(CASE WHEN pnl_realized > 0 THEN 1 END) / COUNT(*) FROM trade_history WHERE date=TODAY",
+      "display": "Percentage",
+      "target": "> 60%"
+    },
+    {
+      "name": "Open Positions",
+      "query": "SELECT COUNT(*) FROM positions WHERE status='OPEN'",
+      "display": "Number",
+      "alert_if": "> 5"
+    },
+    {
+      "name": "Average Trade Return",
+      "query": "SELECT AVG(pnl_pct) FROM trade_history WHERE date=TODAY",
+      "display": "Percentage",
+      "target": "> 3%"
+    },
+    {
+      "name": "Max Drawdown",
+      "query": "SELECT MIN(cumulative_pnl) FROM performance_metrics WHERE date=TODAY",
+      "display": "Percentage",
+      "alert_if": "< -10%"
+    },
+    {
+      "name": "Proposal Response Time",
+      "query": "SELECT AVG(approval_time_ms) FROM trade_requests WHERE date=TODAY",
+      "display": "Milliseconds",
+      "target": "< 1000ms"
+    }
+  ],
+  "alerts": [
+    {
+      "condition": "Daily P&L < -$500",
+      "action": "Pause new proposals"
+    },
+    {
+      "condition": "Win Rate < 50%",
+      "action": "Review strategy"
+    },
+    {
+      "condition": "Database latency > 500ms",
+      "action": "Check connection pool"
+    }
+  ]
+}
