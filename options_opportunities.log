@@ -1933,3 +1933,1403 @@
 2026-02-27 16:15:50,709 - __main__ - ERROR - Error getting options for AGI: {'message': 'column options_quotes.date does not exist', 'code': '42703', 'hint': None, 'details': None}
 2026-02-27 16:15:50,709 - __main__ - WARNING - No opportunities found
 2026-02-27 16:15:50,709 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 09:15:08,335 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 09:15:08,875 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 09:15:08,879 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 09:15:09,042 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 09:15:09,208 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 09:15:09,209 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 09:15:09,209 - __main__ - INFO - Processing RKLB...
+2026-03-02 09:15:09,384 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 09:15:09,385 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 09:15:09,385 - __main__ - WARNING - No opportunities found
+2026-03-02 09:15:09,385 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 10:06:31,073 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 10:06:31,540 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 10:06:31,541 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 10:06:31,700 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 10:06:31,855 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 10:06:31,856 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 10:06:31,856 - __main__ - INFO - Processing RKLB...
+2026-03-02 10:06:32,023 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 10:06:32,024 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 10:06:32,024 - __main__ - WARNING - No opportunities found
+2026-03-02 10:06:32,024 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 11:06:23,727 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 11:06:24,220 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 11:06:24,221 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 11:06:24,383 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 11:06:24,581 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 11:06:24,582 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 11:06:24,583 - __main__ - INFO - Processing RKLB...
+2026-03-02 11:06:24,780 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 11:06:24,781 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 11:06:24,781 - __main__ - WARNING - No opportunities found
+2026-03-02 11:06:24,781 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 12:07:30,621 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 12:07:31,040 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 12:07:31,070 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 12:07:31,202 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 12:07:31,341 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 12:07:31,342 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 12:07:31,342 - __main__ - INFO - Processing RKLB...
+2026-03-02 12:07:31,472 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 12:07:31,473 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 12:07:31,473 - __main__ - WARNING - No opportunities found
+2026-03-02 12:07:31,473 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 13:07:35,116 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 13:07:35,582 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 13:07:35,583 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 13:07:35,754 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 13:07:35,891 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 13:07:35,892 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 13:07:35,892 - __main__ - INFO - Processing RKLB...
+2026-03-02 13:07:36,037 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 13:07:36,038 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 13:07:36,038 - __main__ - WARNING - No opportunities found
+2026-03-02 13:07:36,038 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 14:07:15,680 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 14:07:16,150 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 14:07:16,151 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 14:07:16,280 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 14:07:16,421 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 14:07:16,422 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 14:07:16,423 - __main__ - INFO - Processing RKLB...
+2026-03-02 14:07:16,573 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 14:07:16,574 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 14:07:16,574 - __main__ - WARNING - No opportunities found
+2026-03-02 14:07:16,574 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 15:06:45,937 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 15:06:46,430 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 15:06:46,431 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 15:06:46,561 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 15:06:46,713 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 15:06:46,714 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 15:06:46,714 - __main__ - INFO - Processing RKLB...
+2026-03-02 15:06:46,854 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 15:06:46,855 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 15:06:46,855 - __main__ - WARNING - No opportunities found
+2026-03-02 15:06:46,855 - __main__ - INFO - Options opportunities generation complete
+2026-03-02 16:17:17,283 - __main__ - INFO - Starting options opportunities generation
+2026-03-02 16:17:17,733 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-02 16:17:17,734 - __main__ - INFO - Cleared options_opportunities table
+2026-03-02 16:17:17,896 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 16:17:18,038 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-02 "HTTP/2 200 OK"
+2026-03-02 16:17:18,039 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-02 16:17:18,039 - __main__ - INFO - Processing RKLB...
+2026-03-02 16:17:18,180 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-02 16:17:18,181 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-02 16:17:18,181 - __main__ - WARNING - No opportunities found
+2026-03-02 16:17:18,181 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 09:16:07,624 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 09:16:08,152 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 09:16:08,153 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 09:16:08,345 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 09:16:11,816 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 09:16:11,817 - __main__ - INFO - Found 1 long-bias candidates
+2026-03-03 09:16:11,818 - __main__ - INFO - Processing RKLB...
+2026-03-03 09:16:12,026 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 09:16:12,028 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-03 09:16:12,028 - __main__ - WARNING - No opportunities found
+2026-03-03 09:16:12,028 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 10:06:31,152 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 10:06:31,857 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 10:06:31,858 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 10:06:32,204 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:32,342 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 10:06:32,344 - __main__ - INFO - Found 10 long-bias candidates
+2026-03-03 10:06:32,344 - __main__ - INFO - Processing RKLB...
+2026-03-03 10:06:32,479 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:32,480 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-03 10:06:32,480 - __main__ - INFO - Processing KGC...
+2026-03-03 10:06:32,640 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:32,641 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-03 10:06:32,641 - __main__ - INFO - Processing MU...
+2026-03-03 10:06:32,787 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:32,788 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-03 10:06:32,788 - __main__ - INFO - Processing GFI...
+2026-03-03 10:06:32,935 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:32,936 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-03 10:06:32,936 - __main__ - INFO - Processing NVMI...
+2026-03-03 10:06:33,078 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:33,079 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-03 10:06:33,079 - __main__ - INFO - Processing LRCX...
+2026-03-03 10:06:33,242 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:33,242 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-03 10:06:33,242 - __main__ - INFO - Processing NEM...
+2026-03-03 10:06:33,397 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:33,398 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-03 10:06:33,398 - __main__ - INFO - Processing ONTO...
+2026-03-03 10:06:33,540 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:33,541 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-03 10:06:33,541 - __main__ - INFO - Processing ASML...
+2026-03-03 10:06:33,681 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:33,681 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-03 10:06:33,682 - __main__ - INFO - Processing FCX...
+2026-03-03 10:06:33,811 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 10:06:33,812 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-03 10:06:33,812 - __main__ - WARNING - No opportunities found
+2026-03-03 10:06:33,812 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 11:06:39,565 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 11:06:39,982 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 11:06:39,983 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 11:06:40,147 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:40,269 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 11:06:40,271 - __main__ - INFO - Found 11 long-bias candidates
+2026-03-03 11:06:40,271 - __main__ - INFO - Processing RKLB...
+2026-03-03 11:06:40,402 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:40,403 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-03 11:06:40,403 - __main__ - INFO - Processing KGC...
+2026-03-03 11:06:40,525 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:40,526 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-03 11:06:40,526 - __main__ - INFO - Processing MU...
+2026-03-03 11:06:40,684 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:40,685 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-03 11:06:40,685 - __main__ - INFO - Processing GFI...
+2026-03-03 11:06:40,828 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:40,829 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-03 11:06:40,829 - __main__ - INFO - Processing NVMI...
+2026-03-03 11:06:40,952 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:40,953 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-03 11:06:40,953 - __main__ - INFO - Processing LRCX...
+2026-03-03 11:06:41,086 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:41,087 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-03 11:06:41,087 - __main__ - INFO - Processing KLAC...
+2026-03-03 11:06:41,211 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:41,211 - __main__ - ERROR - Error getting options for KLAC: 'date'
+2026-03-03 11:06:41,211 - __main__ - INFO - Processing NEM...
+2026-03-03 11:06:41,325 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:41,326 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-03 11:06:41,326 - __main__ - INFO - Processing ONTO...
+2026-03-03 11:06:41,462 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:41,463 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-03 11:06:41,463 - __main__ - INFO - Processing ASML...
+2026-03-03 11:06:41,581 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:41,582 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-03 11:06:41,582 - __main__ - INFO - Processing FCX...
+2026-03-03 11:06:41,714 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 11:06:41,715 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-03 11:06:41,715 - __main__ - WARNING - No opportunities found
+2026-03-03 11:06:41,715 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 12:07:10,008 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 12:07:10,467 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 12:07:10,467 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 12:07:10,612 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:10,753 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 12:07:10,754 - __main__ - INFO - Found 7 long-bias candidates
+2026-03-03 12:07:10,755 - __main__ - INFO - Processing RKLB...
+2026-03-03 12:07:10,918 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:10,919 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-03 12:07:10,919 - __main__ - INFO - Processing MU...
+2026-03-03 12:07:11,072 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:11,073 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-03 12:07:11,073 - __main__ - INFO - Processing GFI...
+2026-03-03 12:07:11,211 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:11,211 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-03 12:07:11,211 - __main__ - INFO - Processing NVMI...
+2026-03-03 12:07:11,357 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:11,358 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-03 12:07:11,358 - __main__ - INFO - Processing LRCX...
+2026-03-03 12:07:11,489 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:11,489 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-03 12:07:11,490 - __main__ - INFO - Processing KLAC...
+2026-03-03 12:07:11,627 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:11,628 - __main__ - ERROR - Error getting options for KLAC: 'date'
+2026-03-03 12:07:11,628 - __main__ - INFO - Processing ASML...
+2026-03-03 12:07:11,772 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 12:07:11,772 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-03 12:07:11,773 - __main__ - WARNING - No opportunities found
+2026-03-03 12:07:11,773 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 13:07:32,078 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 13:07:32,532 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 13:07:32,532 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 13:07:32,666 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:32,801 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 13:07:32,802 - __main__ - INFO - Found 7 long-bias candidates
+2026-03-03 13:07:32,802 - __main__ - INFO - Processing MU...
+2026-03-03 13:07:32,952 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:32,953 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-03 13:07:32,953 - __main__ - INFO - Processing GFI...
+2026-03-03 13:07:33,098 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:33,098 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-03 13:07:33,098 - __main__ - INFO - Processing NVMI...
+2026-03-03 13:07:33,217 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:33,218 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-03 13:07:33,218 - __main__ - INFO - Processing LRCX...
+2026-03-03 13:07:33,353 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:33,354 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-03 13:07:33,354 - __main__ - INFO - Processing NEM...
+2026-03-03 13:07:33,506 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:33,507 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-03 13:07:33,507 - __main__ - INFO - Processing ASML...
+2026-03-03 13:07:33,643 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:33,643 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-03 13:07:33,643 - __main__ - INFO - Processing SQM...
+2026-03-03 13:07:33,780 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 13:07:33,780 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-03 13:07:33,780 - __main__ - WARNING - No opportunities found
+2026-03-03 13:07:33,780 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 14:07:47,846 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 14:07:48,469 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 14:07:48,469 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 14:07:48,590 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:48,965 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 14:07:48,966 - __main__ - INFO - Found 8 long-bias candidates
+2026-03-03 14:07:48,966 - __main__ - INFO - Processing KGC...
+2026-03-03 14:07:49,101 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:49,101 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-03 14:07:49,101 - __main__ - INFO - Processing MU...
+2026-03-03 14:07:49,219 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:49,220 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-03 14:07:49,220 - __main__ - INFO - Processing GFI...
+2026-03-03 14:07:49,357 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:49,357 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-03 14:07:49,357 - __main__ - INFO - Processing NVMI...
+2026-03-03 14:07:49,510 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:49,511 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-03 14:07:49,511 - __main__ - INFO - Processing LRCX...
+2026-03-03 14:07:49,633 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:49,634 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-03 14:07:49,634 - __main__ - INFO - Processing NEM...
+2026-03-03 14:07:49,749 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:49,749 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-03 14:07:49,749 - __main__ - INFO - Processing ASML...
+2026-03-03 14:07:49,862 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:49,863 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-03 14:07:49,863 - __main__ - INFO - Processing SQM...
+2026-03-03 14:07:50,009 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 14:07:50,009 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-03 14:07:50,009 - __main__ - WARNING - No opportunities found
+2026-03-03 14:07:50,009 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 15:07:23,012 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 15:07:23,481 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 15:07:23,481 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 15:07:23,621 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:23,755 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 15:07:23,757 - __main__ - INFO - Found 10 long-bias candidates
+2026-03-03 15:07:23,757 - __main__ - INFO - Processing RKLB...
+2026-03-03 15:07:23,894 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:23,894 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-03 15:07:23,894 - __main__ - INFO - Processing KGC...
+2026-03-03 15:07:24,036 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,037 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-03 15:07:24,037 - __main__ - INFO - Processing MU...
+2026-03-03 15:07:24,166 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,166 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-03 15:07:24,166 - __main__ - INFO - Processing GFI...
+2026-03-03 15:07:24,300 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,301 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-03 15:07:24,301 - __main__ - INFO - Processing NVMI...
+2026-03-03 15:07:24,440 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,441 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-03 15:07:24,441 - __main__ - INFO - Processing LRCX...
+2026-03-03 15:07:24,590 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,590 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-03 15:07:24,591 - __main__ - INFO - Processing NEM...
+2026-03-03 15:07:24,723 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,724 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-03 15:07:24,724 - __main__ - INFO - Processing ONTO...
+2026-03-03 15:07:24,854 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,855 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-03 15:07:24,855 - __main__ - INFO - Processing ASML...
+2026-03-03 15:07:24,983 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:24,983 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-03 15:07:24,983 - __main__ - INFO - Processing SQM...
+2026-03-03 15:07:25,111 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 15:07:25,111 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-03 15:07:25,111 - __main__ - WARNING - No opportunities found
+2026-03-03 15:07:25,111 - __main__ - INFO - Options opportunities generation complete
+2026-03-03 16:18:14,262 - __main__ - INFO - Starting options opportunities generation
+2026-03-03 16:18:14,690 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-03 16:18:14,691 - __main__ - INFO - Cleared options_opportunities table
+2026-03-03 16:18:14,832 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:14,958 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-03 "HTTP/2 200 OK"
+2026-03-03 16:18:14,959 - __main__ - INFO - Found 11 long-bias candidates
+2026-03-03 16:18:14,959 - __main__ - INFO - Processing RKLB...
+2026-03-03 16:18:15,095 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,096 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-03 16:18:15,096 - __main__ - INFO - Processing KGC...
+2026-03-03 16:18:15,212 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,213 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-03 16:18:15,213 - __main__ - INFO - Processing MU...
+2026-03-03 16:18:15,333 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,334 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-03 16:18:15,334 - __main__ - INFO - Processing GFI...
+2026-03-03 16:18:15,453 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,454 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-03 16:18:15,454 - __main__ - INFO - Processing NVMI...
+2026-03-03 16:18:15,583 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,584 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-03 16:18:15,584 - __main__ - INFO - Processing LRCX...
+2026-03-03 16:18:15,700 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,701 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-03 16:18:15,701 - __main__ - INFO - Processing KLAC...
+2026-03-03 16:18:15,846 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,846 - __main__ - ERROR - Error getting options for KLAC: 'date'
+2026-03-03 16:18:15,847 - __main__ - INFO - Processing NEM...
+2026-03-03 16:18:15,988 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:15,988 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-03 16:18:15,989 - __main__ - INFO - Processing ONTO...
+2026-03-03 16:18:16,137 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:16,138 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-03 16:18:16,138 - __main__ - INFO - Processing ASML...
+2026-03-03 16:18:16,296 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:16,297 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-03 16:18:16,297 - __main__ - INFO - Processing SQM...
+2026-03-03 16:18:16,456 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-03 16:18:16,456 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-03 16:18:16,456 - __main__ - WARNING - No opportunities found
+2026-03-03 16:18:16,456 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 09:15:50,151 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 09:15:50,639 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 09:15:50,640 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 09:15:50,808 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:50,944 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 09:15:50,945 - __main__ - INFO - Found 10 long-bias candidates
+2026-03-04 09:15:50,945 - __main__ - INFO - Processing RKLB...
+2026-03-04 09:15:51,139 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:51,140 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-04 09:15:51,140 - __main__ - INFO - Processing KGC...
+2026-03-04 09:15:51,273 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:51,274 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-04 09:15:51,274 - __main__ - INFO - Processing MU...
+2026-03-04 09:15:51,440 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:51,441 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-04 09:15:51,441 - __main__ - INFO - Processing GFI...
+2026-03-04 09:15:51,572 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:51,573 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 09:15:51,573 - __main__ - INFO - Processing NVMI...
+2026-03-04 09:15:51,730 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:51,730 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-04 09:15:51,731 - __main__ - INFO - Processing LRCX...
+2026-03-04 09:15:51,857 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:51,858 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 09:15:51,858 - __main__ - INFO - Processing KLAC...
+2026-03-04 09:15:52,032 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:52,033 - __main__ - ERROR - Error getting options for KLAC: 'date'
+2026-03-04 09:15:52,033 - __main__ - INFO - Processing NEM...
+2026-03-04 09:15:52,181 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:52,182 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-04 09:15:52,182 - __main__ - INFO - Processing ONTO...
+2026-03-04 09:15:52,371 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:52,371 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-04 09:15:52,371 - __main__ - INFO - Processing ASML...
+2026-03-04 09:15:52,532 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 09:15:52,533 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-04 09:15:52,533 - __main__ - WARNING - No opportunities found
+2026-03-04 09:15:52,533 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 10:06:48,814 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 10:06:49,468 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 10:06:49,469 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 10:06:49,916 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:50,122 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 10:06:50,123 - __main__ - INFO - Found 8 long-bias candidates
+2026-03-04 10:06:50,124 - __main__ - INFO - Processing RKLB...
+2026-03-04 10:06:50,256 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:50,256 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-04 10:06:50,256 - __main__ - INFO - Processing MU...
+2026-03-04 10:06:50,428 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:50,429 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-04 10:06:50,429 - __main__ - INFO - Processing GFI...
+2026-03-04 10:06:50,628 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:50,629 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 10:06:50,629 - __main__ - INFO - Processing NVMI...
+2026-03-04 10:06:50,781 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:50,782 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-04 10:06:50,782 - __main__ - INFO - Processing LRCX...
+2026-03-04 10:06:50,939 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:50,940 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 10:06:50,940 - __main__ - INFO - Processing ONTO...
+2026-03-04 10:06:51,073 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:51,074 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-04 10:06:51,074 - __main__ - INFO - Processing ASML...
+2026-03-04 10:06:51,230 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:51,231 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-04 10:06:51,231 - __main__ - INFO - Processing SQM...
+2026-03-04 10:06:51,393 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 10:06:51,393 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-04 10:06:51,393 - __main__ - WARNING - No opportunities found
+2026-03-04 10:06:51,394 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 11:06:51,107 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 11:06:51,787 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 11:06:51,788 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 11:06:52,130 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 11:06:52,289 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 11:06:52,291 - __main__ - INFO - Found 4 long-bias candidates
+2026-03-04 11:06:52,291 - __main__ - INFO - Processing GFI...
+2026-03-04 11:06:52,454 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 11:06:52,454 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 11:06:52,455 - __main__ - INFO - Processing LRCX...
+2026-03-04 11:06:52,612 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 11:06:52,613 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 11:06:52,613 - __main__ - INFO - Processing ASML...
+2026-03-04 11:06:52,791 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 11:06:52,792 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-04 11:06:52,792 - __main__ - INFO - Processing SQM...
+2026-03-04 11:06:52,969 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 11:06:52,969 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-04 11:06:52,969 - __main__ - WARNING - No opportunities found
+2026-03-04 11:06:52,969 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 12:07:46,330 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 12:07:46,793 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 12:07:46,794 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 12:07:47,100 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 12:07:47,223 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 12:07:47,224 - __main__ - INFO - Found 3 long-bias candidates
+2026-03-04 12:07:47,224 - __main__ - INFO - Processing GFI...
+2026-03-04 12:07:47,369 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 12:07:47,369 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 12:07:47,370 - __main__ - INFO - Processing LRCX...
+2026-03-04 12:07:47,487 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 12:07:47,487 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 12:07:47,487 - __main__ - INFO - Processing SQM...
+2026-03-04 12:07:47,602 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 12:07:47,602 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-04 12:07:47,603 - __main__ - WARNING - No opportunities found
+2026-03-04 12:07:47,603 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 13:07:48,629 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 13:07:49,021 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 13:07:49,022 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 13:07:49,151 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 13:07:49,291 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 13:07:49,292 - __main__ - INFO - Found 3 long-bias candidates
+2026-03-04 13:07:49,292 - __main__ - INFO - Processing GFI...
+2026-03-04 13:07:49,441 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 13:07:49,442 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 13:07:49,442 - __main__ - INFO - Processing LRCX...
+2026-03-04 13:07:49,552 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 13:07:49,553 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 13:07:49,553 - __main__ - INFO - Processing SQM...
+2026-03-04 13:07:49,689 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 13:07:49,689 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-04 13:07:49,690 - __main__ - WARNING - No opportunities found
+2026-03-04 13:07:49,690 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 14:08:09,349 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 14:08:09,862 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 14:08:09,863 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 14:08:10,046 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 14:08:10,201 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 14:08:10,202 - __main__ - INFO - Found 6 long-bias candidates
+2026-03-04 14:08:10,203 - __main__ - INFO - Processing RKLB...
+2026-03-04 14:08:10,342 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 14:08:10,343 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-04 14:08:10,343 - __main__ - INFO - Processing KGC...
+2026-03-04 14:08:10,459 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 14:08:10,460 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-04 14:08:10,460 - __main__ - INFO - Processing GFI...
+2026-03-04 14:08:10,604 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 14:08:10,605 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 14:08:10,605 - __main__ - INFO - Processing LRCX...
+2026-03-04 14:08:10,736 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 14:08:10,737 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 14:08:10,737 - __main__ - INFO - Processing ONTO...
+2026-03-04 14:08:10,845 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 14:08:10,845 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-04 14:08:10,845 - __main__ - INFO - Processing SQM...
+2026-03-04 14:08:10,958 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 14:08:10,959 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-04 14:08:10,960 - __main__ - WARNING - No opportunities found
+2026-03-04 14:08:10,960 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 15:07:56,781 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 15:07:57,479 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 15:07:57,479 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 15:07:57,635 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 15:07:58,005 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 15:07:58,006 - __main__ - INFO - Found 4 long-bias candidates
+2026-03-04 15:07:58,006 - __main__ - INFO - Processing RKLB...
+2026-03-04 15:07:58,197 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 15:07:58,197 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-04 15:07:58,198 - __main__ - INFO - Processing GFI...
+2026-03-04 15:07:58,340 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 15:07:58,341 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 15:07:58,341 - __main__ - INFO - Processing LRCX...
+2026-03-04 15:07:58,488 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 15:07:58,489 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 15:07:58,489 - __main__ - INFO - Processing SQM...
+2026-03-04 15:07:58,622 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 15:07:58,623 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-04 15:07:58,623 - __main__ - WARNING - No opportunities found
+2026-03-04 15:07:58,623 - __main__ - INFO - Options opportunities generation complete
+2026-03-04 16:17:20,509 - __main__ - INFO - Starting options opportunities generation
+2026-03-04 16:17:21,139 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-04 16:17:21,140 - __main__ - INFO - Cleared options_opportunities table
+2026-03-04 16:17:21,281 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 16:17:21,414 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-04 "HTTP/2 200 OK"
+2026-03-04 16:17:21,415 - __main__ - INFO - Found 3 long-bias candidates
+2026-03-04 16:17:21,415 - __main__ - INFO - Processing GFI...
+2026-03-04 16:17:21,574 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 16:17:21,575 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-04 16:17:21,575 - __main__ - INFO - Processing LRCX...
+2026-03-04 16:17:21,719 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 16:17:21,719 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-04 16:17:21,719 - __main__ - INFO - Processing SQM...
+2026-03-04 16:17:21,837 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-04 16:17:21,838 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-04 16:17:21,838 - __main__ - WARNING - No opportunities found
+2026-03-04 16:17:21,838 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 09:15:48,354 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 09:15:48,873 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 09:15:48,874 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 09:15:49,056 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 09:15:49,200 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 09:15:49,201 - __main__ - INFO - Found 3 long-bias candidates
+2026-03-05 09:15:49,201 - __main__ - INFO - Processing GFI...
+2026-03-05 09:15:49,375 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 09:15:49,375 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 09:15:49,375 - __main__ - INFO - Processing LRCX...
+2026-03-05 09:15:49,579 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 09:15:49,579 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 09:15:49,579 - __main__ - INFO - Processing SQM...
+2026-03-05 09:15:49,738 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 09:15:49,739 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 09:15:49,739 - __main__ - WARNING - No opportunities found
+2026-03-05 09:15:49,739 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 10:06:18,715 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 10:06:19,167 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 10:06:19,167 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 10:06:19,300 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:19,447 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 10:06:19,448 - __main__ - INFO - Found 15 long-bias candidates
+2026-03-05 10:06:19,448 - __main__ - INFO - Processing GFI...
+2026-03-05 10:06:19,640 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:19,641 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 10:06:19,641 - __main__ - INFO - Processing LRCX...
+2026-03-05 10:06:19,771 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:19,772 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 10:06:19,772 - __main__ - INFO - Processing KLAC...
+2026-03-05 10:06:19,927 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:19,928 - __main__ - ERROR - Error getting options for KLAC: 'date'
+2026-03-05 10:06:19,928 - __main__ - INFO - Processing PAAS...
+2026-03-05 10:06:20,102 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:20,103 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-05 10:06:20,103 - __main__ - INFO - Processing ONTO...
+2026-03-05 10:06:20,252 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:20,253 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-05 10:06:20,253 - __main__ - INFO - Processing RGLD...
+2026-03-05 10:06:20,424 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:20,425 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-05 10:06:20,425 - __main__ - INFO - Processing ASML...
+2026-03-05 10:06:20,575 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:20,576 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-05 10:06:20,576 - __main__ - INFO - Processing FCX...
+2026-03-05 10:06:20,689 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:20,690 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-05 10:06:20,690 - __main__ - INFO - Processing SQM...
+2026-03-05 10:06:20,856 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:20,857 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 10:06:20,857 - __main__ - INFO - Processing RKLB...
+2026-03-05 10:06:21,009 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:21,010 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-05 10:06:21,010 - __main__ - INFO - Processing KGC...
+2026-03-05 10:06:21,145 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:21,145 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-05 10:06:21,145 - __main__ - INFO - Processing CDE...
+2026-03-05 10:06:21,315 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:21,315 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-05 10:06:21,315 - __main__ - INFO - Processing AU...
+2026-03-05 10:06:21,451 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:21,452 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-05 10:06:21,452 - __main__ - INFO - Processing SCCO...
+2026-03-05 10:06:21,580 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:21,581 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-05 10:06:21,581 - __main__ - INFO - Processing NEM...
+2026-03-05 10:06:21,725 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 10:06:21,725 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-05 10:06:21,726 - __main__ - WARNING - No opportunities found
+2026-03-05 10:06:21,726 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 11:07:31,556 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 11:07:32,006 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 11:07:32,007 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 11:07:32,157 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:32,264 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 11:07:32,265 - __main__ - INFO - Found 13 long-bias candidates
+2026-03-05 11:07:32,265 - __main__ - INFO - Processing GFI...
+2026-03-05 11:07:32,401 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:32,402 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 11:07:32,402 - __main__ - INFO - Processing LRCX...
+2026-03-05 11:07:32,503 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:32,504 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 11:07:32,504 - __main__ - INFO - Processing PAAS...
+2026-03-05 11:07:32,647 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:32,648 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-05 11:07:32,648 - __main__ - INFO - Processing ONTO...
+2026-03-05 11:07:32,780 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:32,781 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-05 11:07:32,781 - __main__ - INFO - Processing RGLD...
+2026-03-05 11:07:32,914 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:32,915 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-05 11:07:32,915 - __main__ - INFO - Processing ASML...
+2026-03-05 11:07:33,032 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,032 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-05 11:07:33,032 - __main__ - INFO - Processing SQM...
+2026-03-05 11:07:33,173 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,174 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 11:07:33,174 - __main__ - INFO - Processing RKLB...
+2026-03-05 11:07:33,278 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,278 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-05 11:07:33,278 - __main__ - INFO - Processing KGC...
+2026-03-05 11:07:33,440 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,441 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-05 11:07:33,441 - __main__ - INFO - Processing CDE...
+2026-03-05 11:07:33,572 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,572 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-05 11:07:33,572 - __main__ - INFO - Processing AU...
+2026-03-05 11:07:33,701 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,701 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-05 11:07:33,701 - __main__ - INFO - Processing SCCO...
+2026-03-05 11:07:33,829 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,829 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-05 11:07:33,830 - __main__ - INFO - Processing NEM...
+2026-03-05 11:07:33,964 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 11:07:33,964 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-05 11:07:33,964 - __main__ - WARNING - No opportunities found
+2026-03-05 11:07:33,964 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 12:07:08,613 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 12:07:09,041 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 12:07:09,042 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 12:07:09,178 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:09,312 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 12:07:09,313 - __main__ - INFO - Found 16 long-bias candidates
+2026-03-05 12:07:09,313 - __main__ - INFO - Processing GFI...
+2026-03-05 12:07:09,433 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:09,434 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 12:07:09,434 - __main__ - INFO - Processing LRCX...
+2026-03-05 12:07:09,554 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:09,555 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 12:07:09,555 - __main__ - INFO - Processing PAAS...
+2026-03-05 12:07:09,688 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:09,689 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-05 12:07:09,689 - __main__ - INFO - Processing CAT...
+2026-03-05 12:07:09,831 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:09,831 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-05 12:07:09,831 - __main__ - INFO - Processing ONTO...
+2026-03-05 12:07:09,980 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:09,980 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-05 12:07:09,980 - __main__ - INFO - Processing RGLD...
+2026-03-05 12:07:10,102 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:10,103 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-05 12:07:10,103 - __main__ - INFO - Processing ASML...
+2026-03-05 12:07:10,236 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:10,237 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-05 12:07:10,237 - __main__ - INFO - Processing FCX...
+2026-03-05 12:07:10,366 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:10,367 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-05 12:07:10,367 - __main__ - INFO - Processing SQM...
+2026-03-05 12:07:10,500 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:10,501 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 12:07:10,501 - __main__ - INFO - Processing RKLB...
+2026-03-05 12:07:10,628 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:10,629 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-05 12:07:10,629 - __main__ - INFO - Processing KGC...
+2026-03-05 12:07:10,754 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:10,755 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-05 12:07:10,755 - __main__ - INFO - Processing CDE...
+2026-03-05 12:07:10,879 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:10,880 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-05 12:07:10,880 - __main__ - INFO - Processing AU...
+2026-03-05 12:07:11,025 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:11,026 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-05 12:07:11,026 - __main__ - INFO - Processing NVMI...
+2026-03-05 12:07:11,167 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:11,168 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-05 12:07:11,168 - __main__ - INFO - Processing SCCO...
+2026-03-05 12:07:11,303 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:11,304 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-05 12:07:11,304 - __main__ - INFO - Processing NEM...
+2026-03-05 12:07:11,431 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 12:07:11,432 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-05 12:07:11,432 - __main__ - WARNING - No opportunities found
+2026-03-05 12:07:11,432 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 13:06:36,657 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 13:06:37,309 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 13:06:37,310 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 13:06:37,436 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:37,553 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 13:06:37,554 - __main__ - INFO - Found 20 long-bias candidates
+2026-03-05 13:06:37,554 - __main__ - INFO - Processing GFI...
+2026-03-05 13:06:37,713 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:37,713 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 13:06:37,714 - __main__ - INFO - Processing LRCX...
+2026-03-05 13:06:37,834 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:37,835 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 13:06:37,835 - __main__ - INFO - Processing EQX...
+2026-03-05 13:06:37,981 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:37,981 - __main__ - ERROR - Error getting options for EQX: 'date'
+2026-03-05 13:06:37,981 - __main__ - INFO - Processing PAAS...
+2026-03-05 13:06:38,130 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:38,131 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-05 13:06:38,131 - __main__ - INFO - Processing AMAT...
+2026-03-05 13:06:38,271 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:38,271 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-05 13:06:38,271 - __main__ - INFO - Processing CAT...
+2026-03-05 13:06:38,411 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:38,411 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-05 13:06:38,411 - __main__ - INFO - Processing ONTO...
+2026-03-05 13:06:38,531 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:38,532 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-05 13:06:38,532 - __main__ - INFO - Processing RGLD...
+2026-03-05 13:06:38,649 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:38,650 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-05 13:06:38,650 - __main__ - INFO - Processing ASML...
+2026-03-05 13:06:38,804 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:38,804 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-05 13:06:38,804 - __main__ - INFO - Processing FCX...
+2026-03-05 13:06:38,946 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:38,947 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-05 13:06:38,947 - __main__ - INFO - Processing SQM...
+2026-03-05 13:06:39,093 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:39,093 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 13:06:39,093 - __main__ - INFO - Processing RKLB...
+2026-03-05 13:06:39,298 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:39,298 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-05 13:06:39,299 - __main__ - INFO - Processing KGC...
+2026-03-05 13:06:39,448 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:39,449 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-05 13:06:39,449 - __main__ - INFO - Processing CDE...
+2026-03-05 13:06:39,590 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:39,591 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-05 13:06:39,591 - __main__ - INFO - Processing MU...
+2026-03-05 13:06:39,720 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:39,721 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-05 13:06:39,721 - __main__ - INFO - Processing AU...
+2026-03-05 13:06:39,841 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:39,842 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-05 13:06:39,842 - __main__ - INFO - Processing NVMI...
+2026-03-05 13:06:39,992 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:39,992 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-05 13:06:39,993 - __main__ - INFO - Processing AEM...
+2026-03-05 13:06:40,136 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:40,137 - __main__ - ERROR - Error getting options for AEM: 'date'
+2026-03-05 13:06:40,137 - __main__ - INFO - Processing SCCO...
+2026-03-05 13:06:40,283 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:40,283 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-05 13:06:40,283 - __main__ - INFO - Processing NEM...
+2026-03-05 13:06:40,430 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 13:06:40,430 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-05 13:06:40,430 - __main__ - WARNING - No opportunities found
+2026-03-05 13:06:40,430 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 14:06:53,945 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 14:06:54,585 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 14:06:54,585 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 14:06:54,942 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,070 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 14:06:55,071 - __main__ - INFO - Found 20 long-bias candidates
+2026-03-05 14:06:55,072 - __main__ - INFO - Processing GFI...
+2026-03-05 14:06:55,200 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,201 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 14:06:55,201 - __main__ - INFO - Processing LRCX...
+2026-03-05 14:06:55,326 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,327 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 14:06:55,327 - __main__ - INFO - Processing EQX...
+2026-03-05 14:06:55,454 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,455 - __main__ - ERROR - Error getting options for EQX: 'date'
+2026-03-05 14:06:55,455 - __main__ - INFO - Processing PAAS...
+2026-03-05 14:06:55,584 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,585 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-05 14:06:55,585 - __main__ - INFO - Processing AMAT...
+2026-03-05 14:06:55,714 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,714 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-05 14:06:55,715 - __main__ - INFO - Processing CAT...
+2026-03-05 14:06:55,841 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,842 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-05 14:06:55,842 - __main__ - INFO - Processing ONTO...
+2026-03-05 14:06:55,967 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:55,967 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-05 14:06:55,967 - __main__ - INFO - Processing RGLD...
+2026-03-05 14:06:56,099 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:56,099 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-05 14:06:56,100 - __main__ - INFO - Processing ASML...
+2026-03-05 14:06:56,222 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:56,222 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-05 14:06:56,222 - __main__ - INFO - Processing FCX...
+2026-03-05 14:06:56,351 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:56,352 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-05 14:06:56,352 - __main__ - INFO - Processing SQM...
+2026-03-05 14:06:56,613 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:56,614 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 14:06:56,614 - __main__ - INFO - Processing RKLB...
+2026-03-05 14:06:56,753 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:56,754 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-05 14:06:56,754 - __main__ - INFO - Processing KGC...
+2026-03-05 14:06:56,883 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:56,884 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-05 14:06:56,884 - __main__ - INFO - Processing CDE...
+2026-03-05 14:06:57,013 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:57,013 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-05 14:06:57,013 - __main__ - INFO - Processing MU...
+2026-03-05 14:06:57,147 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:57,148 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-05 14:06:57,148 - __main__ - INFO - Processing AU...
+2026-03-05 14:06:57,285 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:57,286 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-05 14:06:57,286 - __main__ - INFO - Processing NVMI...
+2026-03-05 14:06:57,411 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:57,412 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-05 14:06:57,412 - __main__ - INFO - Processing AEM...
+2026-03-05 14:06:57,566 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:57,566 - __main__ - ERROR - Error getting options for AEM: 'date'
+2026-03-05 14:06:57,567 - __main__ - INFO - Processing SCCO...
+2026-03-05 14:06:57,705 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:57,706 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-05 14:06:57,706 - __main__ - INFO - Processing NEM...
+2026-03-05 14:06:57,845 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 14:06:57,845 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-05 14:06:57,846 - __main__ - WARNING - No opportunities found
+2026-03-05 14:06:57,846 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 15:07:06,806 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 15:07:07,486 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 15:07:07,487 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 15:07:07,618 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:07,749 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 15:07:07,750 - __main__ - INFO - Found 20 long-bias candidates
+2026-03-05 15:07:07,750 - __main__ - INFO - Processing GFI...
+2026-03-05 15:07:07,910 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:07,911 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 15:07:07,911 - __main__ - INFO - Processing LRCX...
+2026-03-05 15:07:08,288 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:08,288 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 15:07:08,288 - __main__ - INFO - Processing EQX...
+2026-03-05 15:07:08,417 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:08,417 - __main__ - ERROR - Error getting options for EQX: 'date'
+2026-03-05 15:07:08,418 - __main__ - INFO - Processing PAAS...
+2026-03-05 15:07:08,561 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:08,562 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-05 15:07:08,563 - __main__ - INFO - Processing AMAT...
+2026-03-05 15:07:08,698 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:08,699 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-05 15:07:08,699 - __main__ - INFO - Processing CAT...
+2026-03-05 15:07:09,083 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:09,084 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-05 15:07:09,084 - __main__ - INFO - Processing ONTO...
+2026-03-05 15:07:09,211 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:09,212 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-05 15:07:09,212 - __main__ - INFO - Processing RGLD...
+2026-03-05 15:07:09,342 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:09,343 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-05 15:07:09,343 - __main__ - INFO - Processing ASML...
+2026-03-05 15:07:09,511 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:09,511 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-05 15:07:09,512 - __main__ - INFO - Processing FCX...
+2026-03-05 15:07:09,652 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:09,653 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-05 15:07:09,653 - __main__ - INFO - Processing SQM...
+2026-03-05 15:07:09,804 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:09,805 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 15:07:09,805 - __main__ - INFO - Processing RKLB...
+2026-03-05 15:07:09,934 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:09,934 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-05 15:07:09,935 - __main__ - INFO - Processing KGC...
+2026-03-05 15:07:10,063 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:10,063 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-05 15:07:10,063 - __main__ - INFO - Processing CDE...
+2026-03-05 15:07:10,185 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:10,186 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-05 15:07:10,186 - __main__ - INFO - Processing MU...
+2026-03-05 15:07:10,324 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:10,325 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-05 15:07:10,325 - __main__ - INFO - Processing AU...
+2026-03-05 15:07:10,488 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:10,489 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-05 15:07:10,489 - __main__ - INFO - Processing NVMI...
+2026-03-05 15:07:10,650 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:10,650 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-05 15:07:10,650 - __main__ - INFO - Processing AEM...
+2026-03-05 15:07:10,788 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:10,789 - __main__ - ERROR - Error getting options for AEM: 'date'
+2026-03-05 15:07:10,789 - __main__ - INFO - Processing SCCO...
+2026-03-05 15:07:10,952 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:10,953 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-05 15:07:10,953 - __main__ - INFO - Processing NEM...
+2026-03-05 15:07:11,097 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 15:07:11,098 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-05 15:07:11,098 - __main__ - WARNING - No opportunities found
+2026-03-05 15:07:11,098 - __main__ - INFO - Options opportunities generation complete
+2026-03-05 16:16:42,525 - __main__ - INFO - Starting options opportunities generation
+2026-03-05 16:16:43,015 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-05 16:16:43,016 - __main__ - INFO - Cleared options_opportunities table
+2026-03-05 16:16:43,255 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:43,386 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-05 "HTTP/2 200 OK"
+2026-03-05 16:16:43,387 - __main__ - INFO - Found 16 long-bias candidates
+2026-03-05 16:16:43,387 - __main__ - INFO - Processing GFI...
+2026-03-05 16:16:43,516 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:43,517 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-05 16:16:43,517 - __main__ - INFO - Processing LRCX...
+2026-03-05 16:16:43,643 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:43,644 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-05 16:16:43,644 - __main__ - INFO - Processing PAAS...
+2026-03-05 16:16:43,781 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:43,781 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-05 16:16:43,782 - __main__ - INFO - Processing CAT...
+2026-03-05 16:16:43,913 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:43,914 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-05 16:16:43,914 - __main__ - INFO - Processing ONTO...
+2026-03-05 16:16:44,056 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:44,057 - __main__ - ERROR - Error getting options for ONTO: 'date'
+2026-03-05 16:16:44,057 - __main__ - INFO - Processing RGLD...
+2026-03-05 16:16:44,203 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:44,203 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-05 16:16:44,204 - __main__ - INFO - Processing ASML...
+2026-03-05 16:16:44,326 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:44,327 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-05 16:16:44,327 - __main__ - INFO - Processing FCX...
+2026-03-05 16:16:44,453 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:44,454 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-05 16:16:44,454 - __main__ - INFO - Processing SQM...
+2026-03-05 16:16:44,601 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:44,602 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-05 16:16:44,602 - __main__ - INFO - Processing RKLB...
+2026-03-05 16:16:44,742 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:44,743 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-05 16:16:44,743 - __main__ - INFO - Processing KGC...
+2026-03-05 16:16:44,889 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:44,890 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-05 16:16:44,890 - __main__ - INFO - Processing CDE...
+2026-03-05 16:16:45,016 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:45,017 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-05 16:16:45,017 - __main__ - INFO - Processing AU...
+2026-03-05 16:16:45,164 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:45,164 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-05 16:16:45,165 - __main__ - INFO - Processing NVMI...
+2026-03-05 16:16:45,299 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:45,300 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-05 16:16:45,300 - __main__ - INFO - Processing SCCO...
+2026-03-05 16:16:45,435 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:45,436 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-05 16:16:45,436 - __main__ - INFO - Processing NEM...
+2026-03-05 16:16:45,591 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-05 16:16:45,592 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-05 16:16:45,592 - __main__ - WARNING - No opportunities found
+2026-03-05 16:16:45,592 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 09:14:15,302 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 09:14:15,746 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 09:14:15,746 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 09:14:15,908 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:16,032 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 09:14:16,033 - __main__ - INFO - Found 12 long-bias candidates
+2026-03-06 09:14:16,033 - __main__ - INFO - Processing RKLB...
+2026-03-06 09:14:16,190 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:16,191 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-06 09:14:16,191 - __main__ - INFO - Processing KGC...
+2026-03-06 09:14:16,336 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:16,336 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 09:14:16,337 - __main__ - INFO - Processing CDE...
+2026-03-06 09:14:16,488 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:16,489 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 09:14:16,489 - __main__ - INFO - Processing AU...
+2026-03-06 09:14:16,618 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:16,619 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 09:14:16,619 - __main__ - INFO - Processing GFI...
+2026-03-06 09:14:16,737 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:16,738 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 09:14:16,738 - __main__ - INFO - Processing LRCX...
+2026-03-06 09:14:16,873 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:16,874 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 09:14:16,874 - __main__ - INFO - Processing CAT...
+2026-03-06 09:14:17,020 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:17,020 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 09:14:17,020 - __main__ - INFO - Processing NEM...
+2026-03-06 09:14:17,148 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:17,149 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 09:14:17,149 - __main__ - INFO - Processing SCCO...
+2026-03-06 09:14:17,277 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:17,278 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 09:14:17,278 - __main__ - INFO - Processing ASML...
+2026-03-06 09:14:17,397 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:17,398 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 09:14:17,398 - __main__ - INFO - Processing FCX...
+2026-03-06 09:14:17,516 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:17,517 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 09:14:17,517 - __main__ - INFO - Processing SQM...
+2026-03-06 09:14:17,648 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 09:14:17,649 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 09:14:17,649 - __main__ - WARNING - No opportunities found
+2026-03-06 09:14:17,649 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 10:06:33,470 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 10:06:34,108 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 10:06:34,108 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 10:06:34,246 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:34,400 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 10:06:34,401 - __main__ - INFO - Found 20 long-bias candidates
+2026-03-06 10:06:34,401 - __main__ - INFO - Processing RKLB...
+2026-03-06 10:06:34,560 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:34,561 - __main__ - ERROR - Error getting options for RKLB: 'date'
+2026-03-06 10:06:34,561 - __main__ - INFO - Processing IAG...
+2026-03-06 10:06:34,686 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:34,686 - __main__ - ERROR - Error getting options for IAG: 'date'
+2026-03-06 10:06:34,686 - __main__ - INFO - Processing KGC...
+2026-03-06 10:06:34,817 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:34,818 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 10:06:34,818 - __main__ - INFO - Processing CDE...
+2026-03-06 10:06:35,147 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:35,148 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 10:06:35,148 - __main__ - INFO - Processing MU...
+2026-03-06 10:06:35,313 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:35,314 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-06 10:06:35,314 - __main__ - INFO - Processing AU...
+2026-03-06 10:06:35,457 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:35,457 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 10:06:35,458 - __main__ - INFO - Processing GFI...
+2026-03-06 10:06:35,594 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:35,594 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 10:06:35,595 - __main__ - INFO - Processing NVMI...
+2026-03-06 10:06:35,739 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:35,739 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-06 10:06:35,739 - __main__ - INFO - Processing AEM...
+2026-03-06 10:06:35,865 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:35,866 - __main__ - ERROR - Error getting options for AEM: 'date'
+2026-03-06 10:06:35,866 - __main__ - INFO - Processing LRCX...
+2026-03-06 10:06:36,017 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,017 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 10:06:36,017 - __main__ - INFO - Processing EQX...
+2026-03-06 10:06:36,156 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,157 - __main__ - ERROR - Error getting options for EQX: 'date'
+2026-03-06 10:06:36,157 - __main__ - INFO - Processing PAAS...
+2026-03-06 10:06:36,301 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,302 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-06 10:06:36,302 - __main__ - INFO - Processing AMAT...
+2026-03-06 10:06:36,427 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,428 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-06 10:06:36,428 - __main__ - INFO - Processing CAT...
+2026-03-06 10:06:36,578 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,579 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 10:06:36,579 - __main__ - INFO - Processing NEM...
+2026-03-06 10:06:36,723 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,724 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 10:06:36,724 - __main__ - INFO - Processing SCCO...
+2026-03-06 10:06:36,855 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,856 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 10:06:36,856 - __main__ - INFO - Processing RGLD...
+2026-03-06 10:06:36,979 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:36,979 - __main__ - ERROR - Error getting options for RGLD: 'date'
+2026-03-06 10:06:36,980 - __main__ - INFO - Processing ASML...
+2026-03-06 10:06:37,138 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:37,138 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 10:06:37,139 - __main__ - INFO - Processing FCX...
+2026-03-06 10:06:37,266 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:37,267 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 10:06:37,267 - __main__ - INFO - Processing SQM...
+2026-03-06 10:06:37,431 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 10:06:37,432 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 10:06:37,432 - __main__ - WARNING - No opportunities found
+2026-03-06 10:06:37,432 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 11:06:36,706 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 11:06:37,337 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 11:06:37,338 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 11:06:37,680 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:37,811 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 11:06:37,812 - __main__ - INFO - Found 14 long-bias candidates
+2026-03-06 11:06:37,812 - __main__ - INFO - Processing KGC...
+2026-03-06 11:06:37,950 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:37,950 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 11:06:37,950 - __main__ - INFO - Processing CDE...
+2026-03-06 11:06:38,081 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:38,082 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 11:06:38,082 - __main__ - INFO - Processing MU...
+2026-03-06 11:06:38,229 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:38,230 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-06 11:06:38,230 - __main__ - INFO - Processing AU...
+2026-03-06 11:06:38,393 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:38,393 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 11:06:38,393 - __main__ - INFO - Processing GFI...
+2026-03-06 11:06:38,533 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:38,533 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 11:06:38,533 - __main__ - INFO - Processing NVMI...
+2026-03-06 11:06:38,660 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:38,661 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-06 11:06:38,661 - __main__ - INFO - Processing LRCX...
+2026-03-06 11:06:38,812 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:38,813 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 11:06:38,813 - __main__ - INFO - Processing AMAT...
+2026-03-06 11:06:38,958 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:38,959 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-06 11:06:38,959 - __main__ - INFO - Processing CAT...
+2026-03-06 11:06:39,120 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:39,120 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 11:06:39,120 - __main__ - INFO - Processing NEM...
+2026-03-06 11:06:39,256 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:39,256 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 11:06:39,256 - __main__ - INFO - Processing SCCO...
+2026-03-06 11:06:39,406 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:39,407 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 11:06:39,407 - __main__ - INFO - Processing ASML...
+2026-03-06 11:06:39,567 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:39,568 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 11:06:39,568 - __main__ - INFO - Processing FCX...
+2026-03-06 11:06:39,710 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:39,710 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 11:06:39,711 - __main__ - INFO - Processing SQM...
+2026-03-06 11:06:39,913 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 11:06:39,914 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 11:06:39,914 - __main__ - WARNING - No opportunities found
+2026-03-06 11:06:39,914 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 12:07:30,871 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 12:07:31,329 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 12:07:31,330 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 12:07:31,462 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:31,725 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 12:07:31,726 - __main__ - INFO - Found 15 long-bias candidates
+2026-03-06 12:07:31,727 - __main__ - INFO - Processing KGC...
+2026-03-06 12:07:31,886 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:31,887 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 12:07:31,887 - __main__ - INFO - Processing CDE...
+2026-03-06 12:07:32,034 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,035 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 12:07:32,035 - __main__ - INFO - Processing MU...
+2026-03-06 12:07:32,178 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,179 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-06 12:07:32,179 - __main__ - INFO - Processing AU...
+2026-03-06 12:07:32,313 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,314 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 12:07:32,314 - __main__ - INFO - Processing GFI...
+2026-03-06 12:07:32,437 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,438 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 12:07:32,438 - __main__ - INFO - Processing NVMI...
+2026-03-06 12:07:32,563 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,564 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-06 12:07:32,564 - __main__ - INFO - Processing LRCX...
+2026-03-06 12:07:32,689 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,689 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 12:07:32,690 - __main__ - INFO - Processing PAAS...
+2026-03-06 12:07:32,837 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,838 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-06 12:07:32,838 - __main__ - INFO - Processing AMAT...
+2026-03-06 12:07:32,971 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:32,972 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-06 12:07:32,972 - __main__ - INFO - Processing CAT...
+2026-03-06 12:07:33,106 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:33,107 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 12:07:33,107 - __main__ - INFO - Processing NEM...
+2026-03-06 12:07:33,236 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:33,237 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 12:07:33,237 - __main__ - INFO - Processing SCCO...
+2026-03-06 12:07:33,381 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:33,382 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 12:07:33,382 - __main__ - INFO - Processing ASML...
+2026-03-06 12:07:33,514 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:33,515 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 12:07:33,515 - __main__ - INFO - Processing FCX...
+2026-03-06 12:07:33,643 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:33,644 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 12:07:33,644 - __main__ - INFO - Processing SQM...
+2026-03-06 12:07:33,773 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 12:07:33,773 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 12:07:33,774 - __main__ - WARNING - No opportunities found
+2026-03-06 12:07:33,774 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 13:07:34,816 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 13:07:35,339 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 13:07:35,340 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 13:07:35,568 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:35,719 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 13:07:35,720 - __main__ - INFO - Found 16 long-bias candidates
+2026-03-06 13:07:35,720 - __main__ - INFO - Processing KGC...
+2026-03-06 13:07:36,069 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:36,070 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 13:07:36,070 - __main__ - INFO - Processing CDE...
+2026-03-06 13:07:36,211 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:36,212 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 13:07:36,212 - __main__ - INFO - Processing BE...
+2026-03-06 13:07:36,382 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:36,383 - __main__ - ERROR - Error getting options for BE: 'date'
+2026-03-06 13:07:36,383 - __main__ - INFO - Processing MU...
+2026-03-06 13:07:36,524 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:36,524 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-06 13:07:36,524 - __main__ - INFO - Processing AU...
+2026-03-06 13:07:36,690 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:36,691 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 13:07:36,691 - __main__ - INFO - Processing GFI...
+2026-03-06 13:07:36,878 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:36,878 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 13:07:36,878 - __main__ - INFO - Processing NVMI...
+2026-03-06 13:07:37,040 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:37,040 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-06 13:07:37,040 - __main__ - INFO - Processing LRCX...
+2026-03-06 13:07:37,183 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:37,184 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 13:07:37,184 - __main__ - INFO - Processing PAAS...
+2026-03-06 13:07:37,334 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:37,335 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-06 13:07:37,335 - __main__ - INFO - Processing AMAT...
+2026-03-06 13:07:37,525 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:37,526 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-06 13:07:37,526 - __main__ - INFO - Processing CAT...
+2026-03-06 13:07:37,663 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:37,664 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 13:07:37,664 - __main__ - INFO - Processing NEM...
+2026-03-06 13:07:37,805 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:37,806 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 13:07:37,806 - __main__ - INFO - Processing SCCO...
+2026-03-06 13:07:37,936 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:37,937 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 13:07:37,937 - __main__ - INFO - Processing ASML...
+2026-03-06 13:07:38,104 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:38,105 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 13:07:38,105 - __main__ - INFO - Processing FCX...
+2026-03-06 13:07:38,284 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:38,285 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 13:07:38,285 - __main__ - INFO - Processing SQM...
+2026-03-06 13:07:38,407 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 13:07:38,408 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 13:07:38,408 - __main__ - WARNING - No opportunities found
+2026-03-06 13:07:38,408 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 14:07:19,348 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 14:07:19,831 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 14:07:19,832 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 14:07:19,973 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:20,114 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 14:07:20,115 - __main__ - INFO - Found 14 long-bias candidates
+2026-03-06 14:07:20,116 - __main__ - INFO - Processing KGC...
+2026-03-06 14:07:20,256 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:20,257 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 14:07:20,257 - __main__ - INFO - Processing CDE...
+2026-03-06 14:07:20,390 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:20,391 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 14:07:20,391 - __main__ - INFO - Processing MU...
+2026-03-06 14:07:20,536 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:20,536 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-06 14:07:20,536 - __main__ - INFO - Processing AU...
+2026-03-06 14:07:20,688 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:20,689 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 14:07:20,689 - __main__ - INFO - Processing GFI...
+2026-03-06 14:07:20,831 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:20,832 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 14:07:20,832 - __main__ - INFO - Processing NVMI...
+2026-03-06 14:07:20,974 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:20,974 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-06 14:07:20,974 - __main__ - INFO - Processing LRCX...
+2026-03-06 14:07:21,110 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:21,111 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 14:07:21,111 - __main__ - INFO - Processing AMAT...
+2026-03-06 14:07:21,249 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:21,249 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-06 14:07:21,249 - __main__ - INFO - Processing CAT...
+2026-03-06 14:07:21,401 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:21,401 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 14:07:21,402 - __main__ - INFO - Processing NEM...
+2026-03-06 14:07:21,545 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:21,546 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 14:07:21,546 - __main__ - INFO - Processing SCCO...
+2026-03-06 14:07:21,679 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:21,680 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 14:07:21,680 - __main__ - INFO - Processing ASML...
+2026-03-06 14:07:21,824 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:21,825 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 14:07:21,825 - __main__ - INFO - Processing FCX...
+2026-03-06 14:07:21,962 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:21,963 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 14:07:21,963 - __main__ - INFO - Processing SQM...
+2026-03-06 14:07:22,093 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 14:07:22,094 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 14:07:22,094 - __main__ - WARNING - No opportunities found
+2026-03-06 14:07:22,094 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 15:06:56,485 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 15:06:56,930 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 15:06:56,931 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 15:06:57,057 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:57,203 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 15:06:57,204 - __main__ - INFO - Found 16 long-bias candidates
+2026-03-06 15:06:57,204 - __main__ - INFO - Processing KGC...
+2026-03-06 15:06:57,364 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:57,364 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 15:06:57,364 - __main__ - INFO - Processing CDE...
+2026-03-06 15:06:57,488 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:57,489 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 15:06:57,489 - __main__ - INFO - Processing BE...
+2026-03-06 15:06:57,622 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:57,623 - __main__ - ERROR - Error getting options for BE: 'date'
+2026-03-06 15:06:57,623 - __main__ - INFO - Processing MU...
+2026-03-06 15:06:57,749 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:57,750 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-06 15:06:57,750 - __main__ - INFO - Processing AU...
+2026-03-06 15:06:57,874 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:57,874 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 15:06:57,874 - __main__ - INFO - Processing GFI...
+2026-03-06 15:06:58,002 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:58,002 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 15:06:58,002 - __main__ - INFO - Processing NVMI...
+2026-03-06 15:06:58,136 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:58,137 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-06 15:06:58,137 - __main__ - INFO - Processing LRCX...
+2026-03-06 15:06:58,275 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:58,276 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 15:06:58,276 - __main__ - INFO - Processing PAAS...
+2026-03-06 15:06:58,459 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:58,459 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-06 15:06:58,459 - __main__ - INFO - Processing AMAT...
+2026-03-06 15:06:58,596 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:58,596 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-06 15:06:58,596 - __main__ - INFO - Processing CAT...
+2026-03-06 15:06:58,736 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:58,736 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 15:06:58,737 - __main__ - INFO - Processing NEM...
+2026-03-06 15:06:58,863 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:58,864 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 15:06:58,864 - __main__ - INFO - Processing SCCO...
+2026-03-06 15:06:59,051 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:59,051 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 15:06:59,051 - __main__ - INFO - Processing ASML...
+2026-03-06 15:06:59,190 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:59,191 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 15:06:59,191 - __main__ - INFO - Processing FCX...
+2026-03-06 15:06:59,363 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:59,363 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 15:06:59,363 - __main__ - INFO - Processing SQM...
+2026-03-06 15:06:59,488 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 15:06:59,488 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 15:06:59,488 - __main__ - WARNING - No opportunities found
+2026-03-06 15:06:59,488 - __main__ - INFO - Options opportunities generation complete
+2026-03-06 16:16:11,403 - __main__ - INFO - Starting options opportunities generation
+2026-03-06 16:16:12,024 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-06 16:16:12,025 - __main__ - INFO - Cleared options_opportunities table
+2026-03-06 16:16:12,385 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:12,514 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-06 16:16:12,518 - __main__ - INFO - Found 16 long-bias candidates
+2026-03-06 16:16:12,518 - __main__ - INFO - Processing KGC...
+2026-03-06 16:16:12,824 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:12,825 - __main__ - ERROR - Error getting options for KGC: 'date'
+2026-03-06 16:16:12,825 - __main__ - INFO - Processing CDE...
+2026-03-06 16:16:12,936 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:12,936 - __main__ - ERROR - Error getting options for CDE: 'date'
+2026-03-06 16:16:12,937 - __main__ - INFO - Processing BE...
+2026-03-06 16:16:13,062 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,063 - __main__ - ERROR - Error getting options for BE: 'date'
+2026-03-06 16:16:13,063 - __main__ - INFO - Processing MU...
+2026-03-06 16:16:13,176 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,177 - __main__ - ERROR - Error getting options for MU: 'date'
+2026-03-06 16:16:13,177 - __main__ - INFO - Processing AU...
+2026-03-06 16:16:13,309 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,309 - __main__ - ERROR - Error getting options for AU: 'date'
+2026-03-06 16:16:13,310 - __main__ - INFO - Processing GFI...
+2026-03-06 16:16:13,422 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,423 - __main__ - ERROR - Error getting options for GFI: 'date'
+2026-03-06 16:16:13,423 - __main__ - INFO - Processing NVMI...
+2026-03-06 16:16:13,550 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,550 - __main__ - ERROR - Error getting options for NVMI: 'date'
+2026-03-06 16:16:13,550 - __main__ - INFO - Processing LRCX...
+2026-03-06 16:16:13,677 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,678 - __main__ - ERROR - Error getting options for LRCX: 'date'
+2026-03-06 16:16:13,678 - __main__ - INFO - Processing PAAS...
+2026-03-06 16:16:13,807 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,807 - __main__ - ERROR - Error getting options for PAAS: 'date'
+2026-03-06 16:16:13,807 - __main__ - INFO - Processing AMAT...
+2026-03-06 16:16:13,955 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:13,956 - __main__ - ERROR - Error getting options for AMAT: 'date'
+2026-03-06 16:16:13,956 - __main__ - INFO - Processing CAT...
+2026-03-06 16:16:14,087 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:14,088 - __main__ - ERROR - Error getting options for CAT: 'date'
+2026-03-06 16:16:14,088 - __main__ - INFO - Processing NEM...
+2026-03-06 16:16:14,230 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:14,231 - __main__ - ERROR - Error getting options for NEM: 'date'
+2026-03-06 16:16:14,231 - __main__ - INFO - Processing SCCO...
+2026-03-06 16:16:14,361 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:14,361 - __main__ - ERROR - Error getting options for SCCO: 'date'
+2026-03-06 16:16:14,361 - __main__ - INFO - Processing ASML...
+2026-03-06 16:16:14,517 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:14,518 - __main__ - ERROR - Error getting options for ASML: 'date'
+2026-03-06 16:16:14,518 - __main__ - INFO - Processing FCX...
+2026-03-06 16:16:14,661 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:14,662 - __main__ - ERROR - Error getting options for FCX: 'date'
+2026-03-06 16:16:14,662 - __main__ - INFO - Processing SQM...
+2026-03-06 16:16:14,810 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-06 16:16:14,811 - __main__ - ERROR - Error getting options for SQM: 'date'
+2026-03-06 16:16:14,811 - __main__ - WARNING - No opportunities found
+2026-03-06 16:16:14,811 - __main__ - INFO - Options opportunities generation complete
