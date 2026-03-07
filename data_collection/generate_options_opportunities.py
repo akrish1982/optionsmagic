@@ -132,7 +132,7 @@ def get_options_for_ticker(supabase, ticker, min_days=30, max_days=90):
         # Get put options for this ticker
         response = supabase.table('options_quotes').select('*').eq(
             'symbol', ticker
-        ).eq('date', latest_date).eq('type', 'put').execute()
+        ).eq('quote_date', latest_date).eq('type', 'put').execute()
 
         options = []
         for row in response.data:
