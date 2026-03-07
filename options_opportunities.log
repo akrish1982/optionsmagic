@@ -3333,3 +3333,61 @@
 2026-03-06 16:16:14,811 - __main__ - ERROR - Error getting options for SQM: 'date'
 2026-03-06 16:16:14,811 - __main__ - WARNING - No opportunities found
 2026-03-06 16:16:14,811 - __main__ - INFO - Options opportunities generation complete
+2026-03-07 08:14:26,442 - __main__ - INFO - Starting options opportunities generation
+2026-03-07 08:14:28,105 - httpx - INFO - HTTP Request: DELETE https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?opportunity_id=neq.0 "HTTP/2 200 OK"
+2026-03-07 08:14:28,106 - __main__ - INFO - Cleared options_opportunities table
+2026-03-07 08:14:28,277 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:28,438 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/stock_quotes?select=ticker%2Cprice%2Crsi%2Csma50%2Csma200&quote_date=eq.2026-03-06 "HTTP/2 200 OK"
+2026-03-07 08:14:28,439 - __main__ - INFO - Found 16 long-bias candidates
+2026-03-07 08:14:28,439 - __main__ - INFO - Processing KGC...
+2026-03-07 08:14:28,775 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:29,041 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.KGC&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:29,052 - __main__ - INFO - Processing CDE...
+2026-03-07 08:14:29,176 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:29,371 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.CDE&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:29,384 - __main__ - INFO - Processing BE...
+2026-03-07 08:14:29,515 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:29,737 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.BE&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:29,754 - __main__ - INFO - Processing MU...
+2026-03-07 08:14:29,887 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:30,053 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.MU&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:30,069 - __main__ - INFO - Processing AU...
+2026-03-07 08:14:30,184 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:30,316 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.AU&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:30,321 - __main__ - INFO - Processing GFI...
+2026-03-07 08:14:30,446 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:30,592 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.GFI&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:30,597 - __main__ - INFO - Processing NVMI...
+2026-03-07 08:14:30,723 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:30,888 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.NVMI&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:30,896 - __main__ - INFO - Processing LRCX...
+2026-03-07 08:14:31,043 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:31,201 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.LRCX&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:31,217 - __main__ - INFO - Processing PAAS...
+2026-03-07 08:14:31,331 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:31,481 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.PAAS&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:31,494 - __main__ - INFO - Processing AMAT...
+2026-03-07 08:14:31,626 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:31,817 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.AMAT&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:31,831 - __main__ - INFO - Processing CAT...
+2026-03-07 08:14:31,962 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:32,135 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.CAT&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:32,151 - __main__ - INFO - Processing NEM...
+2026-03-07 08:14:32,275 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:32,410 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.NEM&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:32,423 - __main__ - INFO - Processing SCCO...
+2026-03-07 08:14:32,541 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:32,740 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.SCCO&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:32,753 - __main__ - INFO - Processing ASML...
+2026-03-07 08:14:32,881 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:33,047 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.ASML&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:33,063 - __main__ - INFO - Processing FCX...
+2026-03-07 08:14:33,194 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:33,344 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.FCX&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:33,355 - __main__ - INFO - Processing SQM...
+2026-03-07 08:14:33,491 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=quote_date&order=quote_date.desc&limit=1 "HTTP/2 200 OK"
+2026-03-07 08:14:33,611 - httpx - INFO - HTTP Request: GET https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_quotes?select=%2A&symbol=eq.SQM&quote_date=eq.2026-03-06&type=eq.put "HTTP/2 200 OK"
+2026-03-07 08:14:33,790 - httpx - INFO - HTTP Request: POST https://bsuxftcbjeqzujwhxrtu.supabase.co/rest/v1/options_opportunities?columns=%22rsi_14%22%2C%22annualized_return%22%2C%22expiration_date%22%2C%22delta%22%2C%22price_vs_bb_lower%22%2C%22iv_percentile%22%2C%22return_pct%22%2C%22above_sma_200%22%2C%22width%22%2C%22collateral%22%2C%22strike_price%22%2C%22net_credit%22%2C%22ticker%22%2C%22theta%22%2C%22strategy_type%22 "HTTP/2 201 Created"
+2026-03-07 08:14:33,795 - __main__ - INFO - Inserted 38 opportunities
+2026-03-07 08:14:33,796 - __main__ - INFO - Total opportunities generated: 38
+2026-03-07 08:14:33,796 - __main__ - INFO - Options opportunities generation complete
